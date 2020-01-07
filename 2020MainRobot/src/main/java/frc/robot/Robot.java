@@ -15,14 +15,14 @@ import frc.robot.subsystems.Drivetrain;
 /**import frc.robot.autonomous.PathWeaver;                                                                                    
 import frc.robot.autonomous.ViveAuto;                                                                                    
 import frc.robot.autonomous.ViveMeasurements;                                                                                    
-import frc.robot.driver.LEDController;                                                                                    
+import frc.robot.driver.LEDController;      
 import frc.robot.subsystem.*;                                                                                    
 import edu.wpi.first.wpilibj.networktables.NetworkTable;*/                                                                                    
 import edu.wpi.first.cameraserver.CameraServer;                                                                                    
 import edu.wpi.first.networktables.NetworkTable;                                                                                    
 import edu.wpi.first.wpilibj.Timer;                                                                                    
 import edu.wpi.first.wpilibj.PowerDistributionPanel;                                                                                    
-
+import frc.robot.subsystems.ColourSensor;
 
 public class Robot extends TimedRobot {                                                                                    
   private static final String kDefaultAuto = "Default";                                                                                    
@@ -35,7 +35,8 @@ public class Robot extends TimedRobot {
   public PowerCellIntake PowerCellIntake = new PowerCellIntake();                                                                                    
   public Drivetrain drivetrain = new Drivetrain();                                                                                    
   public VisionController visionController = new VisionController();                                            
-  public LEDController ledController = new LEDController();                                            
+  public LEDController ledController = new LEDController();   
+  public ColourSensor colourSensor = new ColourSensor();                                         
   Timer matchTimer = new Timer();                                            
   NetworkTable table;                                            
   String autoMode;                                            
@@ -95,31 +96,26 @@ public class Robot extends TimedRobot {
     climber.stopVacuum();                                                                                                                                         
     drivetrain.resetEncoders();                                                                                                                                         
   }                                                                                                                                         
-*/                                                                                                                                         
+   */                                                                                                                                     
   @Override                                                                                                                                         
   public void teleopPeriodic() {                                                                                                                                         
-    drive();                                                                                                                                         
-    double[] defaultValue = new double[2];                                                                                                                                         
-                                                                                              
-    /*double[] distances = table.getNumberArray("centreX", defaultValue);                                                                                                                                         
-    SmartDashboard.putNumber("Distance 0", distances[0]);*/                                                                                                                                         
-                                                                                                                                                                                     
-    visionController.update();                                                                                                                                         
-    updateDashboards();                                                                                                                                         
-  }                                                                                                                                         
-                                                                                              
+                                                                                                                                       
+    updateDashboards();                                                                                                                                        
+  }                                                                                                                                                                                                        
   private void drive() {                                                                                                                                         
   }                                                                                                                                         
                                                                                               
   @Override                                                                                                                                         
   public void testPeriodic() {                                                                                                                                         
   }                                                                                                                                         
-  public void updateDashboards()                                                                                                                                         
+  public void updateDashboards()                                                                                                                                        
   {                                                                                                                                         
     PowerCellIntake.updateDashboard(true);                                                                                                                                         
     //climber.updateDashboard(debug);                                                                                                                                         
-    drivetrain.updateDashboard(debug);                                                                                                                                         
+    //drivetrain.updateDashboard(debug);                                                                                                                                         
     //visionController.updateDashboard(debug);                                                                                                                                         
-    //panelintake.updateDashboard(debug);                                                                                                                                         
+    //panelintake.updateDashboard(debug);
+    ColourSensor.robotPeriodic();
+    ColourSensor.updateDashboard(true);                                                                                                                                         
   }                                           
 }                                           
