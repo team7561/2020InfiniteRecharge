@@ -12,11 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;                                                                                    
 import frc.robot.subsystems.Climber;                                                                                    
 import frc.robot.subsystems.Drivetrain;                                                                                    
-/**import frc.robot.autonomous.PathWeaver;                                                                                    
-import frc.robot.autonomous.ViveAuto;                                                                                    
-import frc.robot.autonomous.ViveMeasurements;                                                                                    
-import frc.robot.driver.LEDController;      
-import frc.robot.subsystem.*;                                                                                    
+/*                                                                                   
 import edu.wpi.first.wpilibj.networktables.NetworkTable;*/                                                                                    
 import edu.wpi.first.cameraserver.CameraServer;                                                                                    
 import edu.wpi.first.networktables.NetworkTable;                                                                                    
@@ -98,7 +94,7 @@ public class Robot extends TimedRobot {
   }                                                                                                                                         
    */                                                                                                                                     
   @Override                                                                                                                                         
-  public void teleopPeriodic() {                                                                                                                                         
+  public void teleopPeriodic() {                                                                                                                
                                                                                                                                        
     updateDashboards();                                                                                                                                        
   }                                                                                                                                                                                                        
@@ -115,7 +111,7 @@ public class Robot extends TimedRobot {
     //drivetrain.updateDashboard(debug);                                                                                                                                         
     //visionController.updateDashboard(debug);                                                                                                                                         
     //panelintake.updateDashboard(debug);
-    ColourSensor.robotPeriodic();
-    ColourSensor.updateDashboard(true);                                                                                                                                         
+    colourSensor.robotPeriodic();
+    colourSensor.updateDashboard(true);                                                                                                                                         
   }                                           
 }                                           
