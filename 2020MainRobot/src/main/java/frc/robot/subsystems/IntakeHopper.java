@@ -1,27 +1,29 @@
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 
 public class IntakeHopper implements Subsystem {
 
-    VictorSPX intakeHopperMotor;
+    VictorSP intakeHopperMotor;
     DigitalInput intakeLimitSwitch;
+    DoubleSolenoid hopper;
     Boolean hasBall;
 
     public IntakeHopper()
     {
-        intakeHopperMotor = new VictorSPX(Ports.POWERCELL_INTAKE_CANID);
+        intakeHopperMotor = new VictorSP(Ports.INTAKE_CHANNEL);
+        hopper = new DoubleSolenoid(0,1);
     }
 
     //set speed of both intake motors
     private void intakeSpeed (double speed)
     {
-        intakeHopperMotor.set(ControlMode.PercentOutput, speed);
+        intakeHopperMotor.set(speed);
     }
 
     //Get the Ball
@@ -35,12 +37,13 @@ public class IntakeHopper implements Subsystem {
     {
         intakeSpeed(Speeds.KEEP_BALL_SPEED);
     }
-    // Returns if high enough current to assume ball in possession
-    public boolean hasBall()
+    public void extendHopper()
     {
-        double current = SmartDashboard.getNumber("Channel 7 Current", 0);
-        hasBall = intakeHopperMotor.getMotorOutputPercent() < 0 && current > Constants.POWERCELL_STALL_CURRENT;
-        return hasBall;
+        hopper.set(Value.kForward);
+    }
+    public void retractHopper()
+    {
+        hopper.set(Value.kReverse);
     }
 
     //Ejects the Ball fast
@@ -66,8 +69,7 @@ public class IntakeHopper implements Subsystem {
     {
         if (debug)
         {
-            SmartDashboard.putNumber("Intake Power", intakeHopperMotor.getMotorOutputVoltage());
-            SmartDashboard.putBoolean("Got POWERCELL", hasBall());
+            SmartDashboard.putNumber("Intake Power", intakeHopperMotor.get());
         }
     }
 

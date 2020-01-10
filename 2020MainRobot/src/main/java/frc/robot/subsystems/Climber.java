@@ -11,7 +11,7 @@ import frc.robot.Speeds;
 
 public class Climber implements Subsystem {
     TalonSRX climberMotorA;
-    TalonSRX climberMotorB;
+    VictorSPX climberMotorB;
     public Climber()
     {
         
@@ -33,9 +33,8 @@ public class Climber implements Subsystem {
         if (debug)
             {
             SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getOutputCurrent());
+            SmartDashboard.putNumber("Climber Motor Current", climberMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Climber Motor B Speed", climberMotorB.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor B Current", climberMotorB.getOutputCurrent());
         }
 
 

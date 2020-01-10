@@ -9,37 +9,23 @@ public class Ports {
     public static int DRIVE_RIGHT_A_CANID = 4;
     public static int DRIVE_RIGHT_B_CANID = 5;
     public static int DRIVE_RIGHT_C_CANID = 6;
-    public static int LIFT_A_CANID = 11;
-    public static int LIFT_B_CANID = 12;
-    public static int POWERCELL_INTAKE_CANID = 21;
-    public static int CLIMB_ELEVATOR_A_CANID = 31;
-    public static int CLIMB_ELEVATOR_B_CANID = 32;
-    public static int CLIMB_VACUUM_CANID = 41;
-    public static int ARM_CANID = 51;
+    public static int SHOOTER_A_CANID = 11;
+    public static int SHOOTER_B_CANID = 12;
+    public static int CLIMB_DEPLOY_A_CANID = 21;
+    public static int CLIMB_DEPLOY_B_CANID = 22;
+    public static int CLIMB_WINCH_A_CANID = 23;
+    public static int CLIMB_WINCH_B_CANID = 24;
+    public static int COLOUR_WHEEL_ROTATE_CANID = 31;
 
     // PWM control channels
     public static int LED_CONTROLLER_CHANNEL = 6;
-    public static int INTAKE_CHANNEL = 7;
-    public static int LIFT_A_PWM = 0;
-    public static int LIFT_B_PWM = 1;
+    public static int INTAKE_CHANNEL = 0;
+    public static int FEEDER_CHANNEL = 1;
 
 
     // DIO ports
-    public static int LIMIT_ARM_LOWER = 0;
-    public static int LIMIT_ARM_UPPER = 1;
-    public static int LIMIT_LIFT_UPPER = 2;
-    public static int LIMIT_CLIMB_LOWER = 3;
-
-    public static int ENCODER_LIFT_A_CHANNEL = 4;
-    public static int ENCODER_LIFT_B_CHANNEL = 5;
-    public static int ENCODER_LEFT_A_CHANNEL = 6;
-    public static int ENCODER_LEFT_B_CHANNEL = 7;
-    public static int ENCODER_RIGHT_A_CHANNEL = 8;
-    public static int ENCODER_RIGHT_B_CHANNEL = 9;
 
     // Analog Channels
-    public static int POSITION_CHANNEL = 1;
-    public static int ULTRASONIC_CHANNEL = 2;
 
     // PCM ports
     public static int INTAKE_SOLENOID_CHANNEL_A = 0;
