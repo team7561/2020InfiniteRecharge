@@ -4,20 +4,21 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 
-public class IntakeHopper implements Subsystem {
+public class IntakeHopper extends SubsystemBase {
 
     VictorSP intakeHopperMotor;
     DigitalInput intakeLimitSwitch;
-    DoubleSolenoid hopper;
+    DoubleSolenoid hopperSolenoid;
     Boolean hasBall;
 
     public IntakeHopper()
     {
         intakeHopperMotor = new VictorSP(Ports.INTAKE_CHANNEL);
-        hopper = new DoubleSolenoid(0,1);
+        hopperSolenoid = new DoubleSolenoid(0,1);
     }
 
     //set speed of both intake motors
@@ -27,7 +28,7 @@ public class IntakeHopper implements Subsystem {
     }
 
     //Get the Ball
-    public void getBall()
+    public void grabBall()
     {
         intakeSpeed(Speeds.GET_BALL_SPEED);
     }
@@ -39,11 +40,11 @@ public class IntakeHopper implements Subsystem {
     }
     public void extendHopper()
     {
-        hopper.set(Value.kForward);
+        hopperSolenoid.set(Value.kForward);
     }
     public void retractHopper()
     {
-        hopper.set(Value.kReverse);
+        hopperSolenoid.set(Value.kReverse);
     }
 
     //Ejects the Ball fast

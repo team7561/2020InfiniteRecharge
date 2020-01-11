@@ -1,12 +1,12 @@
 package frc.robot.subsystems;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Ports;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import frc.robot.driver.ADIS16448_IMU;
 
-public class Drivetrain implements Subsystem {
+public class Drivetrain extends SubsystemBase {
 
     double lastError;
 final double encoderRatio = 2;

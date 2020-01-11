@@ -1,22 +1,25 @@
-package frc.robot.commands.intakehopper;
+package frc.robot.commands.controlpanelmanipulator;
 
-import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.RotationControl;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ExtendHopper extends CommandBase {
+public class SpinToColour extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeHopper m_subsystem;
+  private final RotationControl m_subsystem;
+  private String m_currentColour;
+  private String m_desiredColour;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExtendHopper(IntakeHopper subsystem) {
+  public SpinToColour(RotationControl subsystem, String desiredColour) {
     m_subsystem = subsystem;
+    m_desiredColour = desiredColour;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -29,17 +32,19 @@ public class ExtendHopper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.extendHopper();
+    m_currentColour = m_subsystem.detectColour();
+    m_subsystem.rotate();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_subsystem.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return (m_currentColour == m_desiredColour);
   }
 }

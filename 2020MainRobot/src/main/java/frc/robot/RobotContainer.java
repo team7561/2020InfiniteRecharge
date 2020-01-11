@@ -10,7 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.RotationControl;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -22,6 +26,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final Climber m_climber = new Climber();
+  private final IntakeHopper m_iIntakeHopper = new IntakeHopper();
+  private final Drivetrain m_drivetrain = new Drivetrain();
+  private final RotationControl m_rRotationControl = new RotationControl();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 

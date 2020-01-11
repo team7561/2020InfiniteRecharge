@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
-public class ColourSensor{
+public class ColourSensor extends SubsystemBase{
 /**
    * Change the I2C port below to match the connection of your color sensor
    */
@@ -46,7 +47,7 @@ public class ColourSensor{
     m_colorMatcher.addColorMatch(kYellowTarget);    
   }
 
-  public void robotPeriodic() {
+  public String robotPeriodic() {
     /**
      * The method GetColor() returns a normalized color value from the sensor and can be
      * useful if outputting the color to an RGB LED or similar. To
@@ -86,6 +87,7 @@ public class ColourSensor{
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+    return colorString;
   }
 
 public static void updateDashboard(boolean b) {
