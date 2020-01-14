@@ -35,15 +35,19 @@ final double encoderRatio = 2;
     public void drive(double leftSpeed, double rightSpeed) {
         leftA.set(leftSpeed);
         leftB.set(leftSpeed);
+        leftC.set(leftSpeed);
         rightA.set(-rightSpeed);
         rightB.set(-rightSpeed);
+        rightC.set(-rightSpeed);
     }
     public void resetEncoders()
     {
         leftA.getEncoder().setPosition(0);
         leftB.getEncoder().setPosition(0);
+        leftC.getEncoder().setPosition(0);
         rightA.getEncoder().setPosition(0);
         rightB.getEncoder().setPosition(0);
+        rightC.getEncoder().setPosition(0);
 
     }
 
@@ -80,12 +84,16 @@ final double encoderRatio = 2;
             //SmartDashboard.putNumber("Gyro Angle", readGyro());
             SmartDashboard.putNumber("Left A Power", leftA.get());
             SmartDashboard.putNumber("Left B Power", leftB.get());
+            SmartDashboard.putNumber("Left B Power", leftC.get());
             SmartDashboard.putNumber("Right A Power", rightA.get());
             SmartDashboard.putNumber("Right B Power", rightB.get());
+            SmartDashboard.putNumber("Right B Power", rightC.get());
             SmartDashboard.putNumber("Left A Encoder", leftA.getEncoder().getPosition());
             SmartDashboard.putNumber("Left B Encoder", leftB.getEncoder().getPosition());
+            SmartDashboard.putNumber("Left B Encoder", leftC.getEncoder().getPosition());
             SmartDashboard.putNumber("Right A Encoder", rightA.getEncoder().getPosition());
             SmartDashboard.putNumber("Right B Encoder", rightB.getEncoder().getPosition());
+            SmartDashboard.putNumber("Right B Encoder", rightC.getEncoder().getPosition());
         }
     }
     public int getLeftEncoder()
