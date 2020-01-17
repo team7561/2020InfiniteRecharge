@@ -22,8 +22,9 @@ public class Ports {
     public static int INTAKE_CHANNEL = 0;
     public static int FEEDER_CHANNEL = 1;
 
-
     // DIO ports
+
+    public static int CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL = 0;
 
     // Analog Channels
 

@@ -3,15 +3,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Ports;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 //import frc.robot.driver.ADIS16448_IMU;
 
 public class Drivetrain extends SubsystemBase {
 
     double lastError;
-final double encoderRatio = 2;
+    final double encoderRatio = 2;
 
-    //VictorSPX leftA, leftB, leftC, rightA, rightB, rightC;
     CANSparkMax leftA, leftB, leftC, rightA, rightB, rightC;
     public Drivetrain()
     {
@@ -21,6 +21,13 @@ final double encoderRatio = 2;
         rightA = new CANSparkMax(Ports.DRIVE_RIGHT_A_CANID, MotorType.kBrushless);
         rightB = new CANSparkMax(Ports.DRIVE_RIGHT_B_CANID, MotorType.kBrushless);
         rightC = new CANSparkMax(Ports.DRIVE_RIGHT_C_CANID, MotorType.kBrushless);
+        leftA.restoreFactoryDefaults();
+        leftB.restoreFactoryDefaults();
+        leftC.restoreFactoryDefaults();
+        rightA.restoreFactoryDefaults();
+        rightB.restoreFactoryDefaults();
+        rightC.restoreFactoryDefaults();
+        
         leftA.getEncoder().setPositionConversionFactor(42);
         leftB.getEncoder().setPositionConversionFactor(42);
         leftC.getEncoder().setPositionConversionFactor(42);
@@ -28,22 +35,31 @@ final double encoderRatio = 2;
         rightB.getEncoder().setPositionConversionFactor(42);
         rightC.getEncoder().setPositionConversionFactor(42);
         //adis = new ADIS16448_IMU();
-
+        leftA.setIdleMode(IdleMode.kCoast);
+        leftB.setIdleMode(IdleMode.kCoast);
+        leftC.setIdleMode(IdleMode.kCoast);
+        rightA.setIdleMode(IdleMode.kCoast);
+        rightB.setIdleMode(IdleMode.kCoast);
+        rightC.setIdleMode(IdleMode.kCoast);
     }
 
     //sets the speeds of all driving motors
     public void drive(double leftSpeed, double rightSpeed) {
         leftA.set(leftSpeed);
         leftB.set(leftSpeed);
+        leftC.set(leftSpeed);
         rightA.set(-rightSpeed);
         rightB.set(-rightSpeed);
+        rightC.set(-rightSpeed);
     }
     public void resetEncoders()
     {
         leftA.getEncoder().setPosition(0);
         leftB.getEncoder().setPosition(0);
+        leftC.getEncoder().setPosition(0);
         rightA.getEncoder().setPosition(0);
         rightB.getEncoder().setPosition(0);
+        rightC.getEncoder().setPosition(0);
 
     }
 
@@ -80,12 +96,22 @@ final double encoderRatio = 2;
             //SmartDashboard.putNumber("Gyro Angle", readGyro());
             SmartDashboard.putNumber("Left A Power", leftA.get());
             SmartDashboard.putNumber("Left B Power", leftB.get());
+            SmartDashboard.putNumber("Left C Power", leftC.get());
             SmartDashboard.putNumber("Right A Power", rightA.get());
             SmartDashboard.putNumber("Right B Power", rightB.get());
+            SmartDashboard.putNumber("Right C Power", rightC.get());
             SmartDashboard.putNumber("Left A Encoder", leftA.getEncoder().getPosition());
             SmartDashboard.putNumber("Left B Encoder", leftB.getEncoder().getPosition());
+            SmartDashboard.putNumber("Left C Encoder", leftC.getEncoder().getPosition());
             SmartDashboard.putNumber("Right A Encoder", rightA.getEncoder().getPosition());
             SmartDashboard.putNumber("Right B Encoder", rightB.getEncoder().getPosition());
+            SmartDashboard.putNumber("Right C Encoder", rightC.getEncoder().getPosition());
+            SmartDashboard.putNumber("Left A Current", leftA.getOutputCurrent());
+            SmartDashboard.putNumber("Left B Current", leftB.getOutputCurrent());
+            SmartDashboard.putNumber("Left C Current", leftC.getOutputCurrent());
+            SmartDashboard.putNumber("Right A Current", rightA.getOutputCurrent());
+            SmartDashboard.putNumber("Right B Current", rightB.getOutputCurrent());
+            SmartDashboard.putNumber("Right C Current", rightC.getOutputCurrent());
         }
     }
     public int getLeftEncoder()
