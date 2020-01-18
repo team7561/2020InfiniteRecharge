@@ -12,12 +12,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.StopShooting;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeHopper;
 import frc.robot.subsystems.RotationControl;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -31,6 +35,7 @@ public class RobotContainer {
   //private final Climber m_climber = new Climber();
   //private final IntakeHopper m_iIntakeHopper = new IntakeHopper();
   private final Drivetrain m_drivetrain = new Drivetrain();
+  private final Shooter m_shooter = new Shooter();
   //private final RotationControl m_rRotationControl = new RotationControl();
   private Joystick joystick = new Joystick(0);
   
@@ -41,6 +46,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
+    m_shooter.setDefaultCommand( new StopShooting(m_shooter));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -53,7 +59,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     System.out.println("Configure button bindings");
-      }
+    final JoystickButton trigger = new JoystickButton(joystick, 1);
+
+    trigger.whileHeld(new Shoot(m_shooter), true);
+
+    }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

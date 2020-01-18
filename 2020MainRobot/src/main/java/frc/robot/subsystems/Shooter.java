@@ -4,6 +4,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -17,14 +19,16 @@ public class Shooter extends SubsystemBase {
     DoubleSolenoid shooterSolenoid;
     private CANPIDController m_pidController;
     private CANEncoder m_encoder;
+    TalonFX shooterA;
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
   
 
     public Shooter()
     {
-        shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
-        shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
-        shooterMotorA.restoreFactoryDefaults();
+        //shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
+        //shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
+        shooterA = new TalonFX(50);
+        /*shooterMotorA.restoreFactoryDefaults();
         shooterMotorB.restoreFactoryDefaults();
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
@@ -58,41 +62,42 @@ public class Shooter extends SubsystemBase {
 
         shooterMotorB.setInverted(true);
         shooterMotorB.follow(shooterMotorA);
-        shooterSolenoid = new DoubleSolenoid(0,1);
+        shooterSolenoid = new DoubleSolenoid(0,1);*/
     }
 
     //Get the Ball
     public void shootBall()
     {
-        shooterMotorA.set(1);
+        shooterA.set(ControlMode.PercentOutput, -100);
     }
 
     public void periodic()
     {
-    // read PID coefficients from SmartDashboard
-    double p = SmartDashboard.getNumber("P Gain", 0);
-    double i = SmartDashboard.getNumber("I Gain", 0);
-    double d = SmartDashboard.getNumber("D Gain", 0);
-    double iz = SmartDashboard.getNumber("I Zone", 0);
-    double ff = SmartDashboard.getNumber("Feed Forward", 0);
-    double max = SmartDashboard.getNumber("Max Output", 0);
-    double min = SmartDashboard.getNumber("Min Output", 0);
+        updateDashboard(true);
+        // read PID coefficients from SmartDashboard
+        /*double p = SmartDashboard.getNumber("P Gain", 0);
+        double i = SmartDashboard.getNumber("I Gain", 0);
+        double d = SmartDashboard.getNumber("D Gain", 0);
+        double iz = SmartDashboard.getNumber("I Zone", 0);
+        double ff = SmartDashboard.getNumber("Feed Forward", 0);
+        double max = SmartDashboard.getNumber("Max Output", 0);
+        double min = SmartDashboard.getNumber("Min Output", 0);
 
-    // if PID coefficients on SmartDashboard have changed, write new values to controller
-    if((p != kP)) { m_pidController.setP(p); kP = p; }
-    if((i != kI)) { m_pidController.setI(i); kI = i; }
-    if((d != kD)) { m_pidController.setD(d); kD = d; }
-    if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-    if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
-    if((max != kMaxOutput) || (min != kMinOutput)) { 
-      m_pidController.setOutputRange(min, max); 
-      kMinOutput = min; kMaxOutput = max; 
-    } 
-    double setPoint = 1*maxRPM;
-    m_pidController.setReference(setPoint, ControlType.kVelocity);
-    
-    SmartDashboard.putNumber("SetPoint", setPoint);
-    SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
+        // if PID coefficients on SmartDashboard have changed, write new values to controller
+        if((p != kP)) { m_pidController.setP(p); kP = p; }
+        if((i != kI)) { m_pidController.setI(i); kI = i; }
+        if((d != kD)) { m_pidController.setD(d); kD = d; }
+        if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
+        if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
+        if((max != kMaxOutput) || (min != kMinOutput)) { 
+        m_pidController.setOutputRange(min, max); 
+        kMinOutput = min; kMaxOutput = max; 
+        } 
+        double setPoint = 1*maxRPM;
+        m_pidController.setReference(setPoint, ControlType.kVelocity);
+        
+        SmartDashboard.putNumber("SetPoint", setPoint);
+        SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());*/
 
     }
     public void extendDeflector()
@@ -110,9 +115,10 @@ public class Shooter extends SubsystemBase {
         intakeSpeed(-0.4);
     }
    */
-    //Stops intake
+    //Stops shooter
     public void stop()
     {
+        shooterA.set(ControlMode.PercentOutput, 0);
     }
 
 
@@ -120,6 +126,8 @@ public class Shooter extends SubsystemBase {
     {
         if (debug)
         {
+            SmartDashboard.putNumber("Shooter Supply Current", shooterA.getSupplyCurrent());
+            SmartDashboard.putNumber("Shooter Stator Current", shooterA.getStatorCurrent());
         }
     }
      
