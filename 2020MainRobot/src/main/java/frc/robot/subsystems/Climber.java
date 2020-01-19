@@ -45,6 +45,11 @@ public class Climber extends SubsystemBase {
     {
         setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
     }
+    public void stop()
+    {
+        setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
+        climberDeployMotor.set(ControlMode.PercentOutput, 0);
+    }
     public void updateDashboard(boolean debug)
     {
         if (debug)

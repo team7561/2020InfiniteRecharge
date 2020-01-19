@@ -11,14 +11,17 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.climber.Climb_Stop;
+import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.intakehopper.Grabbing_Stop;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.commands.shooter.StopShooting;
+import frc.robot.commands.shooter.Shooting_Stop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeHopper;
-import frc.robot.subsystems.RotationControl;
+import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,12 +34,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  //private final Climber m_climber = new Climber();
-  //private final IntakeHopper m_iIntakeHopper = new IntakeHopper();
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final Climber m_climber = new Climber();
+  private final IntakeHopper m_iIntakeHopper = new IntakeHopper();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
-  //private final RotationControl m_rRotationControl = new RotationControl();
+  private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
   private Joystick joystick = new Joystick(0);
   
  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -46,7 +49,10 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
-    m_shooter.setDefaultCommand( new StopShooting(m_shooter));
+    m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
+    m_climber.setDefaultCommand( new Climb_Stop(m_climber));
+    m_iIntakeHopper.setDefaultCommand( new Grabbing_Stop(m_iIntakeHopper));
+    m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     // Configure the button bindings
     configureButtonBindings();
   }

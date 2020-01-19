@@ -122,4 +122,7 @@ public class Drivetrain extends SubsystemBase {
     {
         return (int) -(rightA.getEncoder().getPosition()+rightB.getEncoder().getPosition())/2;
     }
+
+	public void stop() {
+	}
 }

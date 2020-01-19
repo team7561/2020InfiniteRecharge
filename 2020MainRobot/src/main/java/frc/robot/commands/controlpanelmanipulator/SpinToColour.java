@@ -1,6 +1,6 @@
 package frc.robot.commands.controlpanelmanipulator;
 
-import frc.robot.subsystems.RotationControl;
+import frc.robot.subsystems.ControlPanelManipulator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class SpinToColour extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final RotationControl m_subsystem;
+  private final ControlPanelManipulator m_subsystem;
   private String m_currentColour;
   private String m_desiredColour;
 
@@ -17,7 +17,7 @@ public class SpinToColour extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public SpinToColour(RotationControl subsystem, String desiredColour) {
+  public SpinToColour(ControlPanelManipulator subsystem, String desiredColour) {
     m_subsystem = subsystem;
     m_desiredColour = desiredColour;
     // Use addRequirements() here to declare subsystem dependencies.

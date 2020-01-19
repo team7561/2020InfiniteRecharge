@@ -1,21 +1,21 @@
-package frc.robot.commands.shooter;
+package frc.robot.commands.intakehopper;
 
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.IntakeHopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class StopShooting extends CommandBase {
+public class Grabbing_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_subsystem;
+  private final IntakeHopper m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public StopShooting(Shooter subsystem) {
+  public Grabbing_Stop(IntakeHopper subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
