@@ -53,6 +53,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_iIntakeHopper.setDefaultCommand( new Grabbing_Stop(m_iIntakeHopper));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
+    m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -63,11 +64,45 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+  
   private void configureButtonBindings() {
     System.out.println("Configure button bindings");
-    final JoystickButton trigger = new JoystickButton(joystick, 1);
 
-    trigger.whileHeld(new Shoot(m_shooter), true);
+    //example create joystick: final JoystickButton name = new JoystickButton(joystick, controller button ID)
+    //example create binding: name.command(new exampleCommand())
+
+
+    //creating the buttons for the Xbox Controller
+    final JoystickButton button_A = new JoystickButton(joystick, 1);
+    final JoystickButton button_B = new JoystickButton(joystick, 2);
+    final JoystickButton button_X = new JoystickButton(joystick, 3);
+    final JoystickButton button_Y = new JoystickButton(joystick, 4);
+
+    final JoystickButton button_LB = new JoystickButton(joystick, 5);
+    final JoystickButton button_RB = new JoystickButton(joystick, 6);
+
+    final JoystickButton back = new JoystickButton(joystick, 7);
+    final JoystickButton start = new JoystickButton(joystick, 8);
+
+    final JoystickButton left_joystick_press = new JoystickButton(joystick, 9);
+    final JoystickButton right_joystick_press = new JoystickButton(joystick, 10);
+
+    //binding commands to buttons
+    button_A.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_B.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_X.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_Y.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    button_LB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_RB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    back.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    start.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    left_joystick_press.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    right_joystick_press.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+
 
     }
   /**
