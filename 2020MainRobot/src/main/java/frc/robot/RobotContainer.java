@@ -73,34 +73,42 @@ public class RobotContainer {
 
 
     //creating the buttons for the Xbox Controller
-    final JoystickButton button_A = new JoystickButton(joystick, 1);
-    final JoystickButton button_B = new JoystickButton(joystick, 2);
-    final JoystickButton button_X = new JoystickButton(joystick, 3);
-    final JoystickButton button_Y = new JoystickButton(joystick, 4);
+    final JoystickButton trigger = new JoystickButton(joystick, 1);
+    final JoystickButton thumb = new JoystickButton(joystick, 2);
 
-    final JoystickButton button_LB = new JoystickButton(joystick, 5);
-    final JoystickButton button_RB = new JoystickButton(joystick, 6);
+    final JoystickButton button_3 = new JoystickButton(joystick, 3);
+    final JoystickButton button_4 = new JoystickButton(joystick, 4);
 
-    final JoystickButton back = new JoystickButton(joystick, 7);
-    final JoystickButton start = new JoystickButton(joystick, 8);
+    final JoystickButton button_5 = new JoystickButton(joystick, 5);
+    final JoystickButton button_6 = new JoystickButton(joystick, 6);
 
-    final JoystickButton left_joystick_press = new JoystickButton(joystick, 9);
-    final JoystickButton right_joystick_press = new JoystickButton(joystick, 10);
+    final JoystickButton button_7 = new JoystickButton(joystick, 7);
+    final JoystickButton button_8 = new JoystickButton(joystick, 8);
+
+    final JoystickButton button_9 = new JoystickButton(joystick, 9);
+    final JoystickButton button_10 = new JoystickButton(joystick, 10);
+
+    final JoystickButton button_11 = new JoystickButton(joystick, 11);
+    final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //binding commands to buttons
-    button_A.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_B.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_X.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_Y.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    trigger.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    thumb.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    
+    button_3.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_4.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
-    button_LB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_RB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_5.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_6.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
-    back.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    start.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_7.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_8.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
-    left_joystick_press.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    right_joystick_press.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_9.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_10.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
 
 
