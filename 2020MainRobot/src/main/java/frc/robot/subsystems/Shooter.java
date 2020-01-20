@@ -71,7 +71,7 @@ public class Shooter extends SubsystemBase {
         shooterMotorA.set(-1);
     }
 
-    public void periodic()
+    public void shootAtSpeed(double setPoint)
     {
         updateDashboard(true);
         // read PID coefficients from SmartDashboard
@@ -93,12 +93,15 @@ public class Shooter extends SubsystemBase {
         m_pidController.setOutputRange(min, max); 
         kMinOutput = min; kMaxOutput = max; 
         } 
-        double setPoint = 1*maxRPM;
         m_pidController.setReference(setPoint, ControlType.kVelocity);
         
         SmartDashboard.putNumber("SetPoint", setPoint);
         SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
 
+    }
+    public double getVelocity()
+    {
+        return m_encoder.getVelocity();
     }
     public void extendDeflector()
     {
