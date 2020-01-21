@@ -116,11 +116,11 @@ public class Drivetrain extends SubsystemBase {
     }
     public int getLeftEncoder()
     {
-        return (int) (leftA.getEncoder().getPosition()+leftB.getEncoder().getPosition()+leftC.getEncoder().getPosition())/3;
+        return (int) (leftA.getEncoder().getPosition()+leftB.getEncoder().getPosition())/2;
     }
     public int getRightEncoder()
     {
-        return (int) -(rightA.getEncoder().getPosition()+rightB.getEncoder().getPosition()+rightC.getEncoder().getPosition())/3;
+        return (int) -(rightA.getEncoder().getPosition()+rightB.getEncoder().getPosition())/2;
     }
 
 	public void stop() {
