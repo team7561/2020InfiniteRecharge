@@ -40,7 +40,10 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
-  private Joystick joystick = new Joystick(0);
+
+  //HID
+  private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
+  private XboxController xboxController = new XboxController(1); //Logitech Gamepad F310 (Xbox Controller)
   
  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
  
@@ -71,8 +74,7 @@ public class RobotContainer {
     //example create joystick: final JoystickButton name = new JoystickButton(joystick, controller button ID)
     //example create binding: name.command(new exampleCommand())
 
-
-    //creating the buttons for the Xbox Controller
+    //creating the buttons for the Joystick Controller
     final JoystickButton trigger = new JoystickButton(joystick, 1);
     final JoystickButton thumb = new JoystickButton(joystick, 2);
 
@@ -91,10 +93,10 @@ public class RobotContainer {
     final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
-    //binding commands to buttons
+    //binding buttons to commands for the Joystick Controller
     trigger.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     thumb.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    
+
     button_3.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_4.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
@@ -110,7 +112,35 @@ public class RobotContainer {
     button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
+    //creating the buttons for the Xbox Controller
+    final JoystickButton button_A = new JoystickButton(xboxController, 1);
+    final JoystickButton button_B = new JoystickButton(xboxController, 2);
+    final JoystickButton button_X = new JoystickButton(xboxController, 3);
+    final JoystickButton button_Y = new JoystickButton(xboxController, 4);
 
+    final JoystickButton button_LB = new JoystickButton(xboxController, 5);
+    final JoystickButton button_RB = new JoystickButton(xboxController, 6);
+
+    final JoystickButton back = new JoystickButton(xboxController, 7);
+    final JoystickButton start = new JoystickButton(xboxController, 8);
+
+    final JoystickButton left_joystick_button = new JoystickButton(xboxController, 9);
+    final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
+
+    //binding buttons to commands for the Xbox Controller
+    button_A.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_B.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_X.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_Y.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    button_LB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_RB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    back.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    start.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+
+    left_joystick_button.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    right_joystick_button.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
     }
   /**
