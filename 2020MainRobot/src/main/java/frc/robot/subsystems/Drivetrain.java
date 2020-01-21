@@ -5,12 +5,14 @@ import frc.robot.Ports;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import frc.robot.driver.ADIS16448_IMU;
 
 public class Drivetrain extends SubsystemBase {
 
     double lastError;
     final double encoderRatio = 2;
+    public ADXRS450_Gyro gyro;
 
     CANSparkMax leftA, leftB, leftC, rightA, rightB, rightC;
     public Drivetrain()
@@ -21,12 +23,14 @@ public class Drivetrain extends SubsystemBase {
         rightA = new CANSparkMax(Ports.DRIVE_RIGHT_A_CANID, MotorType.kBrushless);
         rightB = new CANSparkMax(Ports.DRIVE_RIGHT_B_CANID, MotorType.kBrushless);
         rightC = new CANSparkMax(Ports.DRIVE_RIGHT_C_CANID, MotorType.kBrushless);
+        gyro = new ADXRS450_Gyro();
         leftA.restoreFactoryDefaults();
         leftB.restoreFactoryDefaults();
         leftC.restoreFactoryDefaults();
         rightA.restoreFactoryDefaults();
         rightB.restoreFactoryDefaults();
         rightC.restoreFactoryDefaults();
+        gyro.calibrate();
         
         leftA.getEncoder().setPositionConversionFactor(42);
         leftB.getEncoder().setPositionConversionFactor(42);
@@ -63,6 +67,18 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
+    // resets gyro
+    public void resetGyro()
+    {
+        gyro.reset();
+    }
+
+    // reads gyro (between 0 and 360)
+    public double readGyro()
+    {
+        return (gyro.getAngle() % 360 + 360) % 360;
+    }
+
     //teleop driving
     public void arcadeDrive(double x, double y, double speed, boolean inverted) {
         //x = x * Math.abs(x) * speed;
@@ -87,13 +103,19 @@ public class Drivetrain extends SubsystemBase {
             drive(left, right);
         }
     }
+    
+    //turns to specified angle
+    public void turnToAngle(double m_speed) 
+    {
+
+	}
     //put dashboard stuff here
     public void updateDashboard(boolean debug)
     {
         debug = true;
         if (debug)
         {
-            //SmartDashboard.putNumber("Gyro Angle", readGyro());
+            SmartDashboard.putNumber("Gyro Angle", readGyro());
             SmartDashboard.putNumber("Left A Power", leftA.get());
             SmartDashboard.putNumber("Left B Power", leftB.get());
             SmartDashboard.putNumber("Left C Power", leftC.get());
@@ -112,6 +134,7 @@ public class Drivetrain extends SubsystemBase {
             SmartDashboard.putNumber("Right A Current", rightA.getOutputCurrent());
             SmartDashboard.putNumber("Right B Current", rightB.getOutputCurrent());
             SmartDashboard.putNumber("Right C Current", rightC.getOutputCurrent());
+            
         }
     }
     public int getLeftEncoder()
@@ -125,4 +148,5 @@ public class Drivetrain extends SubsystemBase {
 
 	public void stop() {
 	}
+
 }
