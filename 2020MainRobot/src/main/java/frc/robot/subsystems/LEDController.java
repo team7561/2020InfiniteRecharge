@@ -1,8 +1,11 @@
 package frc.robot.subsystems;
 import frc.robot.Ports;
 import edu.wpi.first.wpilibj.Spark;
-public class LEDController {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class LEDController extends SubsystemBase{
     Spark blinkin = new Spark(Ports.LED_CONTROLLER_CHANNEL);
+    ColourSensor colourSensor;
 
     public void Rainbow(){
         blinkin.set(-0.91);
@@ -22,6 +25,10 @@ public class LEDController {
 
     public void Blue(){
         blinkin.set(0.83);
+    }
+    public String detectColour()
+    {
+        return colourSensor.robotPeriodic();
     }
     
 }

@@ -15,16 +15,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class Led_CPM_Colour extends CommandBase {
   private final LEDController m_subsystem;
+  private String m_colour;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Led_CPM_Colour(LEDController subsystem, ColourSensor subsystem) {
+  public Led_CPM_Colour(LEDController subsystem, String colour) {
     m_subsystem = subsystem;
+    m_colour = colour;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+    
   }
 
   // Called when the command is initially scheduled.
@@ -35,6 +38,18 @@ public class Led_CPM_Colour extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (m_colour == "Blue"){
+      m_subsystem.Blue();
+    }
+    if (m_colour == "Red"){
+      m_subsystem.Red();
+    }
+    if (m_colour == "Green"){
+      m_subsystem.Green();
+    }
+    if (m_colour == "Yellow"){
+      m_subsystem.Yellow();
+    }
   }
 
   // Called once the command ends or is interrupted.
