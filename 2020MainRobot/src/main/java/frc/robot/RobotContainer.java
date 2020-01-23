@@ -16,6 +16,7 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
 import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -52,11 +53,12 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
+    m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_iIntakeHopper.setDefaultCommand( new Grabbing_Stop(m_iIntakeHopper));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
-    m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
+    //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -94,10 +96,10 @@ public class RobotContainer {
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //binding buttons to commands for the Joystick Controller
-    trigger.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    thumb.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    /*trigger.whileHeld(new Shoot(m_shooter), true);
+    thumb.whenPressed(new Shooting_Stop(m_shooter), true);
 
-    button_3.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_3.whenPressed(new ShootAtSpeed(m_shooter, -500), true);
     button_4.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
     button_5.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
@@ -110,7 +112,7 @@ public class RobotContainer {
     button_10.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
     button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);*/
 
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
