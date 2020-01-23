@@ -12,7 +12,7 @@ public class TurnToAngle extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   private final double m_speed;
-  private final double m_angle;
+  private double m_angleDifference;
   private final double m_targetAngle;
   
 
@@ -21,10 +21,9 @@ public class TurnToAngle extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TurnToAngle(Drivetrain subsystem, double speed, double angle, double targetAngle){
+  public TurnToAngle(Drivetrain subsystem, double speed, double targetAngle){
     m_subsystem = subsystem;
     m_speed = speed;
-    m_angle = angle;
     m_targetAngle = targetAngle;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -39,8 +38,28 @@ public class TurnToAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.turnToAngle(m_speed);
-     
+     // m_subsystem.turnToAngle(m_speed);
+     m_angleDifference = m_targetAngle - m_subsystem.readGyro();
+     if ((m_angleDifference > m_targetAngle/2) && (m_angleDifference < 180)) {
+      m_subsystem.drive(m_speed/2, -m_speed/2);
+     }
+     if ((m_angleDifference > m_targetAngle/2) && (m_angleDifference > 180)) {
+      m_subsystem.drive(-m_speed/2, m_speed/2);
+     }
+     if ((m_angleDifference > m_targetAngle/4) && (m_angleDifference < 180)) {
+      m_subsystem.drive(m_speed/4, -m_speed/4);
+     }
+     if ((m_angleDifference > m_targetAngle/4) && (m_angleDifference > 180)) {
+      m_subsystem.drive(-m_speed/4, m_speed/4);
+     }
+     else{
+      if (m_angleDifference > 180){
+        m_subsystem.drive(m_speed, -m_speed);
+      }
+      else if (m_angleDifference < 180){
+        m_subsystem.drive(m_speed, -m_speed);
+      }
+     }
   }
 
   // Called once the command ends or is interrupted.

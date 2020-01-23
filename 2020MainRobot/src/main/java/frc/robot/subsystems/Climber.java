@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 //import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -14,14 +15,14 @@ import frc.robot.Ports;
 import frc.robot.Speeds;
 
 public class Climber extends SubsystemBase {
-    TalonSRX climberMotorA;
-    VictorSPX climberMotorB;
+    TalonFX climberMotorA;
+    TalonFX climberMotorB;
     TalonSRX climberDeployMotor;
     DigitalInput climberHookExtended;
     public Climber()
     {
-        climberMotorA = new TalonSRX(Ports.CLIMB_WINCH_A_CANID);
-        climberMotorB = new VictorSPX(Ports.CLIMB_WINCH_B_CANID);
+        climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
+        climberMotorB = new TalonFX(Ports.CLIMB_WINCH_B_CANID);
         climberMotorB.follow(climberMotorA);
         climberDeployMotor = new TalonSRX(Ports.CLIMB_DEPLOY_A_CANID);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
@@ -55,8 +56,11 @@ public class Climber extends SubsystemBase {
         if (debug)
             {
             SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor Current", climberMotorA.getOutputCurrent());
+            SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Climber Motor B Speed", climberMotorB.getMotorOutputPercent());
+            SmartDashboard.putNumber("Climber Motor B Current", climberMotorB.getOutputCurrent());
+            SmartDashboard.putNumber("Climber Deploy Motor Current", climberDeployMotor.getOutputCurrent());
+            SmartDashboard.putNumber("Climber Deploy Motor Speed", climberDeployMotor.getMotorOutputPercent());
         }
 
 

@@ -15,6 +15,7 @@ import frc.robot.commands.climber.Climb_Stop;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
+import frc.robot.commands.leds.DefaultLED;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
@@ -22,6 +23,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,6 +44,8 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
+  private final LEDController m_ledcontroller = new LEDController();
+
   //HID
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
   private XboxController xboxController = new XboxController(1); //Logitech Gamepad F310 (Xbox Controller)
@@ -54,6 +58,7 @@ public class RobotContainer {
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
+    m_ledcontroller.setDefaultCommand( new DefaultLED(m_ledcontroller));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_iIntakeHopper.setDefaultCommand( new Grabbing_Stop(m_iIntakeHopper));

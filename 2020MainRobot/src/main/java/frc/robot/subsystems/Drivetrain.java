@@ -104,11 +104,7 @@ public class Drivetrain extends SubsystemBase {
         }
     }
     
-    //turns to specified angle
-    public void turnToAngle(double m_speed) 
-    {
 
-	}
     //put dashboard stuff here
     public void updateDashboard(boolean debug)
     {
