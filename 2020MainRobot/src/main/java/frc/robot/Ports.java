@@ -31,8 +31,8 @@ public class Ports {
     // PCM ports
     public static int INTAKE_SOLENOID_CHANNEL_A = 0;
     public static int INTAKE_SOLENOID_CHANNEL_B = 1;
-    public static int CLIMBER_SOLENOID_CHANNEL_A = 2;
-    public static int CLIMBER_SOLENOID_CHANNEL_B = 3;
+    public static int CPM_SOLENOID_CHANNEL_A = 2;
+    public static int CPM_SOLENOID_CHANNEL_B = 3;
 
     // PDP Slots
     public static int ARM_PDP_SLOT = 5;

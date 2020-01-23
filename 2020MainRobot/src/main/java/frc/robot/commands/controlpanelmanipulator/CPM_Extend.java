@@ -1,27 +1,21 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+package frc.robot.commands.controlpanelmanipulator;
 
-package frc.robot.commands.leds;
-
-import frc.robot.subsystems.LEDController;
+import frc.robot.subsystems.ControlPanelManipulator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class Led_Off extends CommandBase {
-  private final LEDController m_subsystem;
+public class CPM_Extend extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final ControlPanelManipulator m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Led_Off(LEDController subsystem) {
+  public CPM_Extend(ControlPanelManipulator subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -35,6 +29,7 @@ public class Led_Off extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+      m_subsystem.extend();
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +40,6 @@ public class Led_Off extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
