@@ -30,6 +30,7 @@ public class Shoot extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.shootBall();
+      m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +41,6 @@ public class Shoot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

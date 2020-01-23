@@ -36,9 +36,8 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Arcade drive");
-      m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), 0.6, false);
-      m_subsystem.updateDashboard(true);
+    m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), 0.6, false);
+    m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.

@@ -20,8 +20,10 @@ public class ColourSensor extends SubsystemBase{
    * parameter. The device will be automatically initialized with default 
    * parameters.
    */
-  private final ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
+   private ColorSensorV3 m_colorSensor;
 
+
+  
   /**
    * A Rev Color Match object is used to register and detect known colors. This can 
    * be calibrated ahead of time or during operation.
@@ -41,6 +43,13 @@ public class ColourSensor extends SubsystemBase{
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   public void robotInit() {
+    try {
+    m_colorSensor = new ColorSensorV3(i2cPort);
+    }
+    catch (Exception e)
+    {
+      
+    }
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);
     m_colorMatcher.addColorMatch(kRedTarget);
