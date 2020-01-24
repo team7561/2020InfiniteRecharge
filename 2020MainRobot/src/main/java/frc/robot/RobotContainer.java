@@ -11,10 +11,20 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.Climb_Stop;
+import frc.robot.commands.climber.LowerHook;
+import frc.robot.commands.climber.RaiseHook;
+import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
+import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
+import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
+import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.intakehopper.ExtendHopper;
+import frc.robot.commands.intakehopper.GrabBall;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
+import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.leds.DefaultLED;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
@@ -39,7 +49,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Climber m_climber = new Climber();
-  private final IntakeHopper m_iIntakeHopper = new IntakeHopper();
+  private final IntakeHopper m_intakeHopper = new IntakeHopper();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
@@ -61,7 +71,7 @@ public class RobotContainer {
     m_ledcontroller.setDefaultCommand( new DefaultLED(m_ledcontroller));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
-    m_iIntakeHopper.setDefaultCommand( new Grabbing_Stop(m_iIntakeHopper));
+    m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
@@ -101,14 +111,14 @@ public class RobotContainer {
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //binding buttons to commands for the Joystick Controller
-    /*trigger.whileHeld(new Shoot(m_shooter), true);
+    trigger.whileHeld(new Shoot(m_shooter), true);
     thumb.whenPressed(new Shooting_Stop(m_shooter), true);
 
     button_3.whenPressed(new ShootAtSpeed(m_shooter, -500), true);
-    button_4.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-
-    button_5.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_6.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_4.whenPressed(new GrabBall(m_intakeHopper), true);
+    /*
+    button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);
+    button_6.whenPressed(new RetractHopper(m_intakeHopper), true);
 
     button_7.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_8.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
@@ -117,8 +127,8 @@ public class RobotContainer {
     button_10.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
     button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);*/
-
+    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    */
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
     final JoystickButton button_B = new JoystickButton(xboxController, 2);
@@ -135,19 +145,20 @@ public class RobotContainer {
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
     //binding buttons to commands for the Xbox Controller
-    button_A.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_B.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    
+    button_A.whenPressed(new LowerHook(m_climber), true);
+    button_B.whenPressed(new Climb(m_climber), true);
     button_X.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_Y.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_Y.whenPressed(new RaiseHook(m_climber), true);
 
-    button_LB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_RB.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
+    button_RB.whenPressed(new SpinToColour(m_ControlPanelManipulator, null), true);
 
-    back.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    start.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
+    start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
 
-    left_joystick_button.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    right_joystick_button.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
+    right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
 
     }
   /**
