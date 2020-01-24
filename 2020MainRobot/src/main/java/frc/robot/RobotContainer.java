@@ -21,11 +21,10 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
-import frc.robot.commands.intakehopper.ExtendHopper;
-import frc.robot.commands.intakehopper.GrabBall;
-import frc.robot.commands.intakehopper.Grabbing_Stop;
-import frc.robot.commands.intakehopper.RetractHopper;
-import frc.robot.commands.leds.DefaultLED;
+import frc.robot.commands.IntakeHopper.ExtendHopper;
+import frc.robot.commands.IntakeHopper.GrabBall;
+import frc.robot.commands.IntakeHopper.Grabbing_Stop;
+import frc.robot.commands.IntakeHopper.RetractHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
@@ -68,7 +67,6 @@ public class RobotContainer {
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
-    m_ledcontroller.setDefaultCommand( new DefaultLED(m_ledcontroller));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
