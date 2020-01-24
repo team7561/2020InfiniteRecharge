@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class ControlPanelManipulator extends SubsystemBase {
 
-    ColourSensor colourSensor;
+    public ColourSensor colourSensor;
     VictorSPX colourWheelRotateMotor;
     DoubleSolenoid colourWheelSolenoid;
 
