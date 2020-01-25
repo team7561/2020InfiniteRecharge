@@ -150,10 +150,10 @@ public class RobotContainer {
     button_Y.whenPressed(new RaiseHook(m_climber), true);
 
     button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
-    button_RB.and(button_A).whenActive (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
-    button_RB.and(button_B).whenActive (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
-    button_RB.and(button_X).whenActive (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-    button_RB.and(button_Y).whenActive (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
+    button_RB.and(button_A).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
+    button_RB.and(button_B).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
+    button_RB.and(button_X).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
+    button_RB.and(button_Y).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
 
     back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
