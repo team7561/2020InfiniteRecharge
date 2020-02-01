@@ -18,7 +18,7 @@ public class IntakeHopper extends SubsystemBase {
     public IntakeHopper()
     {
         intakeHopperMotor = new VictorSP(Ports.INTAKE_CHANNEL);
-        hopperSolenoid = new DoubleSolenoid(0,1);
+        hopperSolenoid = new DoubleSolenoid(Ports.INTAKE_SOLENOID_CHANNEL_A,Ports.INTAKE_SOLENOID_CHANNEL_B);
     }
 
     //set speed of both intake motors

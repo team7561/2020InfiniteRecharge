@@ -33,6 +33,8 @@ public class Ports {
     public static int INTAKE_SOLENOID_CHANNEL_B = 1;
     public static int CPM_SOLENOID_CHANNEL_A = 2;
     public static int CPM_SOLENOID_CHANNEL_B = 3;
+    public static int SHOOTER_SOLENOID_CHANNEL_A = 4;
+    public static int SHOOTER_SOLENOID_CHANNEL_B = 5;
 
     // PDP Slots
     public static int ARM_PDP_SLOT = 5;

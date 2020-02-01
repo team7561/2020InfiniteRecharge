@@ -3,6 +3,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -39,11 +40,11 @@ public class Shooter extends SubsystemBase {
         kD = 0; 
         kIz = 0; 
         kFF = 0; 
-        setpoint = -600;
+        setpoint = 200;
         //kMaxOutput = 1; 
         //kMinOutput = -1;
-        kMaxOutput = 0.2; 
-        kMinOutput = -0.2;
+        kMaxOutput = 0.7; 
+        kMinOutput = -0.7;
         maxRPM = 5700;
 
         // set PID coefficients
@@ -60,13 +61,13 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("D Gain", kD);
         SmartDashboard.putNumber("I Zone", kIz);
         SmartDashboard.putNumber("Feed Forward", kFF);
-        SmartDashboard.putNumber("Set Point", setpoint);
+        SmartDashboard.putNumber("Set Point", -setpoint);
         SmartDashboard.putNumber("Max Output", kMaxOutput);
         SmartDashboard.putNumber("Min Output", kMinOutput);
 
-        //shooterMotorB.follow(shooterMotorA, true);
-        shooterMotorB.setInverted(true);
-        shooterSolenoid = new DoubleSolenoid(3,4);
+        shooterMotorB.follow(ExternalFollower.kFollowerSparkMax, Ports.SHOOTER_A_CANID, true);
+        //shooterMotorB.setInverted(true);
+        shooterSolenoid = new DoubleSolenoid(Ports.SHOOTER_SOLENOID_CHANNEL_A, Ports.SHOOTER_SOLENOID_CHANNEL_B);
     }
 
     //Get the Ball
@@ -88,7 +89,7 @@ public class Shooter extends SubsystemBase {
         double ff = SmartDashboard.getNumber("Feed Forward", 0);
         double max = SmartDashboard.getNumber("Max Output", 0);
         double min = SmartDashboard.getNumber("Min Output", 0);
-        setPoint = SmartDashboard.getNumber("Set Point", 0);
+        setPoint = -SmartDashboard.getNumber("Set Point", 0);
 
         // if PID coefficients on SmartDashboard have changed, write new values to controller
         if((p != kP)) { m_pidController.setP(p); kP = p; }
@@ -128,18 +129,18 @@ public class Shooter extends SubsystemBase {
     //Stops shooter
     public void stop()
     {
-       // shooterA.set(ControlMode.PercentOutput, 0);
+        shooterMotorA.set(0);
     }
-
 
     public void updateDashboard(boolean debug)
     {
         if (debug)
         {
+            SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
+            SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
             SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
         }
     }
-     
  }
