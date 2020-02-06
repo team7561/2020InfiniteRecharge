@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.Climb_Stop;
@@ -21,10 +22,10 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
-import frc.robot.commands.IntakeHopper.ExtendHopper;
-import frc.robot.commands.IntakeHopper.GrabBall;
-import frc.robot.commands.IntakeHopper.Grabbing_Stop;
-import frc.robot.commands.IntakeHopper.RetractHopper;
+import frc.robot.commands.intakehopper.ExtendHopper;
+import frc.robot.commands.intakehopper.GrabBall;
+import frc.robot.commands.intakehopper.Grabbing_Stop;
+import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
@@ -59,6 +60,7 @@ public class RobotContainer {
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
   private XboxController xboxController = new XboxController(1); //Logitech Gamepad F310 (Xbox Controller)
   
+  
  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
  
   /**
@@ -69,6 +71,8 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
+    m_climber.setDefaultCommand( new RaiseHook(m_climber));
+    m_climber.setDefaultCommand( new Climb(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
@@ -108,16 +112,21 @@ public class RobotContainer {
     final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
-    //binding buttons to commands for the Joystick Controller
-    trigger.whileHeld(new Shoot(m_shooter), true);
-    thumb.whenPressed(new Shooting_Stop(m_shooter), true);
+    final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
-    button_3.whenPressed(new ShootAtSpeed(m_shooter, -500), true);
-    button_4.whenPressed(new GrabBall(m_intakeHopper), true);
-    /*
+
+    
+
+    //binding buttons to commands for the Joystick Controller
+    trigger.whileHeld(new GrabBall(m_intakeHopper), true); //spins intake while held
+    thumb.whenPressed(new Shooting_Stop(m_shooter), true); //Lock Drivetrain????
+
+    button_3.whenPressed(new RaiseHook(m_climber), true);
+    button_4.whenPressed(new Climb(m_climber), true);
+    
     button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);
     button_6.whenPressed(new RetractHopper(m_intakeHopper), true);
-
+    /*
     button_7.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_8.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
 
@@ -142,6 +151,10 @@ public class RobotContainer {
     final JoystickButton left_joystick_button = new JoystickButton(xboxController, 9);
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
+
+    //final double RT = xboxController.getTriggerAxis(Hand.kRight); //probably the value of the right trigger
+    //final double LT = xboxController.getTriggerAxis(Hand.kLeft); //probably the value of the left trigger
+
     //binding buttons to commands for the Xbox Controller
     
     button_A.whenPressed(new LowerHook(m_climber), true);
@@ -150,10 +163,10 @@ public class RobotContainer {
     button_Y.whenPressed(new RaiseHook(m_climber), true);
 
     button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
-    button_RB.and(button_A).whenActive (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
-    button_RB.and(button_B).whenActive (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
-    button_RB.and(button_X).whenActive (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-    button_RB.and(button_Y).whenActive (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
+    button_RB.and(button_A).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
+    button_RB.and(button_B).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
+    button_RB.and(button_X).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
+    button_RB.and(button_Y).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
 
     back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
