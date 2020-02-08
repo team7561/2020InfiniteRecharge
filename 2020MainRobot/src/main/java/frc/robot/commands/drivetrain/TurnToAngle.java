@@ -57,7 +57,7 @@ public class TurnToAngle extends CommandBase {
         m_subsystem.drive(m_speed, -m_speed);
       }
       else if (m_angleDifference < 180){
-        m_subsystem.drive(m_speed, -m_speed);
+        m_subsystem.drive(-m_speed, m_speed);
       }
      }
   }
@@ -70,6 +70,6 @@ public class TurnToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {        
-        return (m_subsystem.readGyro() <= Constants.ANGLE_TOLERANCE);
+        return (m_angleDifference <= Constants.ANGLE_TOLERANCE);
   }
 }
