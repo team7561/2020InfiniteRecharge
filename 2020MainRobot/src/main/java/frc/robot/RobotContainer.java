@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.Climb_Stop;
 import frc.robot.commands.climber.LowerHook;
@@ -47,7 +46,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Climber m_climber = new Climber();
   private final IntakeHopper m_intakeHopper = new IntakeHopper();
   private final Drivetrain m_drivetrain = new Drivetrain();
@@ -124,15 +122,15 @@ public class RobotContainer {
     button_3.whenPressed(new RaiseHook(m_climber), true);
     button_4.whenPressed(new Climb(m_climber), true);
     
-    button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);
-    button_6.whenPressed(new RetractHopper(m_intakeHopper), true);
-    /*
-    button_7.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_8.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
+    button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);  // Extend intake
+    button_6.whenPressed(new RetractHopper(m_intakeHopper), true); // retract inatke
+    
+    button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
+    button_8.whenPressed(new LowerHook(m_climber), true);          // Lower hook
 
-    button_9.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_10.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-
+   /button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
+    button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
+/*
     button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     */
@@ -159,14 +157,13 @@ public class RobotContainer {
     
     button_A.whenPressed(new LowerHook(m_climber), true);
     button_B.whenPressed(new Climb(m_climber), true);
-    button_X.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
     button_Y.whenPressed(new RaiseHook(m_climber), true);
 
     button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
-    button_RB.and(button_A).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
+/*    button_RB.and(button_A).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Green"), true);
     button_RB.and(button_B).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
     button_RB.and(button_X).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-    button_RB.and(button_Y).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
+    button_RB.and(button_Y).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);*/
 
     back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);

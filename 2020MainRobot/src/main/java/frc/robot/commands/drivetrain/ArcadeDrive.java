@@ -1,6 +1,5 @@
 package frc.robot.commands.drivetrain;
 
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 
 import java.util.function.DoubleSupplier;
@@ -38,6 +37,7 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), 0.6, false);
     m_subsystem.updateDashboard(true);
+    
   }
 
   // Called once the command ends or is interrupted.

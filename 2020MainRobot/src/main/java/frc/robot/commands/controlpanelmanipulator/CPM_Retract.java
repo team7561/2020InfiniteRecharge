@@ -30,6 +30,7 @@ public class CPM_Retract extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.retract();
+      m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.

@@ -30,6 +30,7 @@ public class GrabBall extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.grabBall();
+      m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.

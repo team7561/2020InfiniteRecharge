@@ -8,6 +8,7 @@ import frc.robot.Ports;
 import frc.robot.Speeds;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ControlPanelManipulator extends SubsystemBase {
 
@@ -45,5 +46,9 @@ public class ControlPanelManipulator extends SubsystemBase {
     public void retract()
     {
         colourWheelSolenoid.set(Value.kReverse);
+    }
+    public void updateDashboard(boolean debug)
+    {
+        SmartDashboard.putNumber("Colour Wheel Motor Speed", colourWheelRotateMotor.getMotorOutputPercent());
     }
 }

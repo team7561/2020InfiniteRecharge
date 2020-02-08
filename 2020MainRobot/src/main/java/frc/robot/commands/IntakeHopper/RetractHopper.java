@@ -30,6 +30,7 @@ public class RetractHopper extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.retractHopper();
+      m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.
