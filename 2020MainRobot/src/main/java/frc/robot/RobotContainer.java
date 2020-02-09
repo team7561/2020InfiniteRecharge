@@ -21,6 +21,7 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.drivetrain.TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Stop;
 import frc.robot.commands.injector.Injector_Transfer_Ball;
 import frc.robot.commands.intakehopper.ExtendHopper;
@@ -30,12 +31,16 @@ import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
+import frc.robot.commands.visioncontroller.VCBlink_LED;
+import frc.robot.commands.visioncontroller.VCTurnOffLED;
+import frc.robot.commands.visioncontroller.VCTurnOnLED;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Injector;
 import frc.robot.subsystems.IntakeHopper;
 import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -52,6 +57,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
   private final Injector m_injector = new Injector();
+  private final VisionController m_visionController = new VisionController();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
   //HID
@@ -71,6 +77,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
+    m_visionController.setDefaultCommand( new VCTurnOnLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
@@ -157,6 +164,7 @@ public class RobotContainer {
     
     button_A.whenPressed(new LowerHook(m_climber), true);
     button_B.whenPressed(new Climb(m_climber), true);
+    button_X.whileHeld(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.4), false);
     button_Y.whenPressed(new RaiseHook(m_climber), true);
 
     button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
@@ -164,9 +172,12 @@ public class RobotContainer {
     button_RB.and(button_B).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Red"), true);
     button_RB.and(button_X).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
     button_RB.and(button_Y).whenPressed (new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);*/
+    
+    back.whenPressed(new VCBlink_LED(m_visionController), true);
+    start.whenPressed(new VCTurnOffLED(m_visionController), true);
 
-    back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
-    start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
+    //back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
+    //start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
 
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);

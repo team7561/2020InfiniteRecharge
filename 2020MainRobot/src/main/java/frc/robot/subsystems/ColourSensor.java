@@ -42,13 +42,14 @@ public class ColourSensor extends SubsystemBase{
   private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  public void robotInit() {
+  public ColourSensor() {
     try {
     m_colorSensor = new ColorSensorV3(i2cPort);
     }
     catch (Exception e)
     {
-      
+      System.out.println("No colour sensor detected");
+      System.out.println(e.toString());
     }
     m_colorMatcher.addColorMatch(kBlueTarget);
     m_colorMatcher.addColorMatch(kGreenTarget);

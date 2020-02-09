@@ -1,21 +1,21 @@
-package frc.robot.commands.controlpanelmanipulator;
+package frc.robot.commands.visioncontroller;
 
-import frc.robot.subsystems.ControlPanelManipulator;
+import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class CPM_Stop extends CommandBase {
+public class VCTurnOnLED extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ControlPanelManipulator m_subsystem;
+  private final VisionController m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CPM_Stop(ControlPanelManipulator subsystem) {
+  public VCTurnOnLED(VisionController subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -24,15 +24,12 @@ public class CPM_Stop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.colourSensor.ledController.Rainbow();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.stop();
-      m_subsystem.detectColour();
-      m_subsystem.updateDashboard(true);
+      m_subsystem.turnOnLED();
   }
 
   // Called once the command ends or is interrupted.
