@@ -10,17 +10,19 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.Climb_Stop;
 import frc.robot.commands.climber.LowerHook;
 import frc.robot.commands.climber.RaiseHook;
 import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
 import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
+import frc.robot.commands.controlpanelmanipulator.CPM_Spin;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.injector.Injector_Stop;
+import frc.robot.commands.injector.Injector_Transfer_Ball;
 import frc.robot.commands.intakehopper.ExtendHopper;
 import frc.robot.commands.intakehopper.GrabBall;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
@@ -30,9 +32,8 @@ import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Injector;
 import frc.robot.subsystems.IntakeHopper;
-import frc.robot.subsystems.LEDController;
 import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -50,9 +51,8 @@ public class RobotContainer {
   private final IntakeHopper m_intakeHopper = new IntakeHopper();
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
+  private final Injector m_injector = new Injector();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
-
-  private final LEDController m_ledcontroller = new LEDController();
 
   //HID
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
@@ -66,12 +66,11 @@ public class RobotContainer {
    */
   public RobotContainer() {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY()));
-    m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
+    //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
-    m_climber.setDefaultCommand( new RaiseHook(m_climber));
-    m_climber.setDefaultCommand( new Climb(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
+    m_injector.setDefaultCommand( new Injector_Stop(m_injector));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
@@ -112,14 +111,12 @@ public class RobotContainer {
 
     final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
-
-    
-
     //binding buttons to commands for the Joystick Controller
     trigger.whileHeld(new GrabBall(m_intakeHopper), true); //spins intake while held
     thumb.whenPressed(new Shooting_Stop(m_shooter), true); //Lock Drivetrain????
 
     button_3.whenPressed(new RaiseHook(m_climber), true);
+    button_3.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
     button_4.whenPressed(new Climb(m_climber), true);
     
     button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);  // Extend intake
@@ -127,13 +124,16 @@ public class RobotContainer {
     
     button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
     button_8.whenPressed(new LowerHook(m_climber), true);          // Lower hook
+    button_8.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
 
-   /button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
+    button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
-/*
-    button_11.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    button_12.whenPressed(new ExampleCommand(m_exampleSubsystem), true);
-    */
+
+    button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
+    button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
+    button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
+    button_12.whenReleased(new Injector_Stop(m_injector), true);
+    
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
     final JoystickButton button_B = new JoystickButton(xboxController, 2);

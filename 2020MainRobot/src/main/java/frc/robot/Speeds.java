@@ -19,6 +19,10 @@ public class Speeds {
     public static double CLIMBER_HOOK_RAISE_SPEED = 0.2;
     public static double CLIMBER_HOOK_LOWER_SPEED = -0.2;
     public static double CLIMBER_STOP_SPEED = 0;
+    //Injector
+    public static double INJECTOR_TRANSFER_SPEED = -1.0;
+    public static double INJECTOR_BACKFEED_SPEED = 0.4;
+    public static double INJECTOR_STOP_SPEED = 0;
     // Vision Tracking
     public static double VISION_DRIVE_SPEED = 0.2;
 

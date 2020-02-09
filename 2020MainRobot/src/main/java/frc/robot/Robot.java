@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   double curr_angle, target_angle;                                                                                    
   
   private RobotContainer m_robotContainer;
-   Timer matchTimer = new Timer();                                            
+  Timer matchTimer = new Timer();                                            
   NetworkTable table;                                            
   String autoMode;                                            
 

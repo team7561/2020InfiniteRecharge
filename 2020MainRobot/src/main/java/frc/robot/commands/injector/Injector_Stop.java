@@ -1,21 +1,21 @@
-package frc.robot.commands.climber;
+package frc.robot.commands.injector;
 
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Injector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class LowerHook extends CommandBase {
+public class Injector_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Climber m_subsystem;
+  private final Injector m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LowerHook(Climber subsystem) {
+  public Injector_Stop(Injector subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,13 +29,14 @@ public class LowerHook extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.lowerHook();
+      m_subsystem.stop();
       m_subsystem.updateDashboard(true);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      m_subsystem.stop();
   }
 
   // Returns true when the command should end.

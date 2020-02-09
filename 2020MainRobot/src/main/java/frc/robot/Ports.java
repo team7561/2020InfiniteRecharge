@@ -16,11 +16,12 @@ public class Ports {
     public static int CLIMB_WINCH_A_CANID = 23;
     public static int CLIMB_WINCH_B_CANID = 24;
     public static int COLOUR_WHEEL_ROTATE_CANID = 31;
+    public static int INJECTOR_CANID = 41;
 
     // PWM control channels
-    public static int LED_CONTROLLER_CHANNEL = 6;
+    public static int LED_CONTROLLER_CHANNEL = 7;
     public static int INTAKE_CHANNEL = 0;
-    public static int FEEDER_CHANNEL = 1;
+    public static int COLOUR_WHEEL_ROTATE_CHANNEL = 1;
 
     // DIO ports
 
