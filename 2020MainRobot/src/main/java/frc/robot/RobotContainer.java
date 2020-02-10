@@ -112,7 +112,7 @@ public class RobotContainer {
     final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
-    final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
+    //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
 
     
