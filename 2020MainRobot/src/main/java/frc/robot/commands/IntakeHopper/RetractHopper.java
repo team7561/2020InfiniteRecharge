@@ -1,4 +1,4 @@
-package frc.robot.commands.intakehopper;
+package frc.robot.commands.IntakeHopper;
 
 import frc.robot.subsystems.IntakeHopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
