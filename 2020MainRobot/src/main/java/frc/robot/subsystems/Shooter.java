@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 public class Shooter extends SubsystemBase {
     CANSparkMax shooterMotorA;
@@ -80,12 +81,10 @@ public class Shooter extends SubsystemBase {
     {
         shooterMotorA.set(-0.075);
         //shooterMotorB.set(-0.075);
-        updateDashboard(true);
     }
 
     public void shootAtSpeed(double setPoint)
     {
-        updateDashboard(true);
         // read PID coefficients from SmartDashboard
         double p = SmartDashboard.getNumber("P Gain", 0);
         double i = SmartDashboard.getNumber("I Gain", 0);
@@ -137,9 +136,9 @@ public class Shooter extends SubsystemBase {
         shooterMotorA.set(0);
     }
 
-    public void updateDashboard(boolean debug)
+    public void updateDashboard()
     {
-        if (debug)
+        if (Constants.DEBUG)
         {
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());

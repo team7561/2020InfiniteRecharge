@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Ports;
+import frc.robot.Constants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -106,10 +107,9 @@ public class Drivetrain extends SubsystemBase {
     
 
     //put dashboard stuff here
-    public void updateDashboard(boolean debug)
+    public void updateDashboard()
     {
-        debug = true;
-        if (debug)
+        if (Constants.DEBUG)
         {
             SmartDashboard.putNumber("Gyro Angle", readGyro());
             SmartDashboard.putNumber("Left A Power", leftA.get());

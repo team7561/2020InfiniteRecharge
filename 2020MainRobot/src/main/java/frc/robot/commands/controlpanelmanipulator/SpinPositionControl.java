@@ -33,7 +33,7 @@ public class SpinPositionControl extends CommandBase {
   public void execute() {
       m_subsystem.detectColour();
       m_subsystem.rotate();
-      m_subsystem.updateDashboard(true);
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

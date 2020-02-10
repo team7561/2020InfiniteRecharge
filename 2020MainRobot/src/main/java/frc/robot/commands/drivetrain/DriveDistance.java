@@ -48,7 +48,7 @@ public class DriveDistance extends CommandBase {
     else{
       m_subsystem.drive(m_speed, m_speed);
     }
-    m_subsystem.updateDashboard(true);
+    m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

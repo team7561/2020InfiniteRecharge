@@ -30,7 +30,7 @@ public class Injector_Transfer_Ball extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.transferBall();
-      m_subsystem.updateDashboard(true);
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

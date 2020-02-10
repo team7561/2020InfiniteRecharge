@@ -31,7 +31,7 @@ public class Climb_Stop extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.stop();
-      m_subsystem.updateDashboard(true);
+      m_subsystem.updateDashboard();
 
   }
 

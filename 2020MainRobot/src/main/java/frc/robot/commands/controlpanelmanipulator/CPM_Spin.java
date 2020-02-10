@@ -32,7 +32,7 @@ public class CPM_Spin extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.rotate();
-    m_subsystem.updateDashboard(true);
+    m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

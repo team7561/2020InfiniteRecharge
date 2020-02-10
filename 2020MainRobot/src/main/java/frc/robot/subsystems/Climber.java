@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 
@@ -57,9 +58,9 @@ public class Climber extends SubsystemBase {
         setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
         climberDeployMotorA.set(ControlMode.PercentOutput, 0);
     }
-    public void updateDashboard(boolean debug)
+    public void updateDashboard()
     {
-        if (debug)
+        if (Constants.DEBUG)
             {
             /*SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
             SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getStatorCurrent());

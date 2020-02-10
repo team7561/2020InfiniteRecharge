@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 
@@ -34,9 +35,13 @@ public class Injector extends SubsystemBase {
     }
 
 
-    public void updateDashboard(boolean debug)
+    public void periodic()
     {
-        if (debug)
+        
+    }
+    public void updateDashboard()
+    {
+        if (Constants.DEBUG)
         {
             SmartDashboard.putNumber("Injector Power", injectorrMotor.get());
         }

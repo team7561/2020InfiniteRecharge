@@ -39,7 +39,6 @@ public class TurnToVisionAngle extends CommandBase {
   @Override
   public void execute() {
     System.out.println("Turning to vision angle");
-    m_vision_subsystem.update();
     m_targetAngle = m_vision_subsystem.get_tx();
     System.out.println("tx = " + m_targetAngle);
     
@@ -58,7 +57,7 @@ public class TurnToVisionAngle extends CommandBase {
     else{
       m_subsystem.drive(0, 0);
     }
-    m_subsystem.updateDashboard(true);
+    m_subsystem.updateDashboard();
    }
 
   // Called once the command ends or is interrupted.

@@ -104,6 +104,6 @@ public class ColourSensor extends SubsystemBase{
     return colorString;
   }
 
-public static void updateDashboard(boolean b) {
+public static void updateDashboard() {
 }
 }

@@ -30,7 +30,7 @@ public class LowerHook extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.lowerHook();
-      m_subsystem.updateDashboard(true);
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.
