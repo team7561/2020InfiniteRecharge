@@ -2,7 +2,6 @@ package frc.robot.commands.drivetrain;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.PIDBase.Tolerance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -60,7 +59,8 @@ public class TurnToAngle extends CommandBase {
         m_subsystem.drive(-m_speed, m_speed);
       }
      }
-  }
+     m_subsystem.updateDashboard();
+   }
 
   // Called once the command ends or is interrupted.
   @Override

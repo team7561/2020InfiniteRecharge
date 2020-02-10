@@ -3,6 +3,7 @@ package frc.robot.commands.climber;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+
 /**
  * An example command that uses an example subsystem.
  */
@@ -30,6 +31,8 @@ public class Climb_Stop extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.stop();
+      m_subsystem.updateDashboard();
+
   }
 
   // Called once the command ends or is interrupted.

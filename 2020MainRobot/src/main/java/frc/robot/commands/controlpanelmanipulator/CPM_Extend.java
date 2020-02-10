@@ -30,6 +30,7 @@ public class CPM_Extend extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.extend();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +41,6 @@ public class CPM_Extend extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

@@ -30,6 +30,7 @@ public class Climb extends CommandBase {
   @Override
   public void execute() {
       //m_subsystem.lower();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

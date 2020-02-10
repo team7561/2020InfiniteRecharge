@@ -4,8 +4,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.ExternalFollower;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 //import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 public class Shooter extends SubsystemBase {
     CANSparkMax shooterMotorA;
@@ -31,16 +32,21 @@ public class Shooter extends SubsystemBase {
         //shooterA = new TalonFX(50);
         shooterMotorA.restoreFactoryDefaults();
         shooterMotorB.restoreFactoryDefaults();
+
+        shooterMotorA.setIdleMode(IdleMode.kCoast);
+        shooterMotorB.setIdleMode(IdleMode.kCoast);
+        shooterMotorA.setSmartCurrentLimit(20);
+        shooterMotorB.setSmartCurrentLimit(20);
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
 
         // PID coefficients
         kP = 5e-5; 
-        kI = 1e-6;
-        kD = 0; 
+        kI = 2e-7;
+        kD = 1e-6; 
         kIz = 0; 
         kFF = 0; 
-        setpoint = 200;
+        setpoint = -3000;
         //kMaxOutput = 1; 
         //kMinOutput = -1;
         kMaxOutput = 0.7; 
@@ -75,12 +81,10 @@ public class Shooter extends SubsystemBase {
     {
         shooterMotorA.set(-0.075);
         //shooterMotorB.set(-0.075);
-        updateDashboard(true);
     }
 
     public void shootAtSpeed(double setPoint)
     {
-        updateDashboard(true);
         // read PID coefficients from SmartDashboard
         double p = SmartDashboard.getNumber("P Gain", 0);
         double i = SmartDashboard.getNumber("I Gain", 0);
@@ -102,7 +106,7 @@ public class Shooter extends SubsystemBase {
         kMinOutput = min; kMaxOutput = max; 
         } 
         m_pidController.setReference(setPoint, ControlType.kVelocity);
-        shooterMotorB.set(shooterMotorA.get());
+        //shooterMotorB.set(shooterMotorA.get());
         //SmartDashboard.putNumber("SetPoint", setPoint);
         SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
 
@@ -132,9 +136,9 @@ public class Shooter extends SubsystemBase {
         shooterMotorA.set(0);
     }
 
-    public void updateDashboard(boolean debug)
+    public void updateDashboard()
     {
-        if (debug)
+        if (Constants.DEBUG)
         {
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());

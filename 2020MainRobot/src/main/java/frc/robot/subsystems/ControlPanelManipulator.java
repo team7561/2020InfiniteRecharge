@@ -1,30 +1,30 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ControlPanelManipulator extends SubsystemBase {
 
     public ColourSensor colourSensor;
-    VictorSPX colourWheelRotateMotor;
+    VictorSP colourWheelRotateMotor;
     DoubleSolenoid colourWheelSolenoid;
 
     public ControlPanelManipulator()
     {
         colourSensor = new ColourSensor();
-        colourWheelRotateMotor = new VictorSPX(Ports.COLOUR_WHEEL_ROTATE_CANID);
+        colourWheelRotateMotor = new VictorSP(Ports.COLOUR_WHEEL_ROTATE_CHANNEL);
         colourWheelSolenoid = new DoubleSolenoid(Ports.CPM_SOLENOID_CHANNEL_A, Ports.CPM_SOLENOID_CHANNEL_B);
         
     }
     private void setSpeed(double speed)
     {
-        colourWheelRotateMotor.set(ControlMode.PercentOutput, speed);
+        colourWheelRotateMotor.set(speed);
     }
     public String detectColour()
     {
@@ -45,5 +45,9 @@ public class ControlPanelManipulator extends SubsystemBase {
     public void retract()
     {
         colourWheelSolenoid.set(Value.kReverse);
+    }
+    public void updateDashboard()
+    {
+        SmartDashboard.putNumber("Colour Wheel Motor Speed", colourWheelRotateMotor.get());
     }
 }

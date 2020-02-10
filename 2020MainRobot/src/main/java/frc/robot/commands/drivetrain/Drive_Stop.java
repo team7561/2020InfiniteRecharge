@@ -30,6 +30,7 @@ public class Drive_Stop extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.stop();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 
@@ -66,9 +67,9 @@ public class IntakeHopper extends SubsystemBase {
     }
 
 
-    public void updateDashboard(boolean debug)
+    public void updateDashboard()
     {
-        if (debug)
+        if (Constants.DEBUG)
         {
             SmartDashboard.putNumber("Intake Power", intakeHopperMotor.get());
         }

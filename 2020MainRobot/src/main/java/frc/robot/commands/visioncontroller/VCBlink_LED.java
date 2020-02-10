@@ -1,21 +1,21 @@
-package frc.robot.commands.controlpanelmanipulator;
+package frc.robot.commands.visioncontroller;
 
-import frc.robot.subsystems.ControlPanelManipulator;
+import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class CPM_Retract extends CommandBase {
+public class VCBlink_LED extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ControlPanelManipulator m_subsystem;
+  private final VisionController m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CPM_Retract(ControlPanelManipulator subsystem) {
+  public VCBlink_LED(VisionController subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,8 +29,7 @@ public class CPM_Retract extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.retract();
-      m_subsystem.updateDashboard();
+      m_subsystem.blinkLED();
   }
 
   // Called once the command ends or is interrupted.
@@ -41,6 +40,6 @@ public class CPM_Retract extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

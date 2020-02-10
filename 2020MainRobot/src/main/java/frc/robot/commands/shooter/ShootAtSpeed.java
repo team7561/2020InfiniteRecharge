@@ -33,6 +33,7 @@ public class ShootAtSpeed extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.shootAtSpeed(m_speed);
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.
