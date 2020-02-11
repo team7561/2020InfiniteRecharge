@@ -14,7 +14,6 @@ public class TurnToVisionAngle extends CommandBase {
   private final Drivetrain m_subsystem;
   private final VisionController m_vision_subsystem;
   private final double m_speed;
-  private double m_angleDifference;
   private double m_targetAngle;
   
   /**
@@ -43,10 +42,22 @@ public class TurnToVisionAngle extends CommandBase {
     System.out.println("tx = " + m_targetAngle);
     
     if (m_targetAngle > 10) {
-    m_subsystem.drive(m_speed/2, -m_speed/2);
+    m_subsystem.drive(m_speed, -m_speed);
     }
     else if (m_targetAngle < -10) {
+    m_subsystem.drive(-m_speed, m_speed);
+    }
+    else if (m_targetAngle > 5) {
+    m_subsystem.drive(m_speed/2, -m_speed/2);
+    }
+    else if (m_targetAngle < -5) {
     m_subsystem.drive(-m_speed/2, m_speed/2);
+    }
+    else if (m_targetAngle > 3) {
+    m_subsystem.drive(m_speed/3, -m_speed/3);
+    }
+    else if (m_targetAngle < -3) {
+    m_subsystem.drive(-m_speed/3, m_speed/3);
     }
     else if (m_targetAngle > 1) {
     m_subsystem.drive(m_speed/4, -m_speed/4);

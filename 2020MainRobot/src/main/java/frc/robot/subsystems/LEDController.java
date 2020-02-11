@@ -28,7 +28,7 @@ public class LEDController extends SubsystemBase{
     }
     public String detectColour()
     {
-        return colourSensor.robotPeriodic();
+        return colourSensor.periodic();
     }
     
 }

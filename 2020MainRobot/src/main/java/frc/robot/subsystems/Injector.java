@@ -37,7 +37,7 @@ public class Injector extends SubsystemBase {
 
     public void periodic()
     {
-        
+        updateDashboard();
     }
     public void updateDashboard()
     {

@@ -3,7 +3,7 @@ package frc.robot;
 //import frc.robot.autonomous.Coordinate;
 
 public class Constants {
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
 
     public static int EJECT_TIME = 2;

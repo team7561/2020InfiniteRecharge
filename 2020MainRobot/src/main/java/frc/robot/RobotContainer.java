@@ -164,7 +164,7 @@ public class RobotContainer {
     
     button_A.whenPressed(new LowerHook(m_climber), true);
     button_B.whenPressed(new Climb(m_climber), true);
-    button_X.whileHeld(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.4), false);
+    button_X.whileHeld(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.1), false);
     button_Y.whenPressed(new RaiseHook(m_climber), true);
 
     button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
@@ -173,11 +173,11 @@ public class RobotContainer {
     button_RB.and(button_X).whenActive(new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
     button_RB.and(button_Y).whenActive(new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
     
-    back.whenPressed(new VCBlink_LED(m_visionController), true);
-    start.whenPressed(new VCTurnOffLED(m_visionController), true);
+    //back.whenPressed(new VCBlink_LED(m_visionController), true);
+    //start.whenPressed(new VCTurnOffLED(m_visionController), true);
 
-    //back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
-    //start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
+    back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
+    start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
 
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);

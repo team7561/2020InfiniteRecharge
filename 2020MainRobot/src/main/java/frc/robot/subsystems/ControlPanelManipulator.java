@@ -19,8 +19,7 @@ public class ControlPanelManipulator extends SubsystemBase {
     {
         colourSensor = new ColourSensor();
         colourWheelRotateMotor = new VictorSP(Ports.COLOUR_WHEEL_ROTATE_CHANNEL);
-        colourWheelSolenoid = new DoubleSolenoid(Ports.CPM_SOLENOID_CHANNEL_A, Ports.CPM_SOLENOID_CHANNEL_B);
-        
+        colourWheelSolenoid = new DoubleSolenoid(Ports.CPM_SOLENOID_CHANNEL_A, Ports.CPM_SOLENOID_CHANNEL_B);   
     }
     private void setSpeed(double speed)
     {
@@ -28,7 +27,7 @@ public class ControlPanelManipulator extends SubsystemBase {
     }
     public String detectColour()
     {
-        return colourSensor.robotPeriodic();
+        return colourSensor.periodic();
     }
     public void rotate()
     {

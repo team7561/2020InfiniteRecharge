@@ -9,7 +9,7 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
 
-public class ColourSensor extends SubsystemBase{
+public class ColourSensor{
 /**
    * Change the I2C port below to match the connection of your color sensor
    */
@@ -22,7 +22,6 @@ public class ColourSensor extends SubsystemBase{
    */
    private ColorSensorV3 m_colorSensor;
 
-  
   /**
    * A Rev Color Match object is used to register and detect known colors. This can 
    * be calibrated ahead of time or during operation.
@@ -57,7 +56,7 @@ public class ColourSensor extends SubsystemBase{
     m_colorMatcher.addColorMatch(kYellowTarget);    
   }
 
-  public String robotPeriodic() {
+  public String periodic() {
     /**
      * The method GetColor() returns a normalized color value from the sensor and can be
      * useful if outputting the color to an RGB LED or similar. To
@@ -101,6 +100,9 @@ public class ColourSensor extends SubsystemBase{
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putString("Detected Color", colorString);
+    SmartDashboard.putNumber("Colour Sensor Proximity", m_colorSensor.getProximity());
+    SmartDashboard.putNumber("Colour Sensor IR", m_colorSensor.getIR());
+    SmartDashboard.putString("Colour Sensor Colour", m_colorSensor.getColor().toString());
     return colorString;
   }
 
