@@ -116,7 +116,7 @@ public class RobotContainer {
     final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
-    final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
+    //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
     //binding buttons to commands for the Joystick Controller
     trigger.whileHeld(new GrabBall(m_intakeHopper), true); //spins intake while held
@@ -166,12 +166,6 @@ public class RobotContainer {
     button_B.whenPressed(new Climb(m_climber), true);
     button_X.whileHeld(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.1), false);
     button_Y.whenPressed(new RaiseHook(m_climber), true);
-
-    button_LB.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
-    button_RB.and(button_A).whenActive(new SpinToColour(m_ControlPanelManipulator, "Green"), true);
-    button_RB.and(button_B).whenActive(new SpinToColour(m_ControlPanelManipulator, "Red"), true);
-    button_RB.and(button_X).whenActive(new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-    button_RB.and(button_Y).whenActive(new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
     
     //back.whenPressed(new VCBlink_LED(m_visionController), true);
     //start.whenPressed(new VCTurnOffLED(m_visionController), true);
@@ -181,6 +175,12 @@ public class RobotContainer {
 
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
+
+    button_8.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
+    button_9.whenActive(new SpinToColour(m_ControlPanelManipulator, "Red"), true);
+    button_10.whenActive(new SpinToColour(m_ControlPanelManipulator, "Green"), true);
+    button_11.whenActive(new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
+    button_12.whenActive(new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
 
     }
   /**
