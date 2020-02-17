@@ -1,4 +1,4 @@
-package frc.robot.commands.IntakeHopper;
+package frc.robot.commands.intakehopper;
 
 import frc.robot.subsystems.IntakeHopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -36,12 +36,11 @@ public class GrabBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-      m_subsystem.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

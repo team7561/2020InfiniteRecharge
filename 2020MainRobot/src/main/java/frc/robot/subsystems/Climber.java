@@ -31,7 +31,7 @@ public class Climber extends SubsystemBase {
         talon.enableCurrentLimit(true);*/
 
         climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID);
-        //climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
+        climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
         /*climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
         climberDeployMotorB.follow(climberDeployMotorA);*/

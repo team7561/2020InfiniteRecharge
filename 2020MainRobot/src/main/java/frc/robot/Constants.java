@@ -5,11 +5,9 @@ package frc.robot;
 public class Constants {
     public static boolean DEBUG = true;
 
-
     public static int EJECT_TIME = 2;
     public static int INTAKE_TIME = 2;
     public static int POWERCELL_STALL_CURRENT = 2;
-
 
     public static double DISTANCE_TOLERANCE = 0.08;
     public static double SLOW_DOWN_DISTANCE = 0.4;

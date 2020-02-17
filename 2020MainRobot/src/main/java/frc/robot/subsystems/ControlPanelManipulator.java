@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -29,9 +28,13 @@ public class ControlPanelManipulator extends SubsystemBase {
     {
         return colourSensor.periodic();
     }
-    public void rotate()
+    public void rotateLeft()
     {
         setSpeed(Speeds.ROTATION_CONTROL_SPEED);
+    }
+    public void rotateRight()
+    {
+        setSpeed(-Speeds.ROTATION_CONTROL_SPEED);
     }
     public void stop()
     {

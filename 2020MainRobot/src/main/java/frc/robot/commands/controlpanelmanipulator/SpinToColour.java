@@ -35,7 +35,7 @@ public class SpinToColour extends CommandBase {
   @Override
   public void execute() {
     m_currentColour = m_subsystem.detectColour();
-    m_subsystem.rotate();
+    m_subsystem.rotateLeft();
     m_subsystem.updateDashboard();
   }
 

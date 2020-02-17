@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,18 +11,19 @@ import frc.robot.Speeds;
 
 public class Injector extends SubsystemBase {
 
-    CANSparkMax injectorrMotor;
+    CANSparkMax injectorMotor;
     Boolean hasBall;
 
     public Injector()
     {
-        injectorrMotor = new CANSparkMax(Ports.INJECTOR_CANID, MotorType.kBrushless);
+        injectorMotor = new CANSparkMax(Ports.INJECTOR_CANID, MotorType.kBrushless);
+        injectorMotor.setIdleMode(IdleMode.kCoast);
     }
 
     //set speed of both intake motors
     private void setSpeed (double speed)
     {
-        injectorrMotor.set(speed);
+        injectorMotor.set(speed);
     }
 
     public void transferBall()
@@ -33,6 +35,11 @@ public class Injector extends SubsystemBase {
     {
         setSpeed(Speeds.INJECTOR_STOP_SPEED);
     }
+    //Reverses injector
+    public void reverse()
+    {
+        setSpeed(Speeds.INJECTOR_BACKFEED_SPEED);
+    }
 
 
     public void periodic()
@@ -43,11 +50,8 @@ public class Injector extends SubsystemBase {
     {
         if (Constants.DEBUG)
         {
-            SmartDashboard.putNumber("Injector Power", injectorrMotor.get());
+            SmartDashboard.putNumber("Injector Power", injectorMotor.get());
         }
     }
-
-
-
 
 }
