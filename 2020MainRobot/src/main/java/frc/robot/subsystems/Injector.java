@@ -37,11 +37,16 @@ public class Injector extends SubsystemBase {
     {
         setSpeed(Speeds.INJECTOR_STOP_SPEED);
     }
+    //Reverses injector
+    public void reverse()
+    {
+        setSpeed(Speeds.INJECTOR_BACKFEED_SPEED);
+    }
 
 
     public void periodic()
     {
-        
+        updateDashboard();
     }
     public void updateDashboard()
     {
@@ -50,8 +55,5 @@ public class Injector extends SubsystemBase {
             SmartDashboard.putNumber("Injector Power", injectorMotor.get());
         }
     }
-
-
-
 
 }

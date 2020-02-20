@@ -1,29 +1,22 @@
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.injector;
 
-import frc.robot.subsystems.Drivetrain;
-
-import java.util.function.DoubleSupplier;
-
+import frc.robot.subsystems.Injector;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ArcadeDrive extends CommandBase {
+public class Injector_Reverse extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Drivetrain m_subsystem;
-  private DoubleSupplier m_x, m_y, m_speed;
+  private final Injector m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ArcadeDrive(Drivetrain subsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier speed) {
+  public Injector_Reverse(Injector subsystem) {
     m_subsystem = subsystem;
-    m_x = x;
-    m_y = y;
-    m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -36,14 +29,14 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/4, false);
-    m_subsystem.updateDashboard();
-    
+      m_subsystem.reverse();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      m_subsystem.stop();
   }
 
   // Returns true when the command should end.

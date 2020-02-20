@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Ports;
 import frc.robot.Speeds;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,8 +18,7 @@ public class ControlPanelManipulator extends SubsystemBase {
     {
         colourSensor = new ColourSensor();
         colourWheelRotateMotor = new VictorSP(Ports.COLOUR_WHEEL_ROTATE_CHANNEL);
-        colourWheelSolenoid = new DoubleSolenoid(Ports.CPM_SOLENOID_CHANNEL_A, Ports.CPM_SOLENOID_CHANNEL_B);
-        
+        colourWheelSolenoid = new DoubleSolenoid(Ports.CPM_SOLENOID_CHANNEL_A, Ports.CPM_SOLENOID_CHANNEL_B);   
     }
     private void setSpeed(double speed)
     {
@@ -28,11 +26,15 @@ public class ControlPanelManipulator extends SubsystemBase {
     }
     public String detectColour()
     {
-        return colourSensor.robotPeriodic();
+        return colourSensor.periodic();
     }
-    public void rotate()
+    public void rotateLeft()
     {
         setSpeed(Speeds.ROTATION_CONTROL_SPEED);
+    }
+    public void rotateRight()
+    {
+        setSpeed(-Speeds.ROTATION_CONTROL_SPEED);
     }
     public void stop()
     {

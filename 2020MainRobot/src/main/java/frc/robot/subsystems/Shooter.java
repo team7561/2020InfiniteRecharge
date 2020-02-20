@@ -21,9 +21,8 @@ public class Shooter extends SubsystemBase {
     DoubleSolenoid shooterSolenoid;
     private CANPIDController m_pidController;
     private CANEncoder m_encoder;
-   // TalonFX shooterA;
+
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, setpoint;
-  
 
     public Shooter()
     {
@@ -46,12 +45,12 @@ public class Shooter extends SubsystemBase {
         kD = 1e-6; 
         kIz = 0; 
         kFF = 0; 
-        setpoint = -3000;
+        setpoint = 4000;
         //kMaxOutput = 1; 
         //kMinOutput = -1;
-        kMaxOutput = 0.7; 
-        kMinOutput = -0.7;
-        maxRPM = 5700;
+        kMaxOutput = 0.85; 
+        kMinOutput = -0.85;
+        maxRPM = 4802;
 
         // set PID coefficients
         m_pidController.setP(kP);

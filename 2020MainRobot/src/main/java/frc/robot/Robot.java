@@ -20,9 +20,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 public class Robot extends TimedRobot {    
   private Command m_autonomousCommand;                                                                                
-  private static final String kDefaultAuto = "Default";                                                                                    
-  private static final String kCustomAuto = "My Auto";                                                                                    
-  private String m_autoSelected;                                                                                    
+  private static final String kDefaultAuto = "Default";                                                                       
   double curr_angle, target_angle;                                                                                    
   
   private RobotContainer m_robotContainer;

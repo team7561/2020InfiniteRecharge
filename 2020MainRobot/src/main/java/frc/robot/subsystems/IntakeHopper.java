@@ -32,6 +32,7 @@ public class IntakeHopper extends SubsystemBase {
     public void grabBall()
     {
         intakeSpeed(Speeds.GET_BALL_SPEED);
+        updateDashboard();
     }
 
     //For keep in the Ball while driving
