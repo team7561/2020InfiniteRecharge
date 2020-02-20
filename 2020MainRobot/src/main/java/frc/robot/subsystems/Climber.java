@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -20,22 +21,26 @@ public class Climber extends SubsystemBase {
     DigitalInput climberHookExtended;
     public Climber()
     {
-        //climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
-        //climberMotorB = new TalonFX(Ports.CLIMB_WINCH_B_CANID);
-        /*climberMotorA.configFactoryDefault();
+        climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
+        climberMotorB = new TalonFX(Ports.CLIMB_WINCH_B_CANID);
+        climberMotorA.configFactoryDefault();
         climberMotorB.configFactoryDefault();
-        climberMotorB.follow(climberMotorA);*/
-        /*climberMotorA.configContinuousCurrentLimit(10, 0);
-        talon.configPeakCurrentLimit(15, 0);
-        talon.configPeakCurrentDuration(100, 0);
-        talon.enableCurrentLimit(true);*/
+        climberMotorB.follow(climberMotorA);
+        //climberMotorA.configContinuousCurrentLimit(10, 0);
+        //talon.configPeakCurrentLimit(15, 0);
+        //talon.configPeakCurrentDuration(100, 0);
+        //talon.enableCurrentLimit(true);
 
         climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID);
-        //climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
-        /*climberDeployMotorA.configFactoryDefault();
+        climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
+        climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
-        climberDeployMotorB.follow(climberDeployMotorA);*/
+        climberDeployMotorB.follow(climberDeployMotorA);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
+
+        climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
+        climberDeployMotorB.setNeutralMode(NeutralMode.Brake);
+
     }
     private void setWinchSpeed(double speed)
     {

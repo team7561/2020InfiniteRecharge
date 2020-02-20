@@ -46,6 +46,14 @@ public class Drivetrain extends SubsystemBase {
         rightA.setIdleMode(IdleMode.kCoast);
         rightB.setIdleMode(IdleMode.kCoast);
         rightC.setIdleMode(IdleMode.kCoast);
+
+        int current = 40;
+        leftA.setSmartCurrentLimit(current);
+        leftB.setSmartCurrentLimit(current);
+        leftC.setSmartCurrentLimit(current);
+        rightA.setSmartCurrentLimit(current);
+        rightB.setSmartCurrentLimit(current);
+        rightC.setSmartCurrentLimit(current);
     }
 
     //sets the speeds of all driving motors

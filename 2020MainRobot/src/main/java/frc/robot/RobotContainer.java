@@ -42,6 +42,7 @@ import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -120,7 +121,7 @@ public class RobotContainer {
 
     //binding buttons to commands for the Joystick Controller
     trigger.whileHeld(new GrabBall(m_intakeHopper), true); //spins intake while held
-    thumb.whenPressed(new Shooting_Stop(m_shooter), true); //Lock Drivetrain????
+    thumb.whenPressed(new Shooting_Stop(m_shooter), true);
 
     button_3.whenPressed(new RaiseHook(m_climber), true);
     button_3.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
@@ -129,12 +130,18 @@ public class RobotContainer {
     button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);  // Extend intake
     button_6.whenPressed(new RetractHopper(m_intakeHopper), true); // retract inatke
     
-    button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
+    //button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
+    
+    button_7.whenPressed(new SequentialCommandGroup( 
+                          new ShootAtSpeed(m_shooter, 300), 
+                          new Injector_Transfer_Ball(m_injector) )); //Command Group to shoot at speed and spin injector once at speed.
+
     button_8.whenPressed(new LowerHook(m_climber), true);          // Lower hook
     button_8.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
 
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
+    
 
     button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
