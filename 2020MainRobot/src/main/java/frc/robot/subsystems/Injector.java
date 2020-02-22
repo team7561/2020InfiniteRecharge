@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -17,6 +18,7 @@ public class Injector extends SubsystemBase {
     public Injector()
     {
         injectorMotor = new CANSparkMax(Ports.INJECTOR_CANID, MotorType.kBrushless);
+        injectorMotor.setSmartCurrentLimit(20);
         injectorMotor.setIdleMode(IdleMode.kCoast);
     }
 

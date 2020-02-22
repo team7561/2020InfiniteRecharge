@@ -12,7 +12,6 @@ import java.util.List;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -34,10 +33,8 @@ import frc.robot.commands.controlpanelmanipulator.CPM_SpinLeft;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
-import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.Drive_Stop;
-import frc.robot.commands.drivetrain.TurnToAngle;
 import frc.robot.commands.drivetrain.TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Reverse;
 import frc.robot.commands.injector.Injector_Stop;
@@ -50,7 +47,6 @@ import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
-import frc.robot.commands.visioncontroller.VCBlink_LED;
 import frc.robot.commands.visioncontroller.VCTurnOffLED;
 import frc.robot.commands.visioncontroller.VCTurnOnLED;
 import frc.robot.subsystems.Climber;
@@ -63,6 +59,7 @@ import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -155,12 +152,18 @@ public class RobotContainer {
     button_5.whenPressed(new RetractHopper(m_intakeHopper), true);  // Extend intake
     button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
     
-    button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
+    //button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
+    
+    button_7.whenPressed(new SequentialCommandGroup( 
+                          new ShootAtSpeed(m_shooter, 300), 
+                          new Injector_Transfer_Ball(m_injector) )); //Command Group to shoot at speed and spin injector once at speed.
+
     button_8.whenPressed(new LowerHook(m_climber), true);          // Lower hook
     button_8.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
 
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
+    
 
     button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5));
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));

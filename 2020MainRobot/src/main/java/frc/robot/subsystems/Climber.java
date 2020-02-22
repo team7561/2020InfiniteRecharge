@@ -34,10 +34,14 @@ public class Climber extends SubsystemBase {
 
         climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID);
         climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
-        /*climberDeployMotorA.configFactoryDefault();
+        climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
-        climberDeployMotorB.follow(climberDeployMotorA);*/
+        climberDeployMotorB.follow(climberDeployMotorA);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
+
+        climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
+        climberDeployMotorB.setNeutralMode(NeutralMode.Brake);
+
     }
     private void setWinchSpeed(double speed)
     {
