@@ -2,9 +2,6 @@ package frc.robot.commands.autonomous;
 
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 
 
 /**
@@ -34,6 +31,7 @@ public class FollowTestPath extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_subsystem.drive(0, 0);
       //m_subsystem.lower();
       //m_subsystem.updateDashboard();
   }

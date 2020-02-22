@@ -8,12 +8,25 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import frc.robot.driver.ADIS16448_IMU;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 public class Drivetrain extends SubsystemBase {
 
     double lastError;
     final double encoderRatio = 2;
     public ADXRS450_Gyro gyro;
+
+    private final DifferentialDrive m_drive;
+    private final SpeedControllerGroup m_leftMotors;
+    private final SpeedControllerGroup m_rightMotors;
+
+    // Odometry class for tracking robot pose
+    private final DifferentialDriveOdometry m_odometry;
 
     CANSparkMax leftA, leftB, leftC, rightA, rightB, rightC;
     public Drivetrain()
@@ -24,6 +37,13 @@ public class Drivetrain extends SubsystemBase {
         rightA = new CANSparkMax(Ports.DRIVE_RIGHT_A_CANID, MotorType.kBrushless);
         rightB = new CANSparkMax(Ports.DRIVE_RIGHT_B_CANID, MotorType.kBrushless);
         rightC = new CANSparkMax(Ports.DRIVE_RIGHT_C_CANID, MotorType.kBrushless);
+        m_leftMotors = new SpeedControllerGroup(leftA, leftB, leftC);
+        m_rightMotors = new SpeedControllerGroup(rightA, rightB, rightC);
+        m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+
+
         gyro = new ADXRS450_Gyro();
         leftA.restoreFactoryDefaults();
         leftB.restoreFactoryDefaults();
@@ -50,12 +70,8 @@ public class Drivetrain extends SubsystemBase {
 
     //sets the speeds of all driving motors
     public void drive(double leftSpeed, double rightSpeed) {
-        leftA.set(leftSpeed);
-        leftB.set(leftSpeed);
-        leftC.set(leftSpeed);
-        rightA.set(-rightSpeed);
-        rightB.set(-rightSpeed);
-        rightC.set(-rightSpeed);
+        m_leftMotors.set(leftSpeed);
+        m_rightMotors.set(-rightSpeed);
     }
     public void resetEncoders()
     {
@@ -80,6 +96,14 @@ public class Drivetrain extends SubsystemBase {
         return (gyro.getAngle() % 360 + 360) % 360;
     }
 
+    /**
+     * Returns the heading of the robot.
+     *
+     * @return the robot's heading in degrees, from -180 to 180
+     */
+    public double getHeading() {
+        return Math.IEEEremainder(gyro.getAngle(), 360);
+    }
     //teleop driving
     public void arcadeDrive(double x, double y, double speed, boolean inverted) {
         //x = x * Math.abs(x) * speed;
@@ -104,8 +128,14 @@ public class Drivetrain extends SubsystemBase {
             drive(left, right);
         }
     }
-    
-
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        m_leftMotors.setVoltage(leftVolts);
+        m_rightMotors.setVoltage(-rightVolts);
+        m_drive.feed();
+      }
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
     //put dashboard stuff here
     public void updateDashboard()
     {
@@ -137,12 +167,29 @@ public class Drivetrain extends SubsystemBase {
     {
         return (int) (leftA.getEncoder().getPosition()+leftB.getEncoder().getPosition())/2;
     }
+    public int getLeftEncoderRate()
+    {
+        return (int) (leftA.getEncoder().getVelocity()+leftB.getEncoder().getVelocity()+leftC.getEncoder().getVelocity())/3;
+    }
     public int getRightEncoder()
     {
         return (int) -(rightA.getEncoder().getPosition()+rightB.getEncoder().getPosition())/2;
     }
+    public int getRightEncoderRate()
+    {
+        return (int) (rightA.getEncoder().getVelocity()+rightB.getEncoder().getVelocity()+rightC.getEncoder().getVelocity())/3;
+    }
 
 	public void stop() {
-	}
+        drive(0, 0);
+    }
+    /**
+   * Returns the current wheel speeds of the robot.
+   *
+   * @return The current wheel speeds.
+   */
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftEncoderRate(), getRightEncoder());
+  }
 
 }
