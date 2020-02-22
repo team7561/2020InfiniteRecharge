@@ -39,7 +39,9 @@ public class Drivetrain extends SubsystemBase {
         rightC = new CANSparkMax(Ports.DRIVE_RIGHT_C_CANID, MotorType.kBrushless);
         m_leftMotors = new SpeedControllerGroup(leftA, leftB, leftC);
         m_rightMotors = new SpeedControllerGroup(rightA, rightB, rightC);
+        m_rightMotors.setInverted(true);
         m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+        //m_drive.setSafetyEnabled(false);
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
@@ -70,8 +72,7 @@ public class Drivetrain extends SubsystemBase {
 
     //sets the speeds of all driving motors
     public void drive(double leftSpeed, double rightSpeed) {
-        m_leftMotors.set(leftSpeed);
-        m_rightMotors.set(-rightSpeed);
+        m_drive.tankDrive(leftSpeed, -rightSpeed);
     }
     public void resetEncoders()
     {
@@ -102,7 +103,14 @@ public class Drivetrain extends SubsystemBase {
      * @return the robot's heading in degrees, from -180 to 180
      */
     public double getHeading() {
-        return Math.IEEEremainder(gyro.getAngle(), 360);
+        try
+        {
+            return Math.IEEEremainder(gyro.getAngle(), 360);
+        }
+        catch (Exception e)
+        {
+            return 0;
+        }
     }
     //teleop driving
     public void arcadeDrive(double x, double y, double speed, boolean inverted) {

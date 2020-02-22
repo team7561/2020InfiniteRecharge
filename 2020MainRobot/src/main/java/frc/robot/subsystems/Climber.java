@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -20,11 +21,12 @@ public class Climber extends SubsystemBase {
     DigitalInput climberHookExtended;
     public Climber()
     {
-        //climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
-        //climberMotorB = new TalonFX(Ports.CLIMB_WINCH_B_CANID);
-        /*climberMotorA.configFactoryDefault();
+        climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
+        climberMotorB = new TalonFX(Ports.CLIMB_WINCH_B_CANID);
+        climberMotorA.configFactoryDefault();
         climberMotorB.configFactoryDefault();
-        climberMotorB.follow(climberMotorA);*/
+        climberMotorB.follow(climberMotorA);
+        climberMotorA.setNeutralMode(NeutralMode.Brake);
         /*climberMotorA.configContinuousCurrentLimit(10, 0);
         talon.configPeakCurrentLimit(15, 0);
         talon.configPeakCurrentDuration(100, 0);
@@ -39,7 +41,11 @@ public class Climber extends SubsystemBase {
     }
     private void setWinchSpeed(double speed)
     {
-        //climberMotorA.set(ControlMode.PercentOutput, speed);
+        climberMotorA.set(ControlMode.PercentOutput, speed);
+    }
+    public void climb()
+    {
+        setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
     }
     public void raiseHook()
     {

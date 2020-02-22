@@ -25,13 +25,13 @@ public class Constants {
     public static double kRamseteZeta = 0;
 
     // Auto drivetrain
-    public static double ksVolts = 0;
-    public static double kvVoltSecondsPerMeter = 0;
-    public static double kaVoltSecondsSquaredPerMeter = 0;
+    public static double ksVolts = 1.67;
+    public static double kvVoltSecondsPerMeter = 2.34;
+    public static double kaVoltSecondsSquaredPerMeter = 0.401;
     public static double kPDriveVel = 0;
     public static DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(0.2);
-    public static double kMaxSpeedMetersPerSecond = 0;
-    public static double kMaxAccelerationMetersPerSecondSquared = 0;
+    public static double kMaxSpeedMetersPerSecond = 2;
+    public static double kMaxAccelerationMetersPerSecondSquared = 1;
 
     
 }

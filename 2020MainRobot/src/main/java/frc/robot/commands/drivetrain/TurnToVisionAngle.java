@@ -32,6 +32,7 @@ public class TurnToVisionAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Turn to vision angle called");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,30 +43,32 @@ public class TurnToVisionAngle extends CommandBase {
     System.out.println("tx = " + m_targetAngle);
     
     if (m_targetAngle > 10) {
-    m_subsystem.drive(m_speed, -m_speed);
+      m_subsystem.drive(m_speed, -m_speed);
     }
     else if (m_targetAngle < -10) {
-    m_subsystem.drive(-m_speed, m_speed);
+      m_subsystem.drive(-m_speed, m_speed);
+      return;
     }
     else if (m_targetAngle > 5) {
-    m_subsystem.drive(m_speed/2, -m_speed/2);
+      m_subsystem.drive(m_speed/2, -m_speed/2);
     }
     else if (m_targetAngle < -5) {
-    m_subsystem.drive(-m_speed/2, m_speed/2);
+      m_subsystem.drive(-m_speed/2, m_speed/2);
     }
     else if (m_targetAngle > 3) {
-    m_subsystem.drive(m_speed/3, -m_speed/3);
+      m_subsystem.drive(m_speed/3, -m_speed/3);
     }
     else if (m_targetAngle < -3) {
-    m_subsystem.drive(-m_speed/3, m_speed/3);
+      m_subsystem.drive(-m_speed/3, m_speed/3);
     }
     else if (m_targetAngle > 1) {
-    m_subsystem.drive(m_speed/4, -m_speed/4);
+      m_subsystem.drive(m_speed/4, -m_speed/4);
     }
     else if (m_targetAngle < -1) {
-    m_subsystem.drive(-m_speed/4, m_speed/4);
+      m_subsystem.drive(-m_speed/4, m_speed/4);
     }
     else{
+      System.out.println("At vision target)");
       m_subsystem.drive(0, 0);
     }
     m_subsystem.updateDashboard();
@@ -79,6 +82,7 @@ public class TurnToVisionAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {        
-        return (m_targetAngle <= Constants.ANGLE_TOLERANCE);
+    System.out.println("Turning to vision target finished");  
+    return (m_targetAngle <= Constants.ANGLE_TOLERANCE);
   }
 }

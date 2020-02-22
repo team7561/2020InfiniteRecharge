@@ -36,6 +36,7 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.controlpanelmanipulator.SpinToColour;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.robot.commands.drivetrain.Drive_Stop;
 import frc.robot.commands.drivetrain.TurnToAngle;
 import frc.robot.commands.drivetrain.TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Reverse;
@@ -143,12 +144,13 @@ public class RobotContainer {
     trigger.whenPressed(new GrabBall(m_intakeHopper), true); //spins intake while held
     trigger.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //spins intake while held
     thumb.whenPressed(new EjectBall(m_intakeHopper), true); //Lock Drivetrain????
+    thumb.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //Lock Drivetrain????
     //thumb.whenPressed(new Shooting_Stop(m_shooter), true); //Lock Drivetrain????
 
     button_3.whenPressed(new RaiseHook(m_climber), true);
     button_3.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
     button_4.whenPressed(new Climb(m_climber), true);
-    button_4.whenPressed(new Climb_Stop(m_climber), true);
+    button_4.whenReleased(new Climb_Stop(m_climber), true);
     
     button_5.whenPressed(new RetractHopper(m_intakeHopper), true);  // Extend intake
     button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
@@ -160,10 +162,12 @@ public class RobotContainer {
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
 
+    button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5));
+    //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
-    button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
-    button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
-    button_12.whenReleased(new Injector_Stop(m_injector), true);
+    //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
+    //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
+    //button_12.whenReleased(new Injector_Stop(m_injector), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
@@ -181,7 +185,7 @@ public class RobotContainer {
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
     final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 5);
-    final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 6);
+    //final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 6);
   
     final DPadButton dpad_Up = new DPadButton(xboxController, DPadButton.Direction.UP);
     final DPadButton dpad_Down = new DPadButton(xboxController, DPadButton.Direction.DOWN);
@@ -190,7 +194,9 @@ public class RobotContainer {
     //binding buttons to commands for the Xbox Controller
     
     button_A.whenPressed(new Injector_Transfer_Ball(m_injector), true);
+    button_A.whenReleased(new Injector_Stop(m_injector), true);
     button_B.whenPressed(new Injector_Reverse(m_injector), true);
+    button_B.whenReleased(new Injector_Stop(m_injector), true);
     button_X.whenPressed(new ExtendHopper(m_intakeHopper), false);
     button_Y.whenPressed(new RetractHopper(m_intakeHopper), true);
     
@@ -203,13 +209,13 @@ public class RobotContainer {
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
 
-    button_8.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
+    /*button_8.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
     button_9.whenActive(new SpinToColour(m_ControlPanelManipulator, "Red"), true);
     button_10.whenActive(new SpinToColour(m_ControlPanelManipulator, "Green"), true);
     button_11.whenActive(new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
     button_12.whenActive(new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-
-    RT.whenPressed(new Shooting_Stop(m_shooter), true);
+*/
+    //RT.whenPressed(new Shooting_Stop(m_shooter), true);
     LT.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);
 
     dpad_Up.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);

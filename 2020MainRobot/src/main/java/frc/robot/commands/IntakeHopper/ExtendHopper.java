@@ -30,6 +30,7 @@ public class ExtendHopper extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.extendHopper();
+      System.out.println("Extending hopper");
       m_subsystem.updateDashboard();
   }
 
