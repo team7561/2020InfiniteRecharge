@@ -32,12 +32,15 @@ public class TurnToVisionAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Starting turn to vision angle");
     System.out.println("Turn to vision angle called");
+    m_vision_subsystem.turnOnLED();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_vision_subsystem.turnOnLED();
     System.out.println("Turning to vision angle");
     m_targetAngle = m_vision_subsystem.get_tx();
     System.out.println("tx = " + m_targetAngle);
@@ -77,12 +80,14 @@ public class TurnToVisionAngle extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Turning to vision target finished");  
+    m_vision_subsystem.turnOffLED();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {        
-    System.out.println("Turning to vision target finished");  
-    return (m_targetAngle <= Constants.ANGLE_TOLERANCE);
+    //return (m_targetAngle <= Constants.ANGLE_TOLERANCE);
+    return false;
   }
 }

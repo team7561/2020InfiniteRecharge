@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.Climb_Stop;
+import frc.robot.commands.climber.Climber_Reverse;
 import frc.robot.commands.climber.LowerHook;
 import frc.robot.commands.climber.RaiseHook;
 import frc.robot.commands.commandgroups.R_ShooterInjector;
@@ -32,7 +33,6 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinLeft;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
-import frc.robot.commands.controlpanelmanipulator.SpinPositionControl;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.Drive_Stop;
 import frc.robot.commands.drivetrain.TurnToVisionAngle;
@@ -44,20 +44,20 @@ import frc.robot.commands.intakehopper.ExtendHopper;
 import frc.robot.commands.intakehopper.GrabBall;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
 import frc.robot.commands.intakehopper.RetractHopper;
+import frc.robot.commands.intakehopper.ToggleHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooting_Stop;
 import frc.robot.commands.visioncontroller.VCTurnOffLED;
-import frc.robot.commands.visioncontroller.VCTurnOnLED;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Injector;
+
 import frc.robot.subsystems.IntakeHopper;
 import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -82,9 +82,6 @@ public class RobotContainer {
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
   private XboxController xboxController = new XboxController(1); //Logitech Gamepad F310 (Xbox Controller)
   
-  
- // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
- 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -96,7 +93,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
-    m_visionController.setDefaultCommand( new VCTurnOnLED(m_visionController));
+    m_visionController.setDefaultCommand( new VCTurnOffLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
@@ -112,60 +109,51 @@ public class RobotContainer {
   
   private void configureButtonBindings() {
     System.out.println("Configure button bindings");
-
-    //example create joystick: final JoystickButton name = new JoystickButton(joystick, controller button ID)
-    //example create binding: name.command(new exampleCommand())
-
     //creating the buttons for the Joystick Controller
     final JoystickButton trigger = new JoystickButton(joystick, 1);
     final JoystickButton thumb = new JoystickButton(joystick, 2);
-
     final JoystickButton button_3 = new JoystickButton(joystick, 3);
     final JoystickButton button_4 = new JoystickButton(joystick, 4);
-
     final JoystickButton button_5 = new JoystickButton(joystick, 5);
     final JoystickButton button_6 = new JoystickButton(joystick, 6);
-
     final JoystickButton button_7 = new JoystickButton(joystick, 7);
     final JoystickButton button_8 = new JoystickButton(joystick, 8);
-
     final JoystickButton button_9 = new JoystickButton(joystick, 9);
     final JoystickButton button_10 = new JoystickButton(joystick, 10);
-
     final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
     //binding buttons to commands for the Joystick Controller
-    trigger.whenPressed(new GrabBall(m_intakeHopper), true); //spins intake while held
+    trigger.whenPressed(new GrabBall(m_intakeHopper), true); //spins intake while held and not interuptable by other driver
     trigger.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //spins intake while held
-    thumb.whenPressed(new EjectBall(m_intakeHopper), true); //Lock Drivetrain????
-    thumb.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //Lock Drivetrain????
-    //thumb.whenPressed(new Shooting_Stop(m_shooter), true); //Lock Drivetrain????
-
+    thumb.whenPressed(new EjectBall(m_intakeHopper), true);
+    thumb.whenReleased(new Grabbing_Stop(m_intakeHopper), true);
     button_3.whenPressed(new RaiseHook(m_climber), true);
-    button_3.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
+    button_3.whenReleased(new Climb_Stop(m_climber), true);
     button_4.whenPressed(new Climb(m_climber), true);
-    button_4.whenReleased(new Climb_Stop(m_climber), true);
-    
+    button_4.whenReleased(new Climb_Stop(m_climber), true);    
     button_5.whenPressed(new RetractHopper(m_intakeHopper), true);  // Extend intake
     button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
     
-    //button_7.whenPressed(new ShootAtSpeed(m_shooter, 300), true);  // Shoot at speed
+    button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
     
-    button_7.whenPressed(new SequentialCommandGroup( 
-                          new ShootAtSpeed(m_shooter, 300), 
+    /*button_7.whenPressed(new SequentialCommandGroup( 
+                          new ShootAtSpeed(m_shooter, 3000), 
                           new Injector_Transfer_Ball(m_injector) )); //Command Group to shoot at speed and spin injector once at speed.
+*/
 
-    button_8.whenPressed(new LowerHook(m_climber), true);          // Lower hook
-    button_8.whenReleased(new Climb_Stop(m_climber), true);          // Stop Climbing
+    button_8.whenPressed(new Shooting_Stop(m_shooter), true);          // Lower hook
 
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
+
+    button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
+    button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
     
 
-    button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5));
+    //button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5), true);
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
@@ -204,7 +192,8 @@ public class RobotContainer {
     button_Y.whenPressed(new RetractHopper(m_intakeHopper), true);
     
     button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
-    button_RB.whenPressed(new VCTurnOffLED(m_visionController), true);
+    button_RB.whenPressed(new ToggleHopper(m_intakeHopper), true);
+    //button_RB.whenPressed(new VCTurnOffLED(m_visionController), true);
 
     back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
@@ -212,12 +201,6 @@ public class RobotContainer {
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
 
-    /*button_8.whenPressed(new SpinPositionControl(m_ControlPanelManipulator), true);
-    button_9.whenActive(new SpinToColour(m_ControlPanelManipulator, "Red"), true);
-    button_10.whenActive(new SpinToColour(m_ControlPanelManipulator, "Green"), true);
-    button_11.whenActive(new SpinToColour(m_ControlPanelManipulator, "Yellow"), true);
-    button_12.whenActive(new SpinToColour(m_ControlPanelManipulator, "Blue"), true);
-*/
     //RT.whenPressed(new Shooting_Stop(m_shooter), true);
     LT.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);
 

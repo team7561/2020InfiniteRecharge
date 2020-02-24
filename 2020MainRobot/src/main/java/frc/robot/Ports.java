@@ -24,7 +24,6 @@ public class Ports {
     public static int COLOUR_WHEEL_ROTATE_CHANNEL = 1;
 
     // DIO ports
-
     public static int CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL = 0;
 
     // Analog Channels

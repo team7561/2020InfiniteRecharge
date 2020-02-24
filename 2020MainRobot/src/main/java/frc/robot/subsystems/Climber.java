@@ -36,7 +36,7 @@ public class Climber extends SubsystemBase {
         climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
         climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
-        climberDeployMotorB.follow(climberDeployMotorA);
+        //climberDeployMotorB.follow(climberDeployMotorA);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
 
         climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
@@ -46,10 +46,15 @@ public class Climber extends SubsystemBase {
     private void setWinchSpeed(double speed)
     {
         climberMotorA.set(ControlMode.PercentOutput, speed);
+        climberMotorB.set(ControlMode.PercentOutput, speed);
     }
     public void climb()
     {
         setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
+    }
+    public void climbReverse()
+    {
+        setWinchSpeed(Speeds.CLIMBER_LOWER_SPEED);
     }
     public void raiseHook()
     {
@@ -72,10 +77,10 @@ public class Climber extends SubsystemBase {
     {
         if (Constants.DEBUG)
             {
-            /*SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
+            SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
             SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getStatorCurrent());
             SmartDashboard.putNumber("Climber Motor B Speed", climberMotorB.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor B Current", climberMotorB.getStatorCurrent());*/
+            SmartDashboard.putNumber("Climber Motor B Current", climberMotorB.getStatorCurrent());
             //SmartDashboard.putNumber("Climber Deploy Motor A Current", climberDeployMotorA.getStatorCurrent());
             //SmartDashboard.putNumber("Climber Deploy Motor B Current", climberDeployMotorB.getStatorCurrent());
             SmartDashboard.putNumber("Climber Deploy Motor A Speed", climberDeployMotorA.getMotorOutputPercent());

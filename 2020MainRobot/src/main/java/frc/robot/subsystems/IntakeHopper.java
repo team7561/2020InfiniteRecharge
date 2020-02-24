@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -42,13 +41,16 @@ public class IntakeHopper extends SubsystemBase {
     }
     public void extendHopper()
     {
-        hopperSolenoid.set(Value.kForward);
+        hopperSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     public void retractHopper()
     {
-        hopperSolenoid.set(Value.kReverse);
+        hopperSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
-
+    public boolean isExtended()
+    {
+        return hopperSolenoid.get() == DoubleSolenoid.Value.kForward;
+    }
     //Ejects the Ball fast
     public void ejectBall()
     {

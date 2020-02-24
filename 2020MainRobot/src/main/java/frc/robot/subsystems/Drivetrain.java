@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 public class Drivetrain extends SubsystemBase {
 
     double lastError;
+    int current = 40;
     final double encoderRatio = 2;
     public ADXRS450_Gyro gyro;
 
@@ -69,7 +70,6 @@ public class Drivetrain extends SubsystemBase {
         rightB.setIdleMode(IdleMode.kCoast);
         rightC.setIdleMode(IdleMode.kCoast);
 
-        int current = 40;
         leftA.setSmartCurrentLimit(current);
         leftB.setSmartCurrentLimit(current);
         leftC.setSmartCurrentLimit(current);
