@@ -3,6 +3,9 @@ package frc.robot.commands.drivetrain;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.VisionController;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
@@ -13,18 +16,18 @@ public class TurnToVisionAngle extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   private final VisionController m_vision_subsystem;
-  private final double m_speed;
-  private double m_targetAngle;
+  private DoubleSupplier m_speedSupplier;
+  private double m_targetAngle, m_speed;
   
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, double speed){
+  public TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
     m_subsystem = subsystem;
     m_vision_subsystem = vision_subsystem;
-    m_speed = speed;
+    m_speedSupplier = speedSupplier;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -40,6 +43,7 @@ public class TurnToVisionAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_speed = m_speedSupplier.getAsDouble();
     m_vision_subsystem.turnOnLED();
     System.out.println("Turning to vision angle");
     m_targetAngle = m_vision_subsystem.get_tx();

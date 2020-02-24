@@ -47,6 +47,8 @@ import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.intakehopper.ToggleHopper;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
+import frc.robot.commands.shooter.Shooter_Extend;
+import frc.robot.commands.shooter.Shooter_Retract;
 import frc.robot.commands.shooter.Shooting_Stop;
 import frc.robot.commands.visioncontroller.VCTurnOffLED;
 import frc.robot.subsystems.Climber;
@@ -77,6 +79,7 @@ public class RobotContainer {
   private final Injector m_injector = new Injector();
   private final VisionController m_visionController = new VisionController();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
+
 
   //HID
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
@@ -149,11 +152,11 @@ public class RobotContainer {
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
 
-    button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
-    button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
+    //button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
+    //button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
     
 
-    //button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5), true);
+    button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
@@ -188,8 +191,8 @@ public class RobotContainer {
     button_A.whenReleased(new Injector_Stop(m_injector), true);
     button_B.whenPressed(new Injector_Reverse(m_injector), true);
     button_B.whenReleased(new Injector_Stop(m_injector), true);
-    button_X.whenPressed(new ExtendHopper(m_intakeHopper), false);
-    button_Y.whenPressed(new RetractHopper(m_intakeHopper), true);
+    button_X.whenPressed(new Shooter_Extend(m_shooter), false);
+    button_Y.whenPressed(new Shooter_Retract(m_shooter), true);
     
     button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
     button_RB.whenPressed(new ToggleHopper(m_intakeHopper), true);

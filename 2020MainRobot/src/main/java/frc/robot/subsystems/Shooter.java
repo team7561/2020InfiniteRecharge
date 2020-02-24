@@ -114,11 +114,11 @@ public class Shooter extends SubsystemBase {
     {
         return m_encoder.getVelocity();
     }
-    public void extendDeflector()
+    public void extendHood()
     {
         shooterSolenoid.set(Value.kForward);
     }
-    public void retractDeflector()
+    public void retractHood()
     {
         shooterSolenoid.set(Value.kReverse);
     }
