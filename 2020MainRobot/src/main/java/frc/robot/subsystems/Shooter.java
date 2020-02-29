@@ -34,18 +34,18 @@ public class Shooter extends SubsystemBase {
 
         shooterMotorA.setIdleMode(IdleMode.kCoast);
         shooterMotorB.setIdleMode(IdleMode.kCoast);
-        shooterMotorA.setSmartCurrentLimit(30);
-        shooterMotorB.setSmartCurrentLimit(30);
+        shooterMotorA.setSmartCurrentLimit(40);
+        shooterMotorB.setSmartCurrentLimit(40);
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
 
         // PID coefficients
-        kP = 5e-5; 
-        kI = 1.0e-7;
-        kD = 1.5e-6; 
+        kP = 0.003; 
+        kI = 0.000002;
+        kD = 0.000004; 
         kIz = 0; 
         kFF = 0; 
-        setpoint = 4000;
+        setpoint = 2500;
         //kMaxOutput = 1; 
         //kMinOutput = -1;
         kMaxOutput = 0.85; 
@@ -137,7 +137,7 @@ public class Shooter extends SubsystemBase {
 
     public void updateDashboard()
     {
-        if (Constants.DEBUG)
+        if (Constants.DEBUG_SHOOTER)
         {
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());

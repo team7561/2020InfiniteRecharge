@@ -50,7 +50,7 @@ public class Injector extends SubsystemBase {
     }
     public void updateDashboard()
     {
-        if (Constants.DEBUG)
+        if (Constants.DEBUG_INJECTOR)
         {
             SmartDashboard.putNumber("Injector Power", injectorMotor.get());
         }

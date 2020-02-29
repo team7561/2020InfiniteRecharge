@@ -72,7 +72,7 @@ public class IntakeHopper extends SubsystemBase {
 
     public void updateDashboard()
     {
-        if (Constants.DEBUG)
+        if (Constants.DEBUG_INTAKE)
         {
             SmartDashboard.putNumber("Intake Power", intakeHopperMotor.get());
         }

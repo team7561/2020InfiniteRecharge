@@ -155,7 +155,7 @@ public class Drivetrain extends SubsystemBase {
     //put dashboard stuff here
     public void updateDashboard()
     {
-        if (Constants.DEBUG)
+        if (Constants.DEBUG_DRIVETRAIN)
         {
             SmartDashboard.putNumber("Gyro Angle", readGyro());
             SmartDashboard.putNumber("Left A Power", leftA.get());

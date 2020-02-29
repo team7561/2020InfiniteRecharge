@@ -138,23 +138,17 @@ public class RobotContainer {
     button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
     
     button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
-    
-    /*button_7.whenPressed(new SequentialCommandGroup( 
-                          new ShootAtSpeed(m_shooter, 3000), 
-                          new Injector_Transfer_Ball(m_injector) )); //Command Group to shoot at speed and spin injector once at speed.
-*/
-
-    button_8.whenPressed(new Shooting_Stop(m_shooter), true);          // Lower hook
+    button_8.whenPressed(new Shooting_Stop(m_shooter), true);  
 
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
     button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
 
-    button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
-    button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
+    //button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
+    //button_12.whenReleased(new Climb_Stop(m_climber));
     
 
-    //button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5), true);
-    //button_12.whenReleased(new Drive_Stop(m_drivetrain));
+    button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, 0.6).withTimeout(5), true);
+    button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
     //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);

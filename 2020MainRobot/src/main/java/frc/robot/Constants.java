@@ -5,6 +5,12 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 //import frc.robot.autonomous.Coordinate;
 
 public class Constants {
+    public static boolean DEBUG_DRIVETRAIN = false;
+    public static boolean DEBUG_CLIMBER = false;
+    public static boolean DEBUG_SHOOTER = true;
+    public static boolean DEBUG_INTAKE = false;
+    public static boolean DEBUG_INJECTOR = false;
+    public static boolean DEBUG_COLOUR_SENSOR = false;
     public static boolean DEBUG = true;
 
     public static int EJECT_TIME = 2;

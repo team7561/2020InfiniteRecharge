@@ -36,7 +36,7 @@ public class Climber extends SubsystemBase {
         climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
         climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
-        //climberDeployMotorB.follow(climberDeployMotorA);
+        climberDeployMotorB.follow(climberDeployMotorA);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
 
         climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
@@ -58,11 +58,11 @@ public class Climber extends SubsystemBase {
     }
     public void raiseHook()
     {
-        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
+        //climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
     }
     public void lowerHook()
     {
-        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
+        //climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
     }
     public void stopClimbing()
     {
@@ -75,7 +75,7 @@ public class Climber extends SubsystemBase {
     }
     public void updateDashboard()
     {
-        if (Constants.DEBUG)
+        if (Constants.DEBUG_CLIMBER)
             {
             SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
             SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getStatorCurrent());

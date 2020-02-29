@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import frc.robot.Constants;
+
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorMatch;
@@ -93,14 +95,17 @@ public class ColourSensor{
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
      */
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Green", detectedColor.green);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
-    SmartDashboard.putString("Detected Color", colorString);
-    SmartDashboard.putNumber("Colour Sensor Proximity", m_colorSensor.getProximity());
-    SmartDashboard.putNumber("Colour Sensor IR", m_colorSensor.getIR());
-    SmartDashboard.putString("Colour Sensor Colour", m_colorSensor.getColor().toString());
+    if (Constants.DEBUG_COLOUR_SENSOR)
+    {
+      SmartDashboard.putNumber("Red", detectedColor.red);
+      SmartDashboard.putNumber("Green", detectedColor.green);
+      SmartDashboard.putNumber("Blue", detectedColor.blue);
+      SmartDashboard.putNumber("Confidence", match.confidence);
+      SmartDashboard.putString("Detected Color", colorString);
+      SmartDashboard.putNumber("Colour Sensor Proximity", m_colorSensor.getProximity());
+      SmartDashboard.putNumber("Colour Sensor IR", m_colorSensor.getIR());
+      SmartDashboard.putString("Colour Sensor Colour", m_colorSensor.getColor().toString());
+    }
     return colorString;
   }
 
