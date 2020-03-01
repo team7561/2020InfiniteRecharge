@@ -26,16 +26,20 @@ public class Shooter extends SubsystemBase {
 
     public Shooter()
     {
+        shooterSolenoid = new DoubleSolenoid(Ports.SHOOTER_SOLENOID_CHANNEL_A, Ports.SHOOTER_SOLENOID_CHANNEL_B);
+
         shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
         shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
-        //shooterA = new TalonFX(50);
+        
         shooterMotorA.restoreFactoryDefaults();
         shooterMotorB.restoreFactoryDefaults();
 
         shooterMotorA.setIdleMode(IdleMode.kCoast);
         shooterMotorB.setIdleMode(IdleMode.kCoast);
-        shooterMotorA.setSmartCurrentLimit(40);
-        shooterMotorB.setSmartCurrentLimit(40);
+        
+        shooterMotorA.setSmartCurrentLimit(45);
+        shooterMotorB.setSmartCurrentLimit(45);
+        
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
 
@@ -43,11 +47,9 @@ public class Shooter extends SubsystemBase {
         kP = 0.003; 
         kI = 0.000002;
         kD = 0.000004; 
-        kIz = 0; 
+        kIz = 500; // Error process value must be within before I is used.
         kFF = 0; 
         setpoint = 2500;
-        //kMaxOutput = 1; 
-        //kMinOutput = -1;
         kMaxOutput = 0.85; 
         kMinOutput = -0.85;
         maxRPM = 4500;
@@ -71,8 +73,6 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Min Output", kMinOutput);
 
         shooterMotorB.follow(ExternalFollower.kFollowerSparkMax, Ports.SHOOTER_A_CANID, true);
-        //shooterMotorB.setInverted(true);
-        shooterSolenoid = new DoubleSolenoid(Ports.SHOOTER_SOLENOID_CHANNEL_A, Ports.SHOOTER_SOLENOID_CHANNEL_B);
     }
 
     //Get the Ball

@@ -123,7 +123,7 @@ public class RobotContainer {
     final JoystickButton button_8 = new JoystickButton(joystick, 8);
     final JoystickButton button_9 = new JoystickButton(joystick, 9);
     final JoystickButton button_10 = new JoystickButton(joystick, 10);
-    final JoystickButton button_11 = new JoystickButton(joystick, 11);
+    //final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
@@ -151,7 +151,7 @@ public class RobotContainer {
     
 
     button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
-    button_12.whenReleased(new Drive_Stop(m_drivetrain));
+    //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
     //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
@@ -187,7 +187,6 @@ public class RobotContainer {
     button_B.whenReleased(new Injector_Stop(m_injector), true);
     button_X.whenPressed(new Shooter_Extend(m_shooter), false);
     button_Y.whenPressed(new Shooter_Retract(m_shooter), true);
-    
     button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
     button_RB.whenPressed(new ToggleHopper(m_intakeHopper), true);
     //button_RB.whenPressed(new VCTurnOffLED(m_visionController), true);
