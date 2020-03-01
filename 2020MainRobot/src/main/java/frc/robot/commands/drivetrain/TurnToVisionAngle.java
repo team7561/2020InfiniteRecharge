@@ -61,31 +61,7 @@ public class TurnToVisionAngle extends CommandBase {
     SmartDashboard.putNumber("m_speed", m_speed);
     SmartDashboard.putNumber("m_targetAngle", m_targetAngle);
     SmartDashboard.putNumber("errorSpeed", errorSpeed);
-    /*if (m_targetAngle > 10) {
-      m_subsystem.drive(m_speed*0.6, -m_speed*0.6);
-    }
-    else if (m_targetAngle < -10) {
-      m_subsystem.drive(-m_speed*0.6, m_speed*0.6);
-      return;
-    }
-    else if (m_targetAngle > 5) {
-      m_subsystem.drive(m_speed/2, -m_speed/2);
-    }
-    else if (m_targetAngle < -5) {
-      m_subsystem.drive(-m_speed/2, m_speed/2);
-    }
-    else if (m_targetAngle > 3) {
-      m_subsystem.drive(m_speed/3, -m_speed/3);
-    }
-    else if (m_targetAngle < -3) {
-      m_subsystem.drive(-m_speed/3, m_speed/3);
-    }
-    else if (m_targetAngle > 1) {
-      m_subsystem.drive(m_speed/4, -m_speed/4);
-    }
-    else if (m_targetAngle < -1) {
-      m_subsystem.drive(-m_speed/4, m_speed/4);
-    }*/
+    
     if (Math.abs(m_targetAngle) > Constants.ANGLE_TOLERANCE) {
       m_subsystem.drive(m_speed*errorSpeed, -m_speed*errorSpeed);
     }

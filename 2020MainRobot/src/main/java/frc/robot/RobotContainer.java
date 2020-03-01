@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
@@ -27,6 +29,7 @@ import frc.robot.commands.climber.Climb_Stop;
 import frc.robot.commands.climber.Climber_Reverse;
 import frc.robot.commands.climber.LowerHook;
 import frc.robot.commands.climber.RaiseHook;
+import frc.robot.commands.commandgroups.AutoStrategy1;
 import frc.robot.commands.commandgroups.R_ShooterInjector;
 import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
 import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
@@ -45,7 +48,6 @@ import frc.robot.commands.intakehopper.GrabBall;
 import frc.robot.commands.intakehopper.Grabbing_Stop;
 import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.intakehopper.ToggleHopper;
-import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.ShootAtSpeed;
 import frc.robot.commands.shooter.Shooter_Extend;
 import frc.robot.commands.shooter.Shooter_Retract;
@@ -80,6 +82,11 @@ public class RobotContainer {
   private final VisionController m_visionController = new VisionController();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
+  private final Command autoStrategy1 = new AutoStrategy1(m_drivetrain, m_intakeHopper, m_shooter, m_injector, m_visionController);
+
+  // A chooser for autonomous commands
+  SendableChooser<Command> m_chooser = new SendableChooser<>();
+
 
   //HID
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
@@ -101,6 +108,11 @@ public class RobotContainer {
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
     configureButtonBindings();
+
+    m_chooser.addOption("Auto 1", autoStrategy1);
+    
+    // Put the chooser on the dashboard
+    Shuffleboard.getTab("Autonomous").add(m_chooser);
   }
 
   /**
@@ -140,11 +152,10 @@ public class RobotContainer {
     button_5.whenPressed(new RetractHopper(m_intakeHopper), true);  // Extend intake
     button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
     
-    button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
+    button_7.whenPressed(new ShootAtSpeed(m_shooter, 2500), true);  // Shoot at speed
     button_8.whenPressed(new Shooting_Stop(m_shooter), true);  
 
     button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
-    button_10.whileHeld(new Shoot(m_shooter), true);               // Shoot
 
     //button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
     //button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
@@ -211,10 +222,12 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-
+    public Command getAutonomousCommand() {
+        System.out.println("Command is " + autoStrategy1.toString());
+        return autoStrategy1;
+        //return m_chooser.getSelected();
     // Create a voltage constraint to ensure we don't accelerate too fast
-    var autoVoltageConstraint =
+    /*var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.ksVolts,
             Constants.kvVoltSecondsPerMeter,
@@ -263,7 +276,7 @@ public class RobotContainer {
     );
 
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
+    return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));*/
   }
   
 }

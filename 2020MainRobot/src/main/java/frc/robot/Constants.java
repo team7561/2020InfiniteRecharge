@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 //import frc.robot.autonomous.Coordinate;
 
 public class Constants {
-    public static boolean DEBUG_DRIVETRAIN = false;
+    public static boolean DEBUG_DRIVETRAIN = true;
     public static boolean DEBUG_CLIMBER = false;
     public static boolean DEBUG_SHOOTER = true;
     public static boolean DEBUG_INTAKE = false;

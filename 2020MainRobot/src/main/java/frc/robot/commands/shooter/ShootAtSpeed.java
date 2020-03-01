@@ -1,5 +1,6 @@
 package frc.robot.commands.shooter;
 
+import frc.robot.commands.intakehopper.ExtendHopper;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
