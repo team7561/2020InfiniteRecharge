@@ -7,6 +7,10 @@ public class LEDController extends SubsystemBase{
     Spark blinkin = new Spark(Ports.LED_CONTROLLER_CHANNEL);
     ColourSensor colourSensor;
 
+    public void periodic(){
+        Rainbow();
+    }
+
     public void Rainbow(){
         blinkin.set(-0.91);
     }
@@ -25,6 +29,14 @@ public class LEDController extends SubsystemBase{
 
     public void Blue(){
         blinkin.set(0.83);
+    }
+
+    public void White(){
+        blinkin.set(0.93);
+    }
+
+    public void Lightchase(){
+        blinkin.set(-0.29);
     }
     public String detectColour()
     {
