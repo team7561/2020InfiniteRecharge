@@ -145,23 +145,19 @@ public class RobotContainer {
     trigger.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //spins intake while held
     thumb.whenPressed(new EjectBall(m_intakeHopper), true);
     thumb.whenReleased(new Grabbing_Stop(m_intakeHopper), true);
-    button_3.whenPressed(new RaiseHook(m_climber), true);
-    button_3.whenReleased(new Climb_Stop(m_climber), true);
-    button_4.whenPressed(new Climb(m_climber), true);
-    button_4.whenReleased(new Climb_Stop(m_climber), true);    
-    button_5.whenPressed(new RetractHopper(m_intakeHopper), true);  // Extend intake
-    button_6.whenPressed(new ExtendHopper(m_intakeHopper), true); // retract inatke
+    button_3.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
+    //button_3.whenPressed(new RaiseHook(m_climber), true);
+    //button_3.whenReleased(new Climb_Stop(m_climber), true);
+    //button_4.whenPressed(new Climb(m_climber), true);
+    button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);  // Extend intake
+    button_6.whenPressed(new RetractHopper(m_intakeHopper), true); // retract inatke
     
-    button_7.whenPressed(new ShootAtSpeed(m_shooter, 2500), true);  // Shoot at speed
+    button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true); // Shoot at speed
     button_8.whenPressed(new Shooting_Stop(m_shooter), true);  
 
-    button_9.whenPressed(new Grabbing_Stop(m_intakeHopper), true); // Stop grabbing
 
-    //button_12.whenPressed(new Climber_Reverse(m_climber).withTimeout(5));
-    //button_12.whenReleased(new Climb_Stop(m_climber).withTimeout(5));
-    
-
-    button_12.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
+    button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
+    button_10.whileHeld(new RaiseHook(m_climber), true);  
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
