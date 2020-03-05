@@ -87,7 +87,6 @@ public class Climber extends SubsystemBase {
             //SmartDashboard.putNumber("Climber Deploy Motor B Speed", climberDeployMotorB.getMotorOutputPercent());
         }
 
-
     }
 
 }

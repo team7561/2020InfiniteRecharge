@@ -24,7 +24,7 @@ public class CPM_Stop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.colourSensor.ledController.Rainbow();
+    m_subsystem.colourSensor.ledController.White();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
