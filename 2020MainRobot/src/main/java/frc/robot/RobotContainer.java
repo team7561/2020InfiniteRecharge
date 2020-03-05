@@ -149,11 +149,11 @@ public class RobotContainer {
     //button_3.whenPressed(new RaiseHook(m_climber), true);
     //button_3.whenReleased(new Climb_Stop(m_climber), true);
     //button_4.whenPressed(new Climb(m_climber), true);
-    button_5.whenPressed(new ExtendHopper(m_intakeHopper), true);  // Extend intake
-    button_6.whenPressed(new RetractHopper(m_intakeHopper), true); // retract inatke
+    button_5.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Extend intake
+    button_6.whenPressed(new Shooting_Stop(m_shooter), true); // retract inatke
     
-    button_7.whenPressed(new ShootAtSpeed(m_shooter, 3000), true); // Shoot at speed
-    button_8.whenPressed(new Shooting_Stop(m_shooter), true);  
+    button_7.whenPressed(new ExtendHopper(m_intakeHopper), true); // Shoot at speed
+    button_8.whenPressed(new RetractHopper(m_intakeHopper), true);  
 
 
     button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
