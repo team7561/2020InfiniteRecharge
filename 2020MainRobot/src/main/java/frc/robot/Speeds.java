@@ -8,7 +8,7 @@ public class Speeds {
     public static double STOP_BALL_SPEED = 0;
     //Climber
     public static double CLIMBER_LIFT_SPEED = 0.3;
-    public static double CLIMBER_LOWER_SPEED = -0.1;
+    public static double CLIMBER_LOWER_SPEED = -0.2;
 
     public static double CLIMBER_SLOW_LOWER_SPEED = -0.05;
     public static double CLIMBER_SLOW_LIFT_SPEED = -0.05;
@@ -19,7 +19,7 @@ public class Speeds {
     //Injector
     public static double INJECTOR_TRANSFER_SPEED = -1.0;
     public static double INJECTOR_BACKFEED_SPEED = 0.4;
-    public static double INJECTOR_STOP_SPEED = 0;
+    public static double INJECTOR_STOP_SPEED = 0.05;
     // Vision Tracking
     public static double VISION_DRIVE_SPEED = 0.2;
 

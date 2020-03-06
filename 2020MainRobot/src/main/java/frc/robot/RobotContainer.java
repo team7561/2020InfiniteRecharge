@@ -40,6 +40,7 @@ import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.robot.commands.drivetrain.Drive_Stop;
 import frc.robot.commands.drivetrain.TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Reverse;
+import frc.robot.commands.injector.Injector_Reverse_copy;
 import frc.robot.commands.injector.Injector_Stop;
 import frc.robot.commands.injector.Injector_Transfer_Ball;
 import frc.robot.commands.intakehopper.EjectBall;
@@ -102,7 +103,7 @@ public class RobotContainer {
     m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
-    m_injector.setDefaultCommand( new Injector_Stop(m_injector));
+    m_injector.setDefaultCommand( new Injector_Reverse_copy(m_injector));
     m_visionController.setDefaultCommand( new VCTurnOffLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
@@ -163,7 +164,7 @@ public class RobotContainer {
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
     //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
-    //button_12.whenReleased(new Injector_Stop(m_injector), true);
+    button_12.whenPressed(new Climber_Reverse(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
