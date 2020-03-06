@@ -163,7 +163,7 @@ public class RobotContainer {
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
     //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
-    //button_12.whenReleased(new Injector_Stop(m_injector), true);
+    button_12.whenPressed(new Climber_Reverse(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
