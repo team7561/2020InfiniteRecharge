@@ -51,13 +51,13 @@ public class TurnToVisionAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_speed = (m_speedSupplier.getAsDouble()/4)+0.2;
+    m_speed = 0.4;   //(m_speedSupplier.getAsDouble()/4)+0.2;
     SmartDashboard.putNumber("m_speed", m_speed);
     m_vision_subsystem.turnOnLED();
     System.out.println("Turning to vision angle");
     m_targetAngle = m_vision_subsystem.get_tx();
     System.out.println("tx = " + m_targetAngle);
-    double errorSpeed = m_targetAngle/20;
+    double errorSpeed = m_targetAngle/25 + 0.1 * (m_targetAngle/Math.abs(m_targetAngle));
     SmartDashboard.putNumber("m_speed", m_speed);
     SmartDashboard.putNumber("m_targetAngle", m_targetAngle);
     SmartDashboard.putNumber("errorSpeed", errorSpeed);
@@ -96,7 +96,7 @@ public class TurnToVisionAngle extends CommandBase {
     {
       SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", isFinished);
       //return false;
-      return timerFinished.get()>0.4;
+      return timerFinished.get()>0.6;
     }
   }
 }

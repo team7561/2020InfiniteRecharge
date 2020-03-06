@@ -157,7 +157,8 @@ public class RobotContainer {
 
 
     button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
-    button_10.whileHeld(new RaiseHook(m_climber), true);  
+    button_10.whenPressed(new RaiseHook(m_climber), true);  
+    button_10.whenReleased(new Climb_Stop(m_climber), true);
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));
     //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
