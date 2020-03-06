@@ -21,8 +21,9 @@ public class Shooter extends SubsystemBase {
     DoubleSolenoid shooterSolenoid;
     private CANPIDController m_pidController;
     private CANEncoder m_encoder;
+    private boolean shooting;
 
-    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, setpoint;
+    public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, m_setpoint;
 
     public Shooter()
     {
@@ -43,13 +44,15 @@ public class Shooter extends SubsystemBase {
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
 
+        shooting = false; 
+
         // PID coefficients
         kP = 0.003; 
         kI = 0.000002;
         kD = 0.000004; 
         kIz = 500; // Error process value must be within before I is used.
         kFF = 0; 
-        setpoint = 2500;
+        m_setpoint = 2500;
         kMaxOutput = 0.85; 
         kMinOutput = -0.85;
         maxRPM = 4500;
@@ -68,41 +71,50 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("D Gain", kD);
         SmartDashboard.putNumber("I Zone", kIz);
         SmartDashboard.putNumber("Feed Forward", kFF);
-        SmartDashboard.putNumber("Set Point", -setpoint);
+        SmartDashboard.putNumber("Set Point", m_setpoint);
         SmartDashboard.putNumber("Max Output", kMaxOutput);
         SmartDashboard.putNumber("Min Output", kMinOutput);
-
         shooterMotorB.follow(ExternalFollower.kFollowerSparkMax, Ports.SHOOTER_A_CANID, true);
     }
 
-
     public void shootAtSpeed(double setPoint)
     {
-        System.out.println("Shooting at speed: " + setPoint);
-        // read PID coefficients from SmartDashboard
-        double p = SmartDashboard.getNumber("P Gain", 0);
-        double i = SmartDashboard.getNumber("I Gain", 0);
-        double d = SmartDashboard.getNumber("D Gain", 0);
-        double iz = SmartDashboard.getNumber("I Zone", 0);
-        double ff = SmartDashboard.getNumber("Feed Forward", 0);
-        double max = SmartDashboard.getNumber("Max Output", 0);
-        double min = SmartDashboard.getNumber("Min Output", 0);
-        //setPoint = -SmartDashboard.getNumber("Set Point", 0);
+        shooting = true;
+    }
+    public void periodic()
+    {
+        if (shooting)
+        {
+            System.out.println("Shooting at speed: " + m_setpoint);
+            // read PID coefficients from SmartDashboard
+            double p = SmartDashboard.getNumber("P Gain", 0);
+            double i = SmartDashboard.getNumber("I Gain", 0);
+            double d = SmartDashboard.getNumber("D Gain", 0);
+            double iz = SmartDashboard.getNumber("I Zone", 0);
+            double ff = SmartDashboard.getNumber("Feed Forward", 0);
+            double max = SmartDashboard.getNumber("Max Output", 0);
+            double min = SmartDashboard.getNumber("Min Output", 0);
+            m_setpoint = SmartDashboard.getNumber("Set Point", 0);
 
-        // if PID coefficients on SmartDashboard have changed, write new values to controller
-        if((p != kP)) { m_pidController.setP(p); kP = p; }
-        if((i != kI)) { m_pidController.setI(i); kI = i; }
-        if((d != kD)) { m_pidController.setD(d); kD = d; }
-        if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-        if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
-        if((max != kMaxOutput) || (min != kMinOutput)) { 
-        m_pidController.setOutputRange(min, max); 
-        kMinOutput = min; kMaxOutput = max; 
+            // if PID coefficients on SmartDashboard have changed, write new values to controller
+            if((p != kP)) { m_pidController.setP(p); kP = p; }
+            if((i != kI)) { m_pidController.setI(i); kI = i; }
+            if((d != kD)) { m_pidController.setD(d); kD = d; }
+            if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
+            if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
+            if((max != kMaxOutput) || (min != kMinOutput)) { 
+            m_pidController.setOutputRange(min, max); 
+            kMinOutput = min; kMaxOutput = max; 
+            }
+            m_pidController.setReference(m_setpoint, ControlType.kVelocity);
+            //shooterMotorB.set(shooterMotorA.get());
+            //SmartDashboard.putNumber("SetPoint", setPoint);
+            SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
         }
-        m_pidController.setReference(setPoint, ControlType.kVelocity);
-        //shooterMotorB.set(shooterMotorA.get());
-        //SmartDashboard.putNumber("SetPoint", setPoint);
-        SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
+        else
+        {
+            shooterMotorA.set(0);
+        }
 
     }
     public double getVelocity()
@@ -117,6 +129,10 @@ public class Shooter extends SubsystemBase {
     {
         shooterSolenoid.set(Value.kReverse);
     }
+    public void setSetpoint(double setPoint)
+    {
+        m_setpoint = setPoint;
+    }
 
     //Ejects the Ball slow
    /* public void ejectBallSlow()
@@ -127,7 +143,7 @@ public class Shooter extends SubsystemBase {
     //Stops shooter
     public void stop()
     {
-        shooterMotorA.set(0);
+        shooting = false;
     }
 
     public void updateDashboard()

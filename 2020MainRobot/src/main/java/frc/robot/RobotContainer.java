@@ -84,6 +84,7 @@ public class RobotContainer {
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
   private final Command autoStrategy1 = new AutoStrategy1(m_drivetrain, m_intakeHopper, m_shooter, m_injector, m_visionController);
+  public final Command shooter_stop = new Shooting_Stop(m_shooter);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -100,7 +101,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getThrottle()
     ));
     //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
-    m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
+    //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Reverse_copy(m_injector));

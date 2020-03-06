@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.shooter.Shooting_Stop;
 /*                                                                                   
 import edu.wpi.first.wpilibj.networktables.NetworkTable;*/
 import edu.wpi.first.cameraserver.CameraServer;
@@ -92,7 +93,8 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-    }                                                                                                                                       
+    }
+    m_robotContainer.shooter_stop.schedule();                                                                                                                                   
   }                                                                         
   @Override                                     
   public void teleopPeriodic() {
