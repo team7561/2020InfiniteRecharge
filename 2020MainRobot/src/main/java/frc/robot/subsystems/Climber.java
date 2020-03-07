@@ -58,11 +58,11 @@ public class Climber extends SubsystemBase {
     }
     public void raiseHook()
     {
-        //climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
+        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
     }
     public void lowerHook()
     {
-        //climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
+        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
     }
     public void stopClimbing()
     {
