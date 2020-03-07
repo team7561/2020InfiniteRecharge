@@ -5,11 +5,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.*;
-import frc.robot.commands.TimerCommand;
 import frc.robot.commands.drivetrain.DriveDistance;
 import frc.robot.commands.drivetrain.TurnToVisionAngle;
 import frc.robot.commands.injector.*;
-import frc.robot.commands.intakehopper.ExtendHopper;
 import frc.robot.commands.intakehopper.RetractHopper;
 import frc.robot.commands.intakehopper.ToggleHopper;
 

@@ -32,10 +32,11 @@ public class Climber extends SubsystemBase {
         talon.configPeakCurrentDuration(100, 0);
         talon.enableCurrentLimit(true);*/
 
-        climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID);
-        climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID);
+        climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID); //21
+        climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID); //22
         climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
+        climberDeployMotorB.setInverted(true);
         climberDeployMotorB.follow(climberDeployMotorA);
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
 

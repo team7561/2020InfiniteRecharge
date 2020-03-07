@@ -15,29 +15,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 * An example command that uses an example subsystem.
 */
 public class TurnToVisionAngle extends CommandBase {
-    @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final Drivetrain m_subsystem;
-    private final VisionController m_vision_subsystem;
-    private DoubleSupplier m_speedSupplier;
-    private double m_targetAngle, m_speed;
-    private Timer timer, timerFinished;
-    
-    /**
-    * Creates a new ExampleCommand.
-    *
-    * @param subsystem The subsystem used by this command.
-    */
-    public TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
-        m_subsystem = subsystem;
-        m_vision_subsystem = vision_subsystem;
-        m_speedSupplier = speedSupplier;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
-        timer = new Timer();
-        timerFinished = new Timer();
-    }
-    
-    // Called when the command is initially scheduled.
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final Drivetrain m_subsystem;
+  private final VisionController m_vision_subsystem;
+  private DoubleSupplier m_speedSupplier;
+  private double m_targetAngle, m_speed;
+  private Timer timer, timerFinished;
+  
+  /**
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
+    m_subsystem = subsystem;
+    m_vision_subsystem = vision_subsystem;
+    m_speedSupplier = speedSupplier;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(subsystem);
+    timer = new Timer();
+    timerFinished = new Timer();
+  }
+
+  // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         System.out.println("Starting turn to vision angle");
