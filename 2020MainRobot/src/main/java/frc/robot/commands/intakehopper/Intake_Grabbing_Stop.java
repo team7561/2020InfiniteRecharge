@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class RetractHopper extends CommandBase {
+public class Intake_Grabbing_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeHopper m_subsystem;
 
@@ -15,7 +15,7 @@ public class RetractHopper extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public RetractHopper(IntakeHopper subsystem) {
+  public Intake_Grabbing_Stop(IntakeHopper subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,7 +29,7 @@ public class RetractHopper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.retractHopper();
+      m_subsystem.stop();
       m_subsystem.updateDashboard();
   }
 
@@ -41,6 +41,6 @@ public class RetractHopper extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

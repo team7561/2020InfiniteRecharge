@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class VCBlink_LED extends CommandBase {
+public class VC_Blink_LED extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final VisionController m_subsystem;
 
@@ -15,7 +15,7 @@ public class VCBlink_LED extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public VCBlink_LED(VisionController subsystem) {
+  public VC_Blink_LED(VisionController subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

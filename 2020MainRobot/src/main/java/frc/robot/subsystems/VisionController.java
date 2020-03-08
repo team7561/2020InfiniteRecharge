@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class VisionController extends SubsystemBase {
@@ -13,9 +14,16 @@ public class VisionController extends SubsystemBase {
 	}
 	public void turnOffLED()
 	{
-		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
-		NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
+		//NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+		//NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
 
+
+	}
+	public void periodic()
+	{
+		SmartDashboard.putNumber("ta", get_ta());
+		SmartDashboard.putNumber("tx", get_tx());
+		SmartDashboard.putNumber("ty", get_ty());
 	}
 	public void turnOnLED()
 	{

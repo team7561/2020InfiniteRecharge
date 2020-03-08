@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.shooter.Shooting_Stop;
+import frc.robot.commands.shooter.Shooter_Shooting_Stop;
 /*                                                                                   
 import edu.wpi.first.wpilibj.networktables.NetworkTable;*/
 import edu.wpi.first.cameraserver.CameraServer;

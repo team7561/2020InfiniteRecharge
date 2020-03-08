@@ -1,22 +1,29 @@
-package frc.robot.commands.intakehopper;
+package frc.robot.commands.drivetrain;
 
-import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.Drivetrain;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class EjectBall extends CommandBase {
+public class DT_ArcadeDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeHopper m_subsystem;
+  private final Drivetrain m_subsystem;
+  private DoubleSupplier m_x, m_y, m_speed;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public EjectBall(IntakeHopper subsystem) {
+  public DT_ArcadeDrive(Drivetrain subsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier speed) {
     m_subsystem = subsystem;
+    m_x = x;
+    m_y = y;
+    m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -29,8 +36,9 @@ public class EjectBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.ejectBall();
-      m_subsystem.updateDashboard();
+    m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/2, false);
+    m_subsystem.updateDashboard();
+    
   }
 
   // Called once the command ends or is interrupted.

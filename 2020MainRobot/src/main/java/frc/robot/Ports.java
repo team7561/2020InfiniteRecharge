@@ -25,6 +25,7 @@ public class Ports {
 
     // DIO ports
     public static int CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL = 0;
+    public static int WINCH_LIMIT_SWITCH = 1;
 
     // Analog Channels
 
@@ -50,4 +51,6 @@ public class Ports {
     public static int CLIMB_ELEVATOR_A_PDP_SLOT = 8;
     public static int CLIMB_ELEVATOR_B_PDP_SLOT = 9;
     public static int CLIMB_VACUUM_PDP_SLOT = 10;
+
+
 }

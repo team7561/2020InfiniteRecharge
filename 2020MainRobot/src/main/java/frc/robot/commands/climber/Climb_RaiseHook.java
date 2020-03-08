@@ -1,21 +1,21 @@
-package frc.robot.commands.visioncontroller;
+package frc.robot.commands.climber;
 
-import frc.robot.subsystems.VisionController;
+import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class VCTurnOffLED extends CommandBase {
+public class Climb_RaiseHook extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final VisionController m_subsystem;
+  private final Climber m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public VCTurnOffLED(VisionController subsystem) {
+  public Climb_RaiseHook(Climber subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,7 +29,8 @@ public class VCTurnOffLED extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.turnOffLED();
+      m_subsystem.raiseHook();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

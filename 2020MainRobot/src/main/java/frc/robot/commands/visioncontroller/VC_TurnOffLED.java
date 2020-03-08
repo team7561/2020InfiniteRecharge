@@ -1,21 +1,21 @@
-package frc.robot.commands.intakehopper;
+package frc.robot.commands.visioncontroller;
 
-import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.VisionController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class GrabBall extends CommandBase {
+public class VC_TurnOffLED extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeHopper m_subsystem;
+  private final VisionController m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public GrabBall(IntakeHopper subsystem) {
+  public VC_TurnOffLED(VisionController subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,8 +29,7 @@ public class GrabBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.grabBall();
-      m_subsystem.updateDashboard();
+      m_subsystem.turnOffLED();
   }
 
   // Called once the command ends or is interrupted.

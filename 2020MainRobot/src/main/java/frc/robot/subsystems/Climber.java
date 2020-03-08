@@ -19,6 +19,8 @@ public class Climber extends SubsystemBase {
     VictorSPX climberDeployMotorA;
     VictorSPX climberDeployMotorB;
     DigitalInput climberHookExtended;
+    DigitalInput limitSwitch;
+
     public Climber()
     {
         climberMotorA = new TalonFX(Ports.CLIMB_WINCH_A_CANID);
@@ -34,6 +36,10 @@ public class Climber extends SubsystemBase {
 
         climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID); //21
         climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID); //22
+
+        climberDeployMotorA.configOpenloopRamp(0.5);
+        climberDeployMotorB.configOpenloopRamp(0.5);
+
         climberDeployMotorA.configFactoryDefault();
         climberDeployMotorB.configFactoryDefault();
         climberDeployMotorB.setInverted(true);
@@ -43,6 +49,8 @@ public class Climber extends SubsystemBase {
         climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
         climberDeployMotorB.setNeutralMode(NeutralMode.Brake);
 
+        limitSwitch = new DigitalInput(Ports.WINCH_LIMIT_SWITCH);
+
     }
     private void setWinchSpeed(double speed)
     {
@@ -51,7 +59,12 @@ public class Climber extends SubsystemBase {
     }
     public void climb()
     {
-        setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
+        if (limitSwitch.get()) {
+            setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
+        } else {
+            setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
+        }
+        
     }
     public void climbReverse()
     {
@@ -59,10 +72,14 @@ public class Climber extends SubsystemBase {
     }
     public void raiseHook()
     {
+        climberDeployMotorA.configOpenloopRamp(0.5);
+        climberDeployMotorB.configOpenloopRamp(0.5);
         climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
     }
     public void lowerHook()
     {
+        climberDeployMotorA.configOpenloopRamp(0.5);
+        climberDeployMotorB.configOpenloopRamp(0.5);
         climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
     }
     public void stopClimbing()
@@ -71,9 +88,12 @@ public class Climber extends SubsystemBase {
     }
     public void stop()
     {
+        
         setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
-        climberDeployMotorA.set(ControlMode.PercentOutput, 0);
-    }
+        climberDeployMotorA.configOpenloopRamp(0.0);
+        climberDeployMotorB.configOpenloopRamp(0.0);
+        climberDeployMotorA.set(ControlMode.PercentOutput, 0); 
+       }
     public void updateDashboard()
     {
         if (Constants.DEBUG_CLIMBER)
