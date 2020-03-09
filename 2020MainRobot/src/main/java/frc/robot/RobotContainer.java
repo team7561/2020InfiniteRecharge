@@ -184,8 +184,8 @@ public class RobotContainer {
     final JoystickButton left_joystick_button = new JoystickButton(xboxController, 9);
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
-    final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 5);
-    //final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 6);
+    final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 2);
+    final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 3);
   
     final DPadButton dpad_Up = new DPadButton(xboxController, DPadButton.Direction.UP);
     final DPadButton dpad_Down = new DPadButton(xboxController, DPadButton.Direction.DOWN);
@@ -209,7 +209,7 @@ public class RobotContainer {
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_StopWinch(m_climber), true);
 
-    //RT.whenPressed(new Shooting_Stop(m_shooter), true);
+    RT.whenPressed(new Shooter_Shooting_Stop(m_shooter), true);
     LT.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);
 
     dpad_Up.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
