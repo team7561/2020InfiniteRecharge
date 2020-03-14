@@ -30,6 +30,7 @@ public class RetractHopper extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.retractHopper();
+      System.out.println("Retracting Hopper");
       m_subsystem.updateDashboard();
   }
 
