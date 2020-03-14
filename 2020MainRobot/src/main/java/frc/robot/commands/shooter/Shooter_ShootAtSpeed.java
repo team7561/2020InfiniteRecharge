@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
 * An example command that uses an example subsystem.
 */
-public class ShootAtSpeed extends CommandBase {
+public class Shooter_ShootAtSpeed extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Shooter m_subsystem;
     private final double m_speed;
@@ -18,7 +18,7 @@ public class ShootAtSpeed extends CommandBase {
     *
     * @param subsystem The subsystem used by this command.
     */
-    public ShootAtSpeed(Shooter subsystem, double speed){
+    public Shooter_ShootAtSpeed(Shooter subsystem, double speed){
         m_subsystem = subsystem;
         m_speed = speed;
         m_closeTarget = true;
@@ -27,7 +27,7 @@ public class ShootAtSpeed extends CommandBase {
         addRequirements(subsystem);
         
     }
-    public ShootAtSpeed(Shooter subsystem, double speed, boolean changeHood, boolean closeTarget){
+    public Shooter_ShootAtSpeed(Shooter subsystem, double speed, boolean changeHood, boolean closeTarget){
         m_subsystem = subsystem;
         m_speed = speed;
         m_closeTarget = closeTarget;

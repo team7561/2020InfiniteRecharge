@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.*;
-import frc.robot.commands.drivetrain.DriveDistance;
-import frc.robot.commands.drivetrain.TurnToVisionAngle;
+import frc.robot.commands.drivetrain.DT_DriveDistance;
+import frc.robot.commands.drivetrain.DT_TurnToVisionAngle;
 import frc.robot.commands.injector.*;
-import frc.robot.commands.intakehopper.RetractHopper;
-import frc.robot.commands.intakehopper.ToggleHopper;
+import frc.robot.commands.intakehopper.Intake_RetractHopper;
+import frc.robot.commands.intakehopper.Intake_ToggleHopper;
 
 public class AutoStrategy1 extends SequentialCommandGroup {
 
@@ -27,29 +27,29 @@ public class AutoStrategy1 extends SequentialCommandGroup {
             //new DriveDistance(drivetrain, 0.4, -600),
             //new DriveDistance(drivetrain, 0.4, 600));
             new ParallelCommandGroup(
-                new ShootAtSpeedFinish(shooter, 500),
-                new TurnToVisionAngle(drivetrain, visionController, () -> (0.5))
+                new Shooter_ShootAtSpeedFinish(shooter, 500),
+                new DT_TurnToVisionAngle(drivetrain, visionController, () -> (0.5))
                 .withTimeout(5)),
             new ParallelCommandGroup(
                 new Injector_Transfer_Ball(injector),
                 new SequentialCommandGroup(
                     new WaitCommand(1),
-                    new ToggleHopper(intakeHopper),
+                    new Intake_ToggleHopper(intakeHopper),
                     new WaitCommand(0.5),
-                    new ToggleHopper(intakeHopper),
+                    new Intake_ToggleHopper(intakeHopper),
                     new WaitCommand(0.5),
-                    new ToggleHopper(intakeHopper),
+                    new Intake_ToggleHopper(intakeHopper),
                     new WaitCommand(0.5),
-                    new ToggleHopper(intakeHopper),
+                    new Intake_ToggleHopper(intakeHopper),
                     new WaitCommand(0.5),
-                    new ToggleHopper(intakeHopper)
+                    new Intake_ToggleHopper(intakeHopper)
             )).withTimeout(5),
             new ParallelCommandGroup(
-                new Shooting_Stop(shooter),
+                new Shooter_Shooting_Stop(shooter),
                 new Injector_Stop(injector),
-                new RetractHopper(intakeHopper)
+                new Intake_RetractHopper(intakeHopper)
             ).withTimeout(5),
-            new DriveDistance(drivetrain, 0.5, 400),
-            new DriveDistance(drivetrain, 0.5, -400));
+            new DT_DriveDistance(drivetrain, 0.5, 400),
+            new DT_DriveDistance(drivetrain, 0.5, -400));
   }
 }

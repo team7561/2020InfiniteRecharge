@@ -1,21 +1,21 @@
-package frc.robot.commands.intakehopper;
+package frc.robot.commands.climber;
 
-import frc.robot.subsystems.IntakeHopper;
+import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class ToggleHopper extends CommandBase {
+public class Climb_ReverseWinch extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeHopper m_subsystem;
+  private final Climber m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ToggleHopper(IntakeHopper subsystem) {
+  public Climb_ReverseWinch(Climber subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,15 +29,8 @@ public class ToggleHopper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_subsystem.isExtended())
-    {
-      m_subsystem.retractHopper();
-    }
-    else
-    {
-      m_subsystem.extendHopper();
-    }
-    m_subsystem.updateDashboard();
+      m_subsystem.climbReverse();
+      m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.
@@ -48,6 +41,6 @@ public class ToggleHopper extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

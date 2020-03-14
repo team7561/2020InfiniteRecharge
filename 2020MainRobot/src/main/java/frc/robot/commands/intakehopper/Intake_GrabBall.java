@@ -1,21 +1,21 @@
-package frc.robot.commands.climber;
+package frc.robot.commands.intakehopper;
 
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.IntakeHopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class LowerHook extends CommandBase {
+public class Intake_GrabBall extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Climber m_subsystem;
+  private final IntakeHopper m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LowerHook(Climber subsystem) {
+  public Intake_GrabBall(IntakeHopper subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,7 +29,7 @@ public class LowerHook extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.lowerHook();
+      m_subsystem.grabBall();
       m_subsystem.updateDashboard();
   }
 

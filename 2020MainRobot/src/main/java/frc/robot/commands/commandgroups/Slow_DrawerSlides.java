@@ -16,10 +16,10 @@ public class Slow_DrawerSlides extends ParallelCommandGroup {
     public Slow_DrawerSlides(Climber climber) {
           addCommands(
           // Climb
-          new Climb(climber),
+          new Climb_StartWinch(climber),
   
           // Lower Draw Slides
-          new LowerHook(climber)
+          new Climb_LowerHook(climber)
           );
     }
   

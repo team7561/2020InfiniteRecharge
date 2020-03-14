@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class Climb extends CommandBase {
+public class Climb_StartWinch extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Climber m_subsystem;
 
@@ -15,7 +15,7 @@ public class Climb extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Climb(Climber subsystem) {
+  public Climb_StartWinch(Climber subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

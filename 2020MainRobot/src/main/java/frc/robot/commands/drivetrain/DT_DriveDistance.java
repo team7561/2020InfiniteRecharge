@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
 * An example command that uses an example subsystem.
 */
-public class DriveDistance extends CommandBase {
+public class DT_DriveDistance extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Drivetrain m_subsystem;
     private final double m_speed;
@@ -23,7 +23,7 @@ public class DriveDistance extends CommandBase {
     * @param subsystem The subsystem used by this command.
     */
     
-    public DriveDistance(Drivetrain subsystem, double speed, double distance){
+    public DT_DriveDistance(Drivetrain subsystem, double speed, double distance){
         m_subsystem = subsystem;
         m_speed = speed;
         m_distance = distance;

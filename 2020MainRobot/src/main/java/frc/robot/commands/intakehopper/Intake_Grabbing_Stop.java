@@ -1,21 +1,21 @@
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.intakehopper;
 
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.IntakeHopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class Drive_Stop extends CommandBase {
+public class Intake_Grabbing_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Drivetrain m_subsystem;
+  private final IntakeHopper m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Drive_Stop(Drivetrain subsystem) {
+  public Intake_Grabbing_Stop(IntakeHopper subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

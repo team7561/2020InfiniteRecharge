@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
 * An example command that uses an example subsystem.
 */
-public class TurnToVisionAngle extends CommandBase {
+public class DT_TurnToVisionAngle extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   private final VisionController m_vision_subsystem;
@@ -27,7 +27,7 @@ public class TurnToVisionAngle extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
+  public DT_TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
     m_subsystem = subsystem;
     m_vision_subsystem = vision_subsystem;
     m_speedSupplier = speedSupplier;
@@ -51,13 +51,13 @@ public class TurnToVisionAngle extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_speed = (m_speedSupplier.getAsDouble()/4)+0.2;
+        m_speed = (m_speedSupplier.getAsDouble()/4);
         SmartDashboard.putNumber("m_speed", m_speed);
-        //m_vision_subsystem.turnOnLED();
+        m_vision_subsystem.turnOnLED();
         //System.out.println("Turning to vision angle");
         m_targetAngle = m_vision_subsystem.get_tx();
         System.out.println("tx = " + m_targetAngle);
-        double errorSpeed = m_targetAngle/20;
+        double errorSpeed = motorSpeedForError(m_targetAngle)/20+0.5*(m_targetAngle/Math.abs(m_targetAngle));
         SmartDashboard.putNumber("m_speed", m_speed);
         SmartDashboard.putNumber("m_targetAngle", m_targetAngle);
         SmartDashboard.putNumber("errorSpeed", errorSpeed);
@@ -71,7 +71,7 @@ public class TurnToVisionAngle extends CommandBase {
         }
         m_subsystem.updateDashboard();
     }
-    /*static double motorSpeedForError(double error) {
+    static double motorSpeedForError(double error) {
         if (error < 0) {
             if (error < -16) {
                 if (error < -20)
@@ -91,7 +91,6 @@ public class TurnToVisionAngle extends CommandBase {
         return (2 * error) - 20;
         return error;
     }
-    */
     
     // Called once the command ends or is interrupted.
     @Override
@@ -104,20 +103,25 @@ public class TurnToVisionAngle extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {    
-        boolean isFinished = Math.abs(m_targetAngle) <= Constants.ANGLE_TOLERANCE;
-        if (isFinished)
+        boolean isAtAngle = Math.abs(m_targetAngle) <= Constants.ANGLE_TOLERANCE;
+        if (isAtAngle)
         {
             timerFinished.start();
         }
-        if (timer.get()<0.3)
+        else {
+            timerFinished.reset();
+            timerFinished.stop();
+        }
+        if (timer.get()<10.3)
         {
             return false;
         }
-        else
+        if (timerFinished.get()>12)
         {
-            SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", isFinished);
+            SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", true);
             //return false;
-            return timerFinished.get()>0.4;
+            return true;
         }
+        return false;
     }
 }

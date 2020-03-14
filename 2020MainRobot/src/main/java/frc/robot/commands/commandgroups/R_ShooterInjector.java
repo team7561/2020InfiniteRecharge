@@ -20,7 +20,7 @@ public class R_ShooterInjector extends ParallelCommandGroup {
         new Injector_Transfer_Ball(injector),
 
         // Shoot At Speed
-        new ShootAtSpeed(shooter, -3000)
+        new Shooter_ShootAtSpeed(shooter, -3000)
         );
   }
 

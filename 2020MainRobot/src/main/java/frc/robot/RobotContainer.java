@@ -24,11 +24,11 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import frc.robot.commands.climber.Climb;
-import frc.robot.commands.climber.Climb_Stop;
-import frc.robot.commands.climber.Climber_Reverse;
-import frc.robot.commands.climber.LowerHook;
-import frc.robot.commands.climber.RaiseHook;
+import frc.robot.commands.climber.Climb_StartWinch;
+import frc.robot.commands.climber.Climb_StopWinch;
+import frc.robot.commands.climber.Climb_ReverseWinch;
+import frc.robot.commands.climber.Climb_LowerHook;
+import frc.robot.commands.climber.Climb_RaiseHook;
 import frc.robot.commands.commandgroups.AutoStrategy1;
 import frc.robot.commands.commandgroups.R_ShooterInjector;
 import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
@@ -36,24 +36,24 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinLeft;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
-import frc.robot.commands.drivetrain.ArcadeDrive;
-import frc.robot.commands.drivetrain.Drive_Stop;
-import frc.robot.commands.drivetrain.TurnToVisionAngle;
+import frc.robot.commands.drivetrain.DT_ArcadeDrive;
+import frc.robot.commands.drivetrain.DT_Drive_Stop;
+import frc.robot.commands.drivetrain.DT_TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Reverse;
 import frc.robot.commands.injector.Injector_Reverse_copy;
 import frc.robot.commands.injector.Injector_Stop;
 import frc.robot.commands.injector.Injector_Transfer_Ball;
-import frc.robot.commands.intakehopper.EjectBall;
-import frc.robot.commands.intakehopper.ExtendHopper;
-import frc.robot.commands.intakehopper.GrabBall;
-import frc.robot.commands.intakehopper.Grabbing_Stop;
-import frc.robot.commands.intakehopper.RetractHopper;
-import frc.robot.commands.intakehopper.ToggleHopper;
-import frc.robot.commands.shooter.ShootAtSpeed;
+import frc.robot.commands.intakehopper.Intake_EjectBall;
+import frc.robot.commands.intakehopper.Intake_ExtendHopper;
+import frc.robot.commands.intakehopper.Intake_GrabBall;
+import frc.robot.commands.intakehopper.Intake_Grabbing_Stop;
+import frc.robot.commands.intakehopper.Intake_RetractHopper;
+import frc.robot.commands.intakehopper.Intake_ToggleHopper;
+import frc.robot.commands.shooter.Shooter_ShootAtSpeed;
 import frc.robot.commands.shooter.Shooter_Extend;
 import frc.robot.commands.shooter.Shooter_Retract;
-import frc.robot.commands.shooter.Shooting_Stop;
-import frc.robot.commands.visioncontroller.VCTurnOffLED;
+import frc.robot.commands.shooter.Shooter_Shooting_Stop;
+import frc.robot.commands.visioncontroller.VC_TurnOffLED;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Injector;
@@ -84,7 +84,7 @@ public class RobotContainer {
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
   private final Command autoStrategy1 = new AutoStrategy1(m_drivetrain, m_intakeHopper, m_shooter, m_injector, m_visionController);
-  public final Command shooter_stop = new Shooting_Stop(m_shooter);
+  public final Command shooter_stop = new Shooter_Shooting_Stop(m_shooter);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -98,7 +98,7 @@ public class RobotContainer {
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getThrottle()
+    m_drivetrain.setDefaultCommand( new DT_ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getThrottle()
     ));
     //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
@@ -143,31 +143,27 @@ public class RobotContainer {
     //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
 
     //binding buttons to commands for the Joystick Controller
-    trigger.whenPressed(new GrabBall(m_intakeHopper), true); //spins intake while held and not interuptable by other driver
-    trigger.whenReleased(new Grabbing_Stop(m_intakeHopper), true); //spins intake while held
-    thumb.whenPressed(new EjectBall(m_intakeHopper), true);
-    thumb.whenReleased(new Grabbing_Stop(m_intakeHopper), true);
-    button_3.whenPressed(new TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
+    trigger.whenPressed(new Intake_GrabBall(m_intakeHopper), true); //spins intake while held and not interuptable by other driver
+    trigger.whenReleased(new Intake_Grabbing_Stop(m_intakeHopper), true); //spins intake while held
+    thumb.whenPressed(new Intake_EjectBall(m_intakeHopper), true);
+    thumb.whenReleased(new Intake_Grabbing_Stop(m_intakeHopper), true);
+    button_3.whenPressed(new DT_TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
     //button_3.whenPressed(new RaiseHook(m_climber), true);
     //button_3.whenReleased(new Climb_Stop(m_climber), true);
     //button_4.whenPressed(new Climb(m_climber), true);
-    button_5.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);  // Extend intake
-    button_6.whenPressed(new Shooting_Stop(m_shooter), true); // retract inatke
+    button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);  // Extend intake
+    button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // retract inatke
     
-    button_7.whenPressed(new ExtendHopper(m_intakeHopper), true); // Shoot at speed
-    button_8.whenPressed(new RetractHopper(m_intakeHopper), true);  
+    button_7.whenPressed(new Intake_ExtendHopper(m_intakeHopper), true); // Shoot at speed
+    button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true);  
 
 
-    /*button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
+    button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
     button_9.whenReleased(new Climb_Stop(m_climber), true);
     button_10.whenPressed(new RaiseHook(m_climber), true);  
     button_10.whenReleased(new Climb_Stop(m_climber), true);
-    //button_12.whenReleased(new Drive_Stop(m_drivetrain));
-    //button_11.whenPressed(new CPM_Spin(m_ControlPanelManipulator), true);
-    //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
-    //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
     button_12.whenPressed(new Climber_Reverse(m_climber), true);
-    button_12.whenReleased(new Climb_Stop(m_climber), true);*/
+    button_12.whenReleased(new Climb_Stop(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
@@ -184,8 +180,8 @@ public class RobotContainer {
     final JoystickButton left_joystick_button = new JoystickButton(xboxController, 9);
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
-    final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 5);
-    //final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 6);
+    final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 2);
+    final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 3);
   
     final DPadButton dpad_Up = new DPadButton(xboxController, DPadButton.Direction.UP);
     final DPadButton dpad_Down = new DPadButton(xboxController, DPadButton.Direction.DOWN);
@@ -207,7 +203,7 @@ public class RobotContainer {
     //start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
 
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
-    right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
+    right_joystick_button.whenPressed(new Climb_StopWinch(m_climber), true);
 
     //RT.whenPressed(new Shooting_Stop(m_shooter), true);
     //LT.whenPressed(new Shooting_Stop(m_shooter), true);
