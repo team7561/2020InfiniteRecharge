@@ -7,7 +7,7 @@ public class Speeds {
     public static double EJECT_BALL_SPEED = 1.0;
     public static double STOP_BALL_SPEED = 0;
     //Climber
-    public static double CLIMBER_LIFT_SPEED = 0.3;
+    public static double CLIMBER_LIFT_SPEED = 0.5;
     public static double CLIMBER_LOWER_SPEED = -0.2;
 
     public static double CLIMBER_SLOW_LOWER_SPEED = -0.05;

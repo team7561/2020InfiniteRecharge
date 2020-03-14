@@ -104,7 +104,7 @@ public class RobotContainer {
     //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_Stop(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
-    m_injector.setDefaultCommand( new Injector_Reverse_copy(m_injector));
+    m_injector.setDefaultCommand( new Injector_Stop(m_injector));
     m_visionController.setDefaultCommand( new VCTurnOffLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
@@ -158,7 +158,8 @@ public class RobotContainer {
     button_8.whenPressed(new RetractHopper(m_intakeHopper), true);  
 
 
-    button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
+    /*button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
+    button_9.whenReleased(new Climb_Stop(m_climber), true);
     button_10.whenPressed(new RaiseHook(m_climber), true);  
     button_10.whenReleased(new Climb_Stop(m_climber), true);
     //button_12.whenReleased(new Drive_Stop(m_drivetrain));
@@ -166,6 +167,7 @@ public class RobotContainer {
     //button_11.whenReleased(new CPM_Stop(m_ControlPanelManipulator), true);
     //button_12.whenPressed(new Injector_Transfer_Ball(m_injector), true);
     button_12.whenPressed(new Climber_Reverse(m_climber), true);
+    button_12.whenReleased(new Climb_Stop(m_climber), true);*/
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
@@ -197,18 +199,18 @@ public class RobotContainer {
     button_B.whenReleased(new Injector_Stop(m_injector), true);
     button_X.whenPressed(new Shooter_Extend(m_shooter), false);
     button_Y.whenPressed(new Shooter_Retract(m_shooter), true);
-    button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
+    //button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
     button_RB.whenPressed(new ToggleHopper(m_intakeHopper), true);
     //button_RB.whenPressed(new VCTurnOffLED(m_visionController), true);
 
-    back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
-    start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
+    //back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
+    //start.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
 
     left_joystick_button.whenPressed(new CPM_Stop(m_ControlPanelManipulator), true);
     right_joystick_button.whenPressed(new Climb_Stop(m_climber), true);
 
     //RT.whenPressed(new Shooting_Stop(m_shooter), true);
-    LT.whenPressed(new ShootAtSpeed(m_shooter, 3000), true);
+    //LT.whenPressed(new Shooting_Stop(m_shooter), true);
 
     dpad_Up.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     dpad_Down.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);
