@@ -102,7 +102,7 @@ public class RobotContainer {
     ));
     //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
-    m_climber.setDefaultCommand( new Climb_Stop(m_climber));
+    m_climber.setDefaultCommand( new Climb_StopWinch(m_climber));
     m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
     m_visionController.setDefaultCommand( new VCTurnOffLED(m_visionController));
@@ -158,12 +158,12 @@ public class RobotContainer {
     button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true);  
 
 
-    button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
-    button_9.whenReleased(new Climb_Stop(m_climber), true);
-    button_10.whenPressed(new RaiseHook(m_climber), true);  
-    button_10.whenReleased(new Climb_Stop(m_climber), true);
-    button_12.whenPressed(new Climber_Reverse(m_climber), true);
-    button_12.whenReleased(new Climb_Stop(m_climber), true);
+    button_9.whenPressed(new Climb_StartWinch(m_climber), true); // Stop grabbing
+    button_9.whenReleased(new Climb_StopWinch(m_climber), true);
+    button_10.whenPressed(new Climb_RaiseHook(m_climber), true);  
+    button_10.whenReleased(new Climb_StopWinch(m_climber), true);
+    button_12.whenPressed(new Climb_ReverseWinch(m_climber), true);
+    button_12.whenReleased(new Climb_StopWinch(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
