@@ -27,4 +27,23 @@ public class Constants {
     public static double AUTO_DRIVE_SLOW_SPEED = 0.15;
     public static double TURNING_THRESHOLD = 60;
     public static double ANGLE_TOLERANCE = 5;
+
+
+    public static double SWERVE_FL_OFFSET_ANGLE = 0;
+    public static double SWERVE_FR_OFFSET_ANGLE = 0;
+    public static double SWERVE_BL_OFFSET_ANGLE = 0;
+    public static double SWERVE_BR_OFFSET_ANGLE = 0;
+
+    public static int CAN_ID_DRIVING_FL = 1;
+    public static int CAN_ID_STEERING_FL = 2;
+
+    public static int CAN_ID_DRIVING_FR = 3;
+    public static int CAN_ID_STEERING_FR = 4;
+
+    public static int CAN_ID_DRIVING_BL = 5;
+    public static int CAN_ID_STEERING_BL = 6;
+
+    public static int CAN_ID_DRIVING_BR = 7;
+    public static int CAN_ID_STEERING_BR = 8;
+    
 }
