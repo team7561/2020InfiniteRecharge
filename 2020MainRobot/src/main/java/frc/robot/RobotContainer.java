@@ -34,22 +34,12 @@ import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.drivetrain.DT_ArcadeDrive;
-import frc.robot.commands.injector.Injector_Reverse;
-import frc.robot.commands.injector.Injector_Reverse_copy;
-import frc.robot.commands.injector.Injector_Stop;
-import frc.robot.commands.injector.Injector_Transfer_Ball;
+import frc.robot.commands.injector.*;
 import frc.robot.commands.intakehopper.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.visioncontroller.*;
-import frc.robot.commands.visioncontroller.VC_TurnOffLED;
-import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Injector;
 
-import frc.robot.subsystems.IntakeHopper;
-import frc.robot.subsystems.ControlPanelManipulator;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.VisionController;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -95,7 +85,6 @@ public class RobotContainer {
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
     m_visionController.setDefaultCommand( new VC_TurnOffLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
-    //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
     configureButtonBindings();
 
@@ -138,7 +127,7 @@ public class RobotContainer {
     button_3.whenPressed(new DT_TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
     //button_3.whenPressed(new RaiseHook(m_climber), true);
     //button_3.whenReleased(new Climb_Stop(m_climber), true);
-    //button_4.whenPressed(new Climb(m_climber), true);
+    button_4.whenPressed(new Climb_StartWinch(m_climber), true);
     button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);  // Extend intake
     button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // retract inatke
     
