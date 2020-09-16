@@ -24,11 +24,7 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import frc.robot.commands.climber.Climb_StartWinch;
-import frc.robot.commands.climber.Climb_StopWinch;
-import frc.robot.commands.climber.Climb_ReverseWinch;
-import frc.robot.commands.climber.Climb_LowerHook;
-import frc.robot.commands.climber.Climb_RaiseHook;
+import frc.robot.commands.climber.*;
 import frc.robot.commands.commandgroups.AutoStrategy1;
 import frc.robot.commands.commandgroups.R_ShooterInjector;
 import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
@@ -36,23 +32,15 @@ import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinLeft;
 import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
 import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
+import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.drivetrain.DT_ArcadeDrive;
-import frc.robot.commands.drivetrain.DT_Drive_Stop;
-import frc.robot.commands.drivetrain.DT_TurnToVisionAngle;
 import frc.robot.commands.injector.Injector_Reverse;
 import frc.robot.commands.injector.Injector_Reverse_copy;
 import frc.robot.commands.injector.Injector_Stop;
 import frc.robot.commands.injector.Injector_Transfer_Ball;
-import frc.robot.commands.intakehopper.Intake_EjectBall;
-import frc.robot.commands.intakehopper.Intake_ExtendHopper;
-import frc.robot.commands.intakehopper.Intake_GrabBall;
-import frc.robot.commands.intakehopper.Intake_Grabbing_Stop;
-import frc.robot.commands.intakehopper.Intake_RetractHopper;
-import frc.robot.commands.intakehopper.Intake_ToggleHopper;
-import frc.robot.commands.shooter.Shooter_ShootAtSpeed;
-import frc.robot.commands.shooter.Shooter_Extend;
-import frc.robot.commands.shooter.Shooter_Retract;
-import frc.robot.commands.shooter.Shooter_Shooting_Stop;
+import frc.robot.commands.intakehopper.*;
+import frc.robot.commands.shooter.*;
+import frc.robot.commands.visioncontroller.*;
 import frc.robot.commands.visioncontroller.VC_TurnOffLED;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -102,10 +90,10 @@ public class RobotContainer {
     ));
     //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
     //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
-    m_climber.setDefaultCommand( new Climb_Stop(m_climber));
-    m_intakeHopper.setDefaultCommand( new Grabbing_Stop(m_intakeHopper));
+    m_climber.setDefaultCommand( new Climb_StopWinch(m_climber));
+    m_intakeHopper.setDefaultCommand( new Intake_Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
-    m_visionController.setDefaultCommand( new VCTurnOffLED(m_visionController));
+    m_visionController.setDefaultCommand( new VC_TurnOffLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
     //m_exampleSubsystem.setDefaultCommand( new ExampleCommand(m_exampleSubsystem));
     // Configure the button bindings
@@ -158,12 +146,12 @@ public class RobotContainer {
     button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true);  
 
 
-    button_9.whenPressed(new Climb(m_climber), true); // Stop grabbing
-    button_9.whenReleased(new Climb_Stop(m_climber), true);
-    button_10.whenPressed(new RaiseHook(m_climber), true);  
-    button_10.whenReleased(new Climb_Stop(m_climber), true);
-    button_12.whenPressed(new Climber_Reverse(m_climber), true);
-    button_12.whenReleased(new Climb_Stop(m_climber), true);
+    button_9.whenPressed(new Climb_StartWinch(m_climber), true); // Stop grabbing
+    button_9.whenReleased(new Climb_StopWinch(m_climber), true);
+    button_10.whenPressed(new Climb_RaiseHook(m_climber), true);  
+    button_10.whenReleased(new Climb_StopWinch(m_climber), true);
+    button_12.whenPressed(new Climb_ReverseWinch(m_climber), true);
+    button_12.whenReleased(new Climb_StopWinch(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);
@@ -196,7 +184,7 @@ public class RobotContainer {
     button_X.whenPressed(new Shooter_Extend(m_shooter), false);
     button_Y.whenPressed(new Shooter_Retract(m_shooter), true);
     //button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
-    button_RB.whenPressed(new ToggleHopper(m_intakeHopper), true);
+    button_RB.whenPressed(new Intake_ToggleHopper(m_intakeHopper), true);
     //button_RB.whenPressed(new VCTurnOffLED(m_visionController), true);
 
     //back.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
