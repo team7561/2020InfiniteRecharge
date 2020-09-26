@@ -10,10 +10,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
+import com.revrobotics.ControlType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-public class Swerve extends SubsystemBase {
+public class SwerveModule extends SubsystemBase {
     /**
      * Creates a new ExampleSubsystem.
      */
@@ -21,14 +24,16 @@ public class Swerve extends SubsystemBase {
     double m_angle;
 
     CANSparkMax driveMotor;
-    TalonSRX steeringMotor;
+    CANSparkMax steeringMotor;
 
-
-    public Swerve(double angleOffset, int driveChannel, int steerChannel) {
+    CANPIDController m_steering_pidController;
+    CANEncoder m_steering_encoder;
+    
+    public SwerveModule(double angleOffset, int driveChannel, int steerChannel) {
         setAngleOffset(angleOffset);
         m_angle = 0;
         driveMotor = new CANSparkMax(driveChannel, MotorType.kBrushless);
-        steeringMotor = new TalonSRX(steerChannel);
+        steeringMotor = new CANSparkMax(steerChannel, MotorType.kBrushless);
     }
 
     @Override
@@ -75,7 +80,7 @@ public class Swerve extends SubsystemBase {
     public void stop(){
         //Stops all motors
         driveMotor.set(0);
-        steeringMotor.set(ControlMode.PercentOutput, 0);
+        steeringMotor.set(0);
 
     }
 
