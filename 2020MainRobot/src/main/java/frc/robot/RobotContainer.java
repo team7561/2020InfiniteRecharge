@@ -114,7 +114,7 @@ public class RobotContainer {
     final JoystickButton button_8 = new JoystickButton(joystick, 8);
     final JoystickButton button_9 = new JoystickButton(joystick, 9);
     final JoystickButton button_10 = new JoystickButton(joystick, 10);
-    //final JoystickButton button_11 = new JoystickButton(joystick, 11);
+    final JoystickButton button_11 = new JoystickButton(joystick, 11);
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
 
     //final double joystickThrottle = joystick.getThrottle(); //gets the throttle value on the joystick
@@ -122,25 +122,30 @@ public class RobotContainer {
     //binding buttons to commands for the Joystick Controller
     trigger.whenPressed(new Intake_GrabBall(m_intakeHopper), true); //spins intake while held and not interuptable by other driver
     trigger.whenReleased(new Intake_Grabbing_Stop(m_intakeHopper), true); //spins intake while held
-    thumb.whenPressed(new Intake_EjectBall(m_intakeHopper), true);
-    thumb.whenReleased(new Intake_Grabbing_Stop(m_intakeHopper), true);
-    button_3.whenPressed(new DT_TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true);
+    thumb.whenPressed(new Intake_EjectBall(m_intakeHopper), true); // Eject the ball
+    thumb.whenReleased(new Intake_Grabbing_Stop(m_intakeHopper), true); // Stop grabbing the ball
+    button_3.whenPressed(new DT_TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true); // Turns the drivetrain to the right vision angle
     //button_3.whenPressed(new RaiseHook(m_climber), true);
     //button_3.whenReleased(new Climb_Stop(m_climber), true);
-    button_4.whenPressed(new Climb_StartWinch(m_climber), true);
-    button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);  // Extend intake
-    button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // retract inatke
+    button_4.whenPressed(new Climb_StartWinch(m_climber), true); // Start Winch
+    button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
+    button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // Stop shooting
     
-    button_7.whenPressed(new Intake_ExtendHopper(m_intakeHopper), true); // Shoot at speed
-    button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true);  
+    button_7.whenPressed(new Intake_ExtendHopper(m_intakeHopper), true); // Extend Hopper
+    button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true); // Reatract Hopper
 
 
     button_9.whenPressed(new Climb_StartWinch(m_climber), true); // Stop grabbing
-    button_9.whenReleased(new Climb_StopWinch(m_climber), true);
-    button_10.whenPressed(new Climb_RaiseHook(m_climber), true);  
-    button_10.whenReleased(new Climb_StopWinch(m_climber), true);
-    button_12.whenPressed(new Climb_ReverseWinch(m_climber), true);
-    button_12.whenReleased(new Climb_StopWinch(m_climber), true);
+    button_9.whenReleased(new Climb_StopWinch(m_climber), true); // Stop the Winch
+    button_10.whenPressed(new Climb_RaiseHook(m_climber), true); // Raise the Hook
+    button_10.whenReleased(new Climb_StopWinch(m_climber), true); // Stop the Winch
+    button_11.whenPressed(new Shooter_Extend(m_shooter), true);  // Extend the Shooter Hood
+    button_11.whenReleased(new Shooter_Stop(m_shooter), true); // Stop the Shooter Hood
+    button_12.whenPressed(new Shooter_Retract(m_shooter), true); // Retract the Shooter Hood
+    button_12.whenReleased(new Shooter_Stop(m_shooter), true); // Stop the Shooter Hood
+
+   // button_12.whenPressed(new Climb_ReverseWinch(m_climber), true);
+   // button_12.whenReleased(new Climb_StopWinch(m_climber), true);
     
     //creating the buttons for the Xbox Controller
     final JoystickButton button_A = new JoystickButton(xboxController, 1);

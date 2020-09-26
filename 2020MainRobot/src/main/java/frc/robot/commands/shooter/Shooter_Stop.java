@@ -10,7 +10,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class Shooter_Extend extends CommandBase {
+public class Shooter_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
   /**
@@ -18,18 +18,17 @@ public class Shooter_Extend extends CommandBase {
    * Creates a new Shooter_Extend.
    * @param subsystem
    */
-  public Shooter_Extend(Shooter subsystem) {
+  public Shooter_Stop(Shooter subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.extendHood();
-    System.out.println("Extending Deflector.");
+    m_subsystem.stopHood();
+    System.out.println("Stopping Deflector.");
     m_subsystem.updateDashboard();
   }
 

@@ -6,6 +6,7 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -138,11 +139,15 @@ public class Shooter extends SubsystemBase {
     }
     public void extendHood()
     {
-        shooterSolenoid.set(Value.kForward);
+        shooterHood.set(ControlMode.PercentOutput, 10);
     }
     public void retractHood()
     {
-        shooterSolenoid.set(Value.kReverse);
+        shooterHood.set(ControlMode.PercentOutput, -10);
+    }
+    public void stopHood()
+    {
+        shooterHood.set(ControlMode.PercentOutput, 0);
     }
     public void setSetpoint(double setPoint)
     {
@@ -170,6 +175,8 @@ public class Shooter extends SubsystemBase {
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
             SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
+            SmartDashboard.putNumber("Shooter Hood Position", m_encoder.getPosition());
+            SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.getMotorOutputPercent());
         }
     }
  }
