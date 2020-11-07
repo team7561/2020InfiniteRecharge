@@ -79,7 +79,7 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand( new DT_ArcadeDrive(m_drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getThrottle()
     ));
     //m_drivetrain.setDefaultCommand( new ArcadeDrive(m_drivetrain, () -> 0, () -> 0));
-    //m_shooter.setDefaultCommand( new Shooting_Stop(m_shooter));
+    m_shooter.setDefaultCommand( new Shooter_Shooting_Stop(m_shooter));
     m_climber.setDefaultCommand( new Climb_StopWinch(m_climber));
     m_intakeHopper.setDefaultCommand( new Intake_Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
@@ -140,9 +140,9 @@ public class RobotContainer {
     button_10.whenPressed(new Climb_RaiseHook(m_climber), true); // Raise the Hook
     button_10.whenReleased(new Climb_StopWinch(m_climber), true); // Stop the Winch
     button_11.whenPressed(new Shooter_Extend(m_shooter), true);  // Extend the Shooter Hood
-    button_11.whenReleased(new Shooter_Stop(m_shooter), true); // Stop the Shooter Hood
+    button_11.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
     button_12.whenPressed(new Shooter_Retract(m_shooter), true); // Retract the Shooter Hood
-    button_12.whenReleased(new Shooter_Stop(m_shooter), true); // Stop the Shooter Hood
+    button_12.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
 
    // button_12.whenPressed(new Climb_ReverseWinch(m_climber), true);
    // button_12.whenReleased(new Climb_StopWinch(m_climber), true);

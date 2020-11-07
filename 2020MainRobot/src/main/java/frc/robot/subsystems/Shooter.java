@@ -139,11 +139,11 @@ public class Shooter extends SubsystemBase {
     }
     public void extendHood()
     {
-        shooterHood.set(ControlMode.PercentOutput, 10);
+        shooterHood.set(ControlMode.PercentOutput, 0.25);
     }
     public void retractHood()
     {
-        shooterHood.set(ControlMode.PercentOutput, -10);
+        shooterHood.set(ControlMode.PercentOutput, -0.25);
     }
     public void stopHood()
     {
@@ -164,6 +164,7 @@ public class Shooter extends SubsystemBase {
     public void stop()
     {
         shooting = false;
+        stopHood();
     }
 
     public void updateDashboard()
