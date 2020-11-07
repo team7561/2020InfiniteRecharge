@@ -16,8 +16,7 @@ import frc.robot.Speeds;
 public class Climber extends SubsystemBase {
     TalonFX climberMotorA;
     TalonFX climberMotorB;
-    VictorSPX climberDeployMotorA;
-    VictorSPX climberDeployMotorB;
+    VictorSPX climberDeployMotor;
     DigitalInput climberHookExtended;
     DigitalInput limitSwitch;
 
@@ -34,20 +33,14 @@ public class Climber extends SubsystemBase {
         talon.configPeakCurrentDuration(100, 0);
         talon.enableCurrentLimit(true);*/
 
-        climberDeployMotorA = new VictorSPX(Ports.CLIMB_DEPLOY_A_CANID); //21
-        climberDeployMotorB = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID); //22
+        climberDeployMotor = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID); //22
 
-        climberDeployMotorA.configOpenloopRamp(0.5);
-        climberDeployMotorB.configOpenloopRamp(0.5);
+        climberDeployMotor.configOpenloopRamp(0.5);
 
-        climberDeployMotorA.configFactoryDefault();
-        climberDeployMotorB.configFactoryDefault();
-        climberDeployMotorB.setInverted(true);
-        climberDeployMotorB.follow(climberDeployMotorA);
+        climberDeployMotor.configFactoryDefault();
         climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
 
-        climberDeployMotorA.setNeutralMode(NeutralMode.Brake);
-        climberDeployMotorB.setNeutralMode(NeutralMode.Brake);
+        climberDeployMotor.setNeutralMode(NeutralMode.Brake);
 
         limitSwitch = new DigitalInput(Ports.WINCH_LIMIT_SWITCH);
 
@@ -55,11 +48,10 @@ public class Climber extends SubsystemBase {
     private void setWinchSpeed(double speed)
     {
         climberMotorA.set(ControlMode.PercentOutput, speed);
-        climberMotorB.set(ControlMode.PercentOutput, speed);
     }
     public void climb()
     {
-        if (limitSwitch.get()) {
+        if (!limitSwitch.get()) {
             setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
         } else {
             setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
@@ -72,15 +64,13 @@ public class Climber extends SubsystemBase {
     }
     public void raiseHook()
     {
-        climberDeployMotorA.configOpenloopRamp(0.5);
-        climberDeployMotorB.configOpenloopRamp(0.5);
-        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
+        climberDeployMotor.configOpenloopRamp(0.5);
+        climberDeployMotor.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_RAISE_SPEED);
     }
     public void lowerHook()
     {
-        climberDeployMotorA.configOpenloopRamp(0.5);
-        climberDeployMotorB.configOpenloopRamp(0.5);
-        climberDeployMotorA.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
+        climberDeployMotor.configOpenloopRamp(0.5);
+        climberDeployMotor.set(ControlMode.PercentOutput, Speeds.CLIMBER_HOOK_LOWER_SPEED);
     }
     public void stopClimbing()
     {
@@ -90,21 +80,18 @@ public class Climber extends SubsystemBase {
     {
         
         setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
-        climberDeployMotorA.configOpenloopRamp(0.0);
-        climberDeployMotorB.configOpenloopRamp(0.0);
-        climberDeployMotorA.set(ControlMode.PercentOutput, 0); 
+        climberDeployMotor.configOpenloopRamp(0.0);
+        climberDeployMotor.set(ControlMode.PercentOutput, 0); 
        }
     public void updateDashboard()
     {
         if (Constants.DEBUG_CLIMBER)
             {
-            SmartDashboard.putNumber("Climber Motor A Speed", climberMotorA.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor A Current", climberMotorA.getStatorCurrent());
-            SmartDashboard.putNumber("Climber Motor B Speed", climberMotorB.getMotorOutputPercent());
-            SmartDashboard.putNumber("Climber Motor B Current", climberMotorB.getStatorCurrent());
-            //SmartDashboard.putNumber("Climber Deploy Motor A Current", climberDeployMotorA.getStatorCurrent());
+            SmartDashboard.putNumber("Climber Motor Speed", climberMotorA.getMotorOutputPercent());
+            SmartDashboard.putNumber("Climber Motor Current", climberMotorA.getStatorCurrent());
+            //SmartDashboard.putNumber("Climber Deploy Motor A Current", climberDeployMotor.getStatorCurrent());
             //SmartDashboard.putNumber("Climber Deploy Motor B Current", climberDeployMotorB.getStatorCurrent());
-            SmartDashboard.putNumber("Climber Deploy Motor A Speed", climberDeployMotorA.getMotorOutputPercent());
+            SmartDashboard.putNumber("Climber Deploy Motor Speed", climberDeployMotor.getMotorOutputPercent());
             //SmartDashboard.putNumber("Climber Deploy Motor B Speed", climberDeployMotorB.getMotorOutputPercent());
         }
 
