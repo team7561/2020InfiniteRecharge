@@ -6,7 +6,10 @@ import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-//import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,9 +22,11 @@ public class Shooter extends SubsystemBase {
     CANSparkMax shooterMotorA;
     CANSparkMax shooterMotorB;
     DoubleSolenoid shooterSolenoid;
+    TalonSRX shooterHood;
+
     private CANPIDController m_pidController;
     private CANEncoder m_encoder;
-    private boolean shooting;
+    private boolean shooting, hood_auto;
 
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, m_setpoint;
 
@@ -31,6 +36,7 @@ public class Shooter extends SubsystemBase {
 
         shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
         shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
+        shooterHood = new TalonSRX(Ports.SHOOTER_HOOD_CANID);
         
         shooterMotorA.restoreFactoryDefaults();
         shooterMotorB.restoreFactoryDefaults();
@@ -43,6 +49,16 @@ public class Shooter extends SubsystemBase {
         
         m_pidController = shooterMotorA.getPIDController();
         m_encoder = shooterMotorA.getEncoder();
+
+        shooterHood.configFactoryDefault();
+        shooterHood.configPeakCurrentLimit(2);
+        shooterHood.configPeakCurrentDuration(200);
+        shooterHood.configContinuousCurrentLimit(3);
+        shooterHood.enableCurrentLimit(true);
+        shooterHood.setNeutralMode(NeutralMode.Brake);
+        shooterHood.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
+
+        shooterHood.setSensorPhase(true);
 
         shooting = false; 
 
@@ -123,11 +139,15 @@ public class Shooter extends SubsystemBase {
     }
     public void extendHood()
     {
-        shooterSolenoid.set(Value.kForward);
+        shooterHood.set(ControlMode.PercentOutput, 0.25);
     }
     public void retractHood()
     {
-        shooterSolenoid.set(Value.kReverse);
+        shooterHood.set(ControlMode.PercentOutput, -0.25);
+    }
+    public void stopHood()
+    {
+        shooterHood.set(ControlMode.PercentOutput, 0);
     }
     public void setSetpoint(double setPoint)
     {
@@ -144,6 +164,7 @@ public class Shooter extends SubsystemBase {
     public void stop()
     {
         shooting = false;
+        stopHood();
     }
 
     public void updateDashboard()
@@ -155,6 +176,8 @@ public class Shooter extends SubsystemBase {
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
             SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
+            SmartDashboard.putNumber("Shooter Hood Position", m_encoder.getPosition());
+            SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.getMotorOutputPercent());
         }
     }
  }

@@ -14,14 +14,14 @@ public class Drivetrain extends SubsystemBase {
     /**
      * Creates a new ExampleSubsystem.
      */
-    Swerve moduleFL, moduleFR, moduleBL, moduleBR;
+    SwerveModule moduleFL, moduleFR, moduleBL, moduleBR;
     double angleFL, angleFR, angleBL, angleBR;
 
     public Drivetrain() {
-        moduleFL = new Swerve(Constants.SWERVE_FL_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_FL, Constants.CAN_ID_STEERING_FL);
-        moduleFR = new Swerve(Constants.SWERVE_FR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_FR, Constants.CAN_ID_STEERING_FR);
-        moduleBL = new Swerve(Constants.SWERVE_BL_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BL, Constants.CAN_ID_STEERING_BL);
-        moduleBR = new Swerve(Constants.SWERVE_BR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BR, Constants.CAN_ID_STEERING_BR);
+        moduleFL = new SwerveModule(Constants.SWERVE_FL_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_FL, Constants.CAN_ID_STEERING_FL);
+        moduleFR = new SwerveModule(Constants.SWERVE_FR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_FR, Constants.CAN_ID_STEERING_FR);
+        moduleBL = new SwerveModule(Constants.SWERVE_BL_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BL, Constants.CAN_ID_STEERING_BL);
+        moduleBR = new SwerveModule(Constants.SWERVE_BR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BR, Constants.CAN_ID_STEERING_BR);
     }
 
     @Override

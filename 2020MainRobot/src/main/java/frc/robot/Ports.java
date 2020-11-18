@@ -11,6 +11,7 @@ public class Ports {
     public static int DRIVE_RIGHT_C_CANID = 6;
     public static int SHOOTER_A_CANID = 11;
     public static int SHOOTER_B_CANID = 12;
+    public static int SHOOTER_HOOD_CANID = 13;
     public static int CLIMB_DEPLOY_A_CANID = 21;
     public static int CLIMB_DEPLOY_B_CANID = 22;
     public static int CLIMB_WINCH_A_CANID = 23;

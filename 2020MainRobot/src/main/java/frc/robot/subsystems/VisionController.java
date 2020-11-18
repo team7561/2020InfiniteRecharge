@@ -14,7 +14,7 @@ public class VisionController extends SubsystemBase {
 	}
 	public void turnOffLED()
 	{
-		//NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 		//NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
 
 

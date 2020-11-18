@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.shooter.Shooter_Shooting_Stop;
-/*                                                                                   
-import edu.wpi.first.wpilibj.networktables.NetworkTable;*/
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.Timer;
@@ -21,7 +18,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private static final String kDefaultAuto = "Default";
+  private static final String DEFAULT_AUTO = "Default";
   double curr_angle, target_angle;
 
   private RobotContainer m_robotContainer;
@@ -38,12 +35,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     debug = true;
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.setDefaultOption("Default Auto", DEFAULT_AUTO);
     invertedDrive = false;
     speedControl = 0.5;
     setM_robotContainer(new RobotContainer());
 
-    /* table = NetworkTable.getTable("GRIP/myContoursReport"); */
+    //table = NetworkTable.getTable("GRIP/myContoursReport"); 
     CameraServer.getInstance().startAutomaticCapture();
   }
 
@@ -66,13 +63,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -84,6 +74,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    // Empty as scheduler takes care of this
   }                                                                                                                                
   @Override                                                                                                                                         
   public void teleopInit() {         
@@ -97,9 +88,8 @@ public class Robot extends TimedRobot {
     m_robotContainer.shooter_stop.schedule();                                                                                                                                   
   }                                                                         
   @Override                                     
-  public void teleopPeriodic() {
-                                                                                                                                       
-    updateDashboards();                                                                                                                                        
+  public void teleopPeriodic() {                                                                                                                                   
+    // Unused as scheduler takes care of this.
   }                                                                                                                                        
                                                                                               
   @Override                                                                                                                                         
@@ -108,15 +98,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();                                                                                                                                       
   }                                          
   @Override                                                                                                                                         
-  public void testPeriodic() {                                                                                                                                         
-  }
-  public void updateDashboards()                                                                                                                                        
-  {                                                                                                                                         
-    //climber.updateDashboard(debug);                                                                                                                                         
-    //drivetrain.updateDashboard(debug);                                                                                                                                         
-    //visionController.updateDashboard(debug);                                                                                                                                         
-    //panelintake.updateDashboard(debug);
-    //colourSensor.robotPeriodic();
-    //colourSensor.updateDashboard(true);                                                                                                                                         
+  public void testPeriodic() {         
+    // Unused                                                                                                                                
   }
 }

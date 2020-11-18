@@ -10,40 +10,31 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class Shooter_Retract extends CommandBase {
+public class Shooter_Stop extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
   /**
-   * Creates a new Shooter_Retract.
-   *  @param subsystem
+   * 
+   * Creates a new Shooter_Extend.
+   * @param subsystem
    */
-  public Shooter_Retract(Shooter subsystem) {
+  public Shooter_Stop(Shooter subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.retractHood();
-    System.out.println("Retracting Deflector");
+    m_subsystem.stopHood();
+    System.out.println("Stopping Deflector.");
     m_subsystem.updateDashboard();
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
