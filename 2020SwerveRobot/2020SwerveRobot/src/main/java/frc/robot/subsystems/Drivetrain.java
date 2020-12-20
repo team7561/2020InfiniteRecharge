@@ -28,4 +28,32 @@ public class Drivetrain extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
     }
+
+	public void stop() {
+    }
+    public void updateDashboard()
+    {
+
+    }
+
+	public void resetEncoders() {
+	}
+
+	public double getFrontRightEncoder() {
+		return 0;
+    }
+    public double getFrontLeftEncoder() {
+		return 0;
+	}
+
+	public void drive(double d, double e) {
+	}
+
+	public double readGyro() {
+		return 0;
+	}
+
+	public void arcadeDrive(double asDouble, double asDouble2, double d, boolean b) {
+	}
+
 }
