@@ -12,8 +12,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,7 +19,6 @@ import frc.robot.Ports;
 public class Shooter extends SubsystemBase {
     CANSparkMax shooterMotorA;
     CANSparkMax shooterMotorB;
-    DoubleSolenoid shooterSolenoid;
     TalonSRX shooterHood;
 
     private CANPIDController m_pidController;
@@ -32,7 +29,6 @@ public class Shooter extends SubsystemBase {
 
     public Shooter()
     {
-        shooterSolenoid = new DoubleSolenoid(Ports.SHOOTER_SOLENOID_CHANNEL_A, Ports.SHOOTER_SOLENOID_CHANNEL_B);
 
         shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
         shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
