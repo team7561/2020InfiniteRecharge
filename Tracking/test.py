@@ -21,7 +21,9 @@ def field1():
     imgfield1 = tkinter.Label(c, image=imgfield)
     imgfield1.place(x=0, y=0, relwidth=1, relheight=1)
     c.update()
-    robot.tkraise(aboveThis=test)
+    robot= c.create_image(x, y, image=img) 
+    c.tag_raise(robot)
+    c.update()
     print("Field 1")
 
 def move(shape, x1, y1):
