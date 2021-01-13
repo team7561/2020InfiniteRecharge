@@ -1,0 +1,10 @@
+{
+  "game": "game name",
+  "field-image": "C:\Users\alexg\PathWeaver\Games\2021 Infinite Recharge Home Game\field-image.png",
+  "field-corners": {
+    "top-left": [139, 33],
+    "bottom-right": [1003, 465]
+  },
+  "field-size": [4.2, 9.5],
+  "field-unit": "m"
+}

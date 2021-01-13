@@ -37,24 +37,23 @@ public class DT_ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/2, false);
     m_subsystem.updateDashboard();
 
-    m_angle = Math.atan(m_x.getAsDouble()/ m_y.getAsDouble());
+    m_angle = Math.atan(m_x / m_y );
 
-    if ( m_x.getAsDouble() < 0){
-        if (m_y.getAsDouble() >= 0){
+    if ( m_x  < 0){
+        if (m_y  >= 0){
             m_angle += Math.PI;
         }
     }
 
-    m_power = Math.sqrt(Math.pow(m_x.getAsDouble(), 2) + Math.pow(m_y.getAsDouble(), 2)) * m_speed.getAsDouble();
+    m_power = Math.sqrt(Math.pow(m_x , 2) + Math.pow(m_y , 2)) * m_speed ;
 
     m_subsystem.moduleBL.setAngle(m_angle);
     m_subsystem.moduleFL.setAngle(m_angle);
     m_subsystem.moduleBR.setAngle(m_angle);
     m_subsystem.moduleFR.setAngle(m_angle);
-*/
+
     double m_power = 0.25;
     m_subsystem.moduleBL.setSpeed(m_power);
     m_subsystem.moduleBR.setSpeed(m_power);
