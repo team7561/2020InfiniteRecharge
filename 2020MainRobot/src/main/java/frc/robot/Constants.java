@@ -1,11 +1,9 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
-
 public class Constants {
     public static boolean DEBUG_DRIVETRAIN = false;
     public static boolean DEBUG_CLIMBER = false;
-    public static boolean DEBUG_SHOOTER = true;
+    public static boolean DEBUG_SHOOTER = false;
     public static boolean DEBUG_INTAKE = false;
     public static boolean DEBUG_INJECTOR = false;
     public static boolean DEBUG_COLOUR_SENSOR = false;
@@ -23,15 +21,24 @@ public class Constants {
     public static double ANGLE_TOLERANCE = 0.5;
 
     // Auto Constants
-    public static double kRamseteB = 0;
-    public static double kRamseteZeta = 0;
+    public static double kRamseteB = 2;
+    public static double kRamseteZeta = 0.7;
 
     // Auto drivetrain
-    public static double ksVolts = 1.67;
-    public static double kvVoltSecondsPerMeter = 2.34;
-    public static double kaVoltSecondsSquaredPerMeter = 0.401;
-    public static double kPDriveVel = 0;
-    public static DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(0.2);
-    public static double kMaxSpeedMetersPerSecond = 2;
-    public static double kMaxAccelerationMetersPerSecondSquared = 1;
+    public static final double DRIVE_TRACK_WIDTH = 0.916;
+    public static final double AUTO_MAX_VELOCITY = 1;
+    public static final double AUTO_MAX_ACCEL = 0.5;
+    public static final double AUTO_MAX_CENTRIPETAL_ACCEL = 1;
+
+    public static double ksVolts = 0.344;
+    public static double kvVoltSecondsPerMeter = 1.16;
+    public static double kaVoltSecondsSquaredPerMeter = 0.0495;
+    public static double kPDriveVel = 0.000692;
+    public static double kMaxSpeedMetersPerSecond = 1;
+    public static double kMaxAccelerationMetersPerSecondSquared = 0.5;
+
+    // 5.95:1
+    // 42 pulses per rev
+    public static final double DRIVE_GEAR_RATIO = 0.16806722689;
+
 }

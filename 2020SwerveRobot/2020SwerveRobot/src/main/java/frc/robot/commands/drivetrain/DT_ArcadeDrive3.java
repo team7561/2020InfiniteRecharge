@@ -35,22 +35,8 @@ public class DT_ArcadeDrive3 extends CommandBase {
     double y = m_y.getAsDouble();
     double speed = m_speed.getAsDouble();
      
-    if (x > 1)
-    {
-      x = 1;
-    }
-    if (x < -1)
-    {
-      x = -1;
-    }
-    if (y > 1)
-    {
-      y = 1;
-    }
-    if (y < -1)
-    {
-      y = -1;
-    }
+    x = clip(x);
+    y = clip(y);
     
     if (m_subsystem.getMode() == SwerveMode.TANK || m_subsystem.getMode() == SwerveMode.TANK_X)
     {
@@ -59,11 +45,11 @@ public class DT_ArcadeDrive3 extends CommandBase {
 
     m_angle = Math.atan(x/y);
 
-    if ( x  < 0){
-        if (y < 0){
-            m_angle += Math.PI;
-        }
+    if (x<0 && y<0)
+    {
+      m_angle += Math.PI;
     }
+    
     m_angle = m_angle * 10;
     m_power = Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) * speed;
 
@@ -97,4 +83,14 @@ public class DT_ArcadeDrive3 extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
+  public double clip(double input)
+  {
+    if (input > 1)
+      return 1;
+    if (input < 1)
+      return -1;
+    return input;
+  }
+
 }

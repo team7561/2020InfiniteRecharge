@@ -3,7 +3,7 @@
     "motorPorts": [1,2,3],
     "rightMotorPorts": [4,5,6],
     "motorsInverted": [False, False, False],
-    "rightMotorsInverted": [True, True, True],
+    "rightMotorsInverted": [False, False, False],
     # Encoder edges-per-revolution (*NOT* cycles per revolution!)
     # **Note pass an EPR of 1 for the NEO Integrated encoder as the SparkMax
     # already handles this conversion**
@@ -40,6 +40,7 @@
     # "" (NavX using default SPI, ADXRS450 using onboard CS0, or no gyro)
     "gyroPort": "",
 }
+
 
 
 

@@ -56,6 +56,7 @@ public class Shooter extends SubsystemBase {
 
         shooterHood.setSensorPhase(true);
 
+        hood_auto = false;
         shooting = false; 
 
         // PID coefficients
@@ -77,15 +78,6 @@ public class Shooter extends SubsystemBase {
         m_pidController.setFF(kFF);
         m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
-        // display PID coefficients on SmartDashboard
-        SmartDashboard.putNumber("P Gain", kP);
-        SmartDashboard.putNumber("I Gain", kI);
-        SmartDashboard.putNumber("D Gain", kD);
-        SmartDashboard.putNumber("I Zone", kIz);
-        SmartDashboard.putNumber("Feed Forward", kFF);
-        SmartDashboard.putNumber("Set Point", m_setpoint);
-        SmartDashboard.putNumber("Max Output", kMaxOutput);
-        SmartDashboard.putNumber("Min Output", kMinOutput);
         shooterMotorB.follow(ExternalFollower.kFollowerSparkMax, Ports.SHOOTER_A_CANID, true);
     }
 
@@ -127,7 +119,10 @@ public class Shooter extends SubsystemBase {
         {
             shooterMotorA.set(0);
         }
+        if (hood_auto)
+        {
 
+        }
     }
     public double getVelocity()
     {
@@ -167,6 +162,17 @@ public class Shooter extends SubsystemBase {
     {
         if (Constants.DEBUG_SHOOTER)
         {
+                
+            // display PID coefficients on SmartDashboard
+            SmartDashboard.putNumber("P Gain", kP);
+            SmartDashboard.putNumber("I Gain", kI);
+            SmartDashboard.putNumber("D Gain", kD);
+            SmartDashboard.putNumber("I Zone", kIz);
+            SmartDashboard.putNumber("Feed Forward", kFF);
+            SmartDashboard.putNumber("Set Point", m_setpoint);
+            SmartDashboard.putNumber("Max Output", kMaxOutput);
+            SmartDashboard.putNumber("Min Output", kMinOutput);
+            
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());

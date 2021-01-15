@@ -8,30 +8,23 @@
 package frc.robot;
 
 import java.util.List;
+import java.util.Arrays;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.wpilibj.geometry.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.wpilibj.trajectory.*;
+import edu.wpi.first.wpilibj.trajectory.constraint.*;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.commands.climber.*;
-import frc.robot.commands.commandgroups.AutoStrategy1;
-import frc.robot.commands.commandgroups.R_ShooterInjector;
-import frc.robot.commands.controlpanelmanipulator.CPM_Extend;
-import frc.robot.commands.controlpanelmanipulator.CPM_Retract;
-import frc.robot.commands.controlpanelmanipulator.CPM_SpinLeft;
-import frc.robot.commands.controlpanelmanipulator.CPM_SpinRight;
-import frc.robot.commands.controlpanelmanipulator.CPM_Stop;
+import frc.robot.commands.controlpanelmanipulator.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.drivetrain.DT_ArcadeDrive;
 import frc.robot.commands.injector.*;
@@ -39,10 +32,11 @@ import frc.robot.commands.intakehopper.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.visioncontroller.*;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -61,17 +55,16 @@ public class RobotContainer {
   private final VisionController m_visionController = new VisionController();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
-  private final Command autoStrategy1 = new AutoStrategy1(m_drivetrain, m_intakeHopper, m_shooter, m_injector, m_visionController);
   public final Command shooter_stop = new Shooter_Shooting_Stop(m_shooter);
-
-  // A chooser for autonomous commands
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
-
 
   //HID
   private Joystick joystick = new Joystick(0); //Logitech Extreme 3D Pro Joysick Controller
   private XboxController xboxController = new XboxController(1); //Logitech Gamepad F310 (Xbox Controller)
   
+  TrajectoryConfig m_trajConfig = new TrajectoryConfig(Constants.AUTO_MAX_VELOCITY, Constants.AUTO_MAX_ACCEL);
+
+  SendableChooser<List<Pose2d>> m_autoChooser = new SendableChooser<List<Pose2d>>();
+
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -88,10 +81,30 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    m_chooser.addOption("Auto 1", autoStrategy1);
+    // add trajectory constraints
+    m_trajConfig.addConstraint(new DifferentialDriveKinematicsConstraint(m_drivetrain.getKinematics(), 3.6));
+    m_trajConfig.addConstraint(new CentripetalAccelerationConstraint(Constants.AUTO_MAX_CENTRIPETAL_ACCEL));
+    m_trajConfig.addConstraint(new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(Constants.ksVolts,Constants.kvVoltSecondsPerMeter,Constants.kaVoltSecondsSquaredPerMeter),m_drivetrain.getKinematics(),4));
+
+     // set up autonomous trajectories
+     m_autoChooser.setDefaultOption("None", null);
+     m_autoChooser.addOption("Straight Line",
+         Arrays.asList(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1, 0, new Rotation2d(0))));
+     m_autoChooser.addOption("Curve", Arrays.asList(new Pose2d(0, 0, new Rotation2d()),
+         new Pose2d(2+0.2032, 2-0.1524, new Rotation2d()), new Pose2d(3+0.2032, 2-0.1524, new Rotation2d())));
+     m_autoChooser.addOption("Bumps",
+         Arrays.asList(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1.6, 0.94, Rotation2d.fromDegrees(45)),
+             new Pose2d(3.152, 1.736, new Rotation2d()), 
+             new Pose2d(4.484, 1.736, new Rotation2d()),
+             new Pose2d(5.152, 0.942, Rotation2d.fromDegrees(-90)),
+             new Pose2d(4.382, 0, Rotation2d.fromDegrees(-180)),
+             new Pose2d(3.828, 0.942, Rotation2d.fromDegrees(-225)),
+             new Pose2d(2.521, 1.436, Rotation2d.fromDegrees(-180)),
+             new Pose2d(0.526, 1.436, Rotation2d.fromDegrees(-180)))); 
+     SmartDashboard.putData(m_autoChooser);
     
     // Put the chooser on the dashboard
-    Shuffleboard.getTab("Autonomous").add(m_chooser);
+    Shuffleboard.getTab("Autonomous").add(m_autoChooser);
   }
 
   /**
@@ -153,17 +166,17 @@ public class RobotContainer {
     final JoystickButton button_X = new JoystickButton(xboxController, 3);
     final JoystickButton button_Y = new JoystickButton(xboxController, 4);
 
-    final JoystickButton button_LB = new JoystickButton(xboxController, 5);
+    //final JoystickButton button_LB = new JoystickButton(xboxController, 5);
     final JoystickButton button_RB = new JoystickButton(xboxController, 6);
 
-    final JoystickButton back = new JoystickButton(xboxController, 7);
-    final JoystickButton start = new JoystickButton(xboxController, 8);
+    //final JoystickButton back = new JoystickButton(xboxController, 7);
+    //final JoystickButton start = new JoystickButton(xboxController, 8);
 
     final JoystickButton left_joystick_button = new JoystickButton(xboxController, 9);
     final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
 
-    final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 2);
-    final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 3);
+    //final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 2);
+    //final JoystickAnalogButton RT = new JoystickAnalogButton(xboxController, 3);
   
     final DPadButton dpad_Up = new DPadButton(xboxController, DPadButton.Direction.UP);
     final DPadButton dpad_Down = new DPadButton(xboxController, DPadButton.Direction.DOWN);
@@ -201,51 +214,66 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-    public Command getAutonomousCommand() {
-        System.out.println("Command is " + autoStrategy1.toString());
-        return autoStrategy1;
-        //return m_chooser.getSelected();
-    // Create a voltage constraint to ensure we don't accelerate too fast
-    /*var autoVoltageConstraint =
-        new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(Constants.ksVolts,
-            Constants.kvVoltSecondsPerMeter,
-            Constants.kaVoltSecondsSquaredPerMeter),
-            Constants.kDriveKinematics,
-            10);
 
-    // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond,
-        Constants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(Constants.kDriveKinematics)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+
+    List<Pose2d> waypoints = m_autoChooser.getSelected();
+
+    if (waypoints != null) {
+
+      Trajectory traj = TrajectoryGenerator.generateTrajectory(waypoints, m_trajConfig);
+
+      return new DT_ResetDrivePose(m_drivetrain).andThen(new DT_DrivePath(traj, m_drivetrain)).andThen(() -> {
+        m_drivetrain.stop();
+      });
+
+    } else {
+      return null;
+    }
+
+  }
+  public Command getAutonomousCommand2() {
+
+    // Create a voltage constraint to ensure we don't accelerate too fast
 
     // An example trajectory to follow.  All units in meters.
+    
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(
-            new Translation2d(1, 1),
-            new Translation2d(2, -1)
+            new Translation2d(0.5, 0.5),
+            new Translation2d(1, -0.5)
         ),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
+        new Pose2d(0.5, 0, new Rotation2d(0)),
         // Pass config
-        config
+        m_trajConfig
     );
+    String trajectoryJSON = "paths/output/TestPath3.wpilib.json";
+    Trajectory trajectory = new Trajectory();
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    }
+    exampleTrajectory = trajectory;
 
     RamseteCommand ramseteCommand = new RamseteCommand(
         exampleTrajectory,
         m_drivetrain::getPose,
         new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
         new SimpleMotorFeedforward(Constants.ksVolts,
-        Constants.kvVoltSecondsPerMeter,
-        Constants.kaVoltSecondsSquaredPerMeter),
-        Constants.kDriveKinematics,
+                                   Constants.kvVoltSecondsPerMeter,
+                                   Constants.kaVoltSecondsSquaredPerMeter),
+                                   m_drivetrain.getKinematics(),
         m_drivetrain::getWheelSpeeds,
         new PIDController(Constants.kPDriveVel, 0, 0),
         new PIDController(Constants.kPDriveVel, 0, 0),
@@ -254,8 +282,11 @@ public class RobotContainer {
         m_drivetrain
     );
 
+    // Reset odometry to the starting pose of the trajectory.
+    m_drivetrain.resetOdometry(exampleTrajectory.getInitialPose());
+
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));*/
+    return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
   }
   
 }

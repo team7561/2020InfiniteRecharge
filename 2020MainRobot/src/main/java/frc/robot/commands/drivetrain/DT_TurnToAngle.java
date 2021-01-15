@@ -38,7 +38,7 @@ public class DT_TurnToAngle extends CommandBase {
   @Override
   public void execute() {
      // m_subsystem.turnToAngle(m_speed);
-     m_angleDifference = m_targetAngle - m_subsystem.readGyro();
+     m_angleDifference = m_targetAngle - m_subsystem.getGyroRotation().getDegrees();
      if ((m_angleDifference > m_targetAngle/2) && (m_angleDifference < 180)) {
       m_subsystem.drive(m_speed/2, -m_speed/2);
      }
