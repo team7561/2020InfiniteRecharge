@@ -11,6 +11,16 @@ def connection_listener(connected, info):
     with cond:
         notified[0] = True
         cond.notify()
+class OdometryData:
+    def __init__(self, x = 99, y = 99, rot = 999):
+        self.x = x
+        self.y = y
+        self.rot = rot
+
+def convert_to_pixels(self):
+    pixel_x = (1 + self.x) / 2 * Constants.display_width
+    pixel_y = (1 + self.x) / 2 * Constants.display_height
+    return pixel_x, pixel_y
 
 
 NetworkTables.initialize(server=Constants.networktables_IP)
@@ -22,7 +32,10 @@ except:
 table = NetworkTables.getTable('SmartDashboard')
 
 def get_target_location():
-    return TrackerData(table.getNumber("Target Location X", 0), 0, table.getNumber("Target Location Z", 0), 0, table.getNumber("Target Location Heading", 0), 0)
+    return TrackerData(table.getNumber("odometry_x", 0), 0, table.getNumber("odometry_y", 0), 0, table.getNumber("odometry_theta", 0), 0)
+
+def get_robot_odometry():
+    return OdometryData(table.getNumber("Target Location X", 0), table.getNumber("Target Location Z", 0), table.getNumber("Target Location Heading", 0))
 
 def get_destination_location():
     return TrackerData(table.getNumber("Destination Location X", 0), 0, table.getNumber("Destination Location Z", 0), 0, table.getNumber("Destination Location Heading", 0), 0)

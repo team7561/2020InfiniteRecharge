@@ -15,8 +15,6 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.*;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -26,17 +24,16 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 import frc.robot.commands.climber.*;
 import frc.robot.commands.controlpanelmanipulator.*;
 import frc.robot.commands.drivetrain.*;
-import frc.robot.commands.drivetrain.DT_ArcadeDrive;
 import frc.robot.commands.injector.*;
 import frc.robot.commands.intakehopper.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.visioncontroller.*;
+import frc.robot.commands.autonomous.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -82,9 +79,10 @@ public class RobotContainer {
     configureButtonBindings();
 
     // add trajectory constraints
-    m_trajConfig.addConstraint(new DifferentialDriveKinematicsConstraint(m_drivetrain.getKinematics(), 3.6));
+    m_trajConfig.addConstraint(new DifferentialDriveKinematicsConstraint(m_drivetrain.getKinematics(), 1.6));
     m_trajConfig.addConstraint(new CentripetalAccelerationConstraint(Constants.AUTO_MAX_CENTRIPETAL_ACCEL));
-    m_trajConfig.addConstraint(new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(Constants.ksVolts,Constants.kvVoltSecondsPerMeter,Constants.kaVoltSecondsSquaredPerMeter),m_drivetrain.getKinematics(),4));
+    m_trajConfig.addConstraint(new DifferentialDriveVoltageConstraint(new SimpleMotorFeedforward(Constants.ksVolts,Constants.kvVoltSecondsPerMeter,Constants.kaVoltSecondsSquaredPerMeter),m_drivetrain.getKinematics(),2));
+
 
      // set up autonomous trajectories
      m_autoChooser.setDefaultOption("None", null);
@@ -101,6 +99,7 @@ public class RobotContainer {
              new Pose2d(3.828, 0.942, Rotation2d.fromDegrees(-225)),
              new Pose2d(2.521, 1.436, Rotation2d.fromDegrees(-180)),
              new Pose2d(0.526, 1.436, Rotation2d.fromDegrees(-180)))); 
+
      SmartDashboard.putData(m_autoChooser);
     
     // Put the chooser on the dashboard
@@ -140,7 +139,8 @@ public class RobotContainer {
     button_3.whenPressed(new DT_TurnToVisionAngle(m_drivetrain, m_visionController, () -> (joystick.getThrottle()+1)/2).withTimeout(5), true); // Turns the drivetrain to the right vision angle
     //button_3.whenPressed(new RaiseHook(m_climber), true);
     //button_3.whenReleased(new Climb_Stop(m_climber), true);
-    button_4.whenPressed(new Climb_StartWinch(m_climber), true); // Start Winch
+    button_4.whenPressed(new DT_ResetDrivePose(m_drivetrain), true); // Start Winch
+    //button_4.whenPressed(new Climb_StartWinch(m_climber), true); // Start Winch
     button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter, 3000), true);  // Shoot at speed
     button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // Stop shooting
     
@@ -221,6 +221,25 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    return new AutoBarrel(m_drivetrain);
+    /*
+    // Load in path
+    String trajectoryJSON = "output/BarrelRacing.wpilib.json";
+    Trajectory trajectory = new Trajectory();
+    try {
+      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException ex) {
+      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+    }
+
+  
+    return new DT_InitDrivePose(m_drivetrain, 0.752, -3.383).andThen(new DT_DrivePath(trajectory, m_drivetrain)).andThen(() -> {
+      m_drivetrain.stop();
+    });
+    */
+  }  
+  public Command getAutonomousCommand3() {
 
     List<Pose2d> waypoints = m_autoChooser.getSelected();
 
@@ -237,56 +256,4 @@ public class RobotContainer {
     }
 
   }
-  public Command getAutonomousCommand2() {
-
-    // Create a voltage constraint to ensure we don't accelerate too fast
-
-    // An example trajectory to follow.  All units in meters.
-    
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(
-            new Translation2d(0.5, 0.5),
-            new Translation2d(1, -0.5)
-        ),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(0.5, 0, new Rotation2d(0)),
-        // Pass config
-        m_trajConfig
-    );
-    String trajectoryJSON = "paths/output/TestPath3.wpilib.json";
-    Trajectory trajectory = new Trajectory();
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-    } catch (IOException ex) {
-      DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-    }
-    exampleTrajectory = trajectory;
-
-    RamseteCommand ramseteCommand = new RamseteCommand(
-        exampleTrajectory,
-        m_drivetrain::getPose,
-        new RamseteController(Constants.kRamseteB, Constants.kRamseteZeta),
-        new SimpleMotorFeedforward(Constants.ksVolts,
-                                   Constants.kvVoltSecondsPerMeter,
-                                   Constants.kaVoltSecondsSquaredPerMeter),
-                                   m_drivetrain.getKinematics(),
-        m_drivetrain::getWheelSpeeds,
-        new PIDController(Constants.kPDriveVel, 0, 0),
-        new PIDController(Constants.kPDriveVel, 0, 0),
-        // RamseteCommand passes volts to the callback
-        m_drivetrain::tankDriveVolts,
-        m_drivetrain
-    );
-
-    // Reset odometry to the starting pose of the trajectory.
-    m_drivetrain.resetOdometry(exampleTrajectory.getInitialPose());
-
-    // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> m_drivetrain.tankDriveVolts(0, 0));
-  }
-  
 }

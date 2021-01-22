@@ -1,7 +1,7 @@
 package frc.robot;
 
 public class Constants {
-    public static boolean DEBUG_DRIVETRAIN = false;
+    public static boolean DEBUG_DRIVETRAIN = true;
     public static boolean DEBUG_CLIMBER = false;
     public static boolean DEBUG_SHOOTER = false;
     public static boolean DEBUG_INTAKE = false;
@@ -39,6 +39,6 @@ public class Constants {
 
     // 5.95:1
     // 42 pulses per rev
-    public static final double DRIVE_GEAR_RATIO = 0.16806722689;
+    public static final double DRIVE_GEAR_RATIO = 1/5.95;
 
 }

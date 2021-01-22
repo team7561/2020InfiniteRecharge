@@ -13,13 +13,10 @@ y = 50
 img = ImageTk.PhotoImage(Image.open("download.jfif"))  
 robot= c.create_image(x, y, image=img) 
 
-imgfield = ImageTk.PhotoImage(Image.open("Screenshot 2021-01-12 160815.png"))  
 
 def field1():
     global x
     global y
-    imgfield1 = tkinter.Label(c, image=imgfield)
-    imgfield1.place(x=0, y=0, relwidth=1, relheight=1)
     c.update()
     robot= c.create_image(x, y, image=img) 
     c.tag_raise(robot)

@@ -65,7 +65,7 @@ public class Drivetrain extends SubsystemBase {
         m_rightEncoder = rightA.getEncoder();
         
         // set up encoder conversion factor
-        double conversionFactor = Constants.DRIVE_GEAR_RATIO * 0.3239;
+        double conversionFactor = Constants.DRIVE_GEAR_RATIO * 2*Math.PI*3*2.54/100;
 
         rightA.setInverted(true);
         m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -77,14 +77,15 @@ public class Drivetrain extends SubsystemBase {
         m_rightEncoder.setVelocityConversionFactor(conversionFactor/60);
         m_rightEncoder.setPositionConversionFactor(conversionFactor);
         
-        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
         m_kinematics = new DifferentialDriveKinematics(Constants.DRIVE_TRACK_WIDTH);
 
         m_leftController = new PIDController(0.4, 0, 0);
         m_rightController = new PIDController(0.4, 0, 0);
         
         m_leftFF = new SimpleMotorFeedforward(0.1765, 3.3, 0.341);
-        m_rightFF = new SimpleMotorFeedforward(0.1835, 3.24, 0.3645);
+        m_rightFF = new SimpleMotorFeedforward(0.1765, 3.3, 0.341);
+        //m_rightFF = new SimpleMotorFeedforward(0.1835, 3.24, 0.3645);
   
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
@@ -138,14 +139,7 @@ public class Drivetrain extends SubsystemBase {
      * @return the robot's heading in degrees, from -180 to 180
      */
     public double getHeading() {
-        try
-        {
-            return Math.IEEEremainder(gyro.getAngle(), 360);
-        }
-        catch (Exception e)
-        {
-            return 0;
-        }
+        return getGyroRotation().getDegrees();
     }
     /**
      * Gets the drivetrain's kinematic model.
@@ -168,7 +162,7 @@ public class Drivetrain extends SubsystemBase {
         rightA.setVoltage(rightVoltage);
     }
     public Rotation2d getGyroRotation() {
-        return gyro.getRotation2d();//Rotation2d.fromDegrees(-m_gyroFilter.calculate(m_gyro.getAngle()));
+        return Rotation2d.fromDegrees(-gyro.getAngle());
       }
     public void periodic() {
         // update the drivetrain's position estimate
@@ -201,7 +195,7 @@ public class Drivetrain extends SubsystemBase {
             right = 1;
         }
         if (inverted == true) {
-            drive(-left, -right);
+            drive(-left, right);
         }
         else
         {
@@ -213,15 +207,26 @@ public class Drivetrain extends SubsystemBase {
         m_rightMotors.setVoltage(-rightVolts);
         m_drive.feed();
       }
-    /**
-     * Resets the drivetrain's stored pose and encoder values.
-     */
-    public void resetPose() {
-        m_leftEncoder.setPosition(0);
-        m_rightEncoder.setPosition(0);
-
-        m_odometry.resetPosition(new Pose2d(), getGyroRotation());
-    }
+      /**
+       * Resets the drivetrain's stored pose and encoder values.
+       */
+      public void resetPose() {
+          m_leftEncoder.setPosition(0);
+          m_rightEncoder.setPosition(0);
+          gyro.reset();
+  
+          m_odometry.resetPosition(new Pose2d(), getGyroRotation());
+      }
+      /**
+       * Resets the drivetrain's stored pose and encoder values.
+       */
+      public void setPose(double x, double y) {
+          m_leftEncoder.setPosition(x);
+          m_rightEncoder.setPosition(y);
+          gyro.reset();
+  
+          m_odometry.resetPosition(new Pose2d(), getGyroRotation());
+      }
     public Pose2d getPose() {
         return m_odometry.getPoseMeters();
     }
