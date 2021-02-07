@@ -19,10 +19,10 @@ public class Speeds {
     //Injector
     public static double INJECTOR_TRANSFER_SPEED = -1.0;
     public static double INJECTOR_BACKFEED_SPEED = 0.4;
-    public static double INJECTOR_STOP_SPEED = 0.05;
+    public static double INJECTOR_STOP_SPEED = 0.00;
     // Vision Tracking
     public static double VISION_DRIVE_SPEED = 0.2;
 
     // Control Panel Manipulator
-    public static double ROTATION_CONTROL_SPEED = -0.5;
+    public static double ROTATION_CONTROL_SPEED = -0.75;
 }

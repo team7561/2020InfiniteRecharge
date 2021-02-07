@@ -35,24 +35,31 @@ public class DT_ArcadeDrive3 extends CommandBase {
     double y = m_y.getAsDouble();
     double speed = m_speed.getAsDouble();
      
-    x = clip(x);
-    y = clip(y);
+    System.out.println(x);
+    System.out.println(y);
+    /*x = clip(x);
+    y = clip(y);*/
     
     if (m_subsystem.getMode() == SwerveMode.TANK || m_subsystem.getMode() == SwerveMode.TANK_X)
     {
       x = 0;
     }
 
-    m_angle = Math.atan(x/y);
+    m_angle = Math.atan2(y, x)%Math.PI;
 
     if (x<0 && y<0)
     {
       m_angle += Math.PI;
     }
     
-    m_angle = m_angle * 10;
-    m_power = Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) * speed;
+    m_angle = m_angle * 30;
 
+    if (m_angle > 1000)
+    {
+      m_angle = 0;
+    }
+    m_power = Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) * speed;
+    System.out.println(m_power);
     m_subsystem.moduleBL.setAngle(m_angle);
     m_subsystem.moduleFL.setAngle(m_angle);
     m_subsystem.moduleBR.setAngle(m_angle);

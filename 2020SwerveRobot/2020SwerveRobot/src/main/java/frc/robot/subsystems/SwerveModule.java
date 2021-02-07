@@ -76,13 +76,15 @@ public class SwerveModule extends SubsystemBase {
 
         // PID coefficients
         steering_kP = 0.1; 
-        steering_kI = 0.000002;
-        steering_kD = 0.000004; 
+        steering_kI = 0.0;
+        steering_kD = 0.0; 
+        //steering_kI = 0.000002;
+        //steering_kD = 0.000004; 
         //kIz = 500; // Error process value must be within before I is used.
         steering_kFF = 0; 
         steering_m_setpoint = 0;
-        steering_kMaxOutput = 0.4; 
-        steering_kMinOutput = -0.4;
+        steering_kMaxOutput = 0.7; 
+        steering_kMinOutput = -0.7;
         steering_maxRPM = 4500;
 
         m_steering_pidController = m_steeringMotor.getPIDController();
@@ -104,8 +106,8 @@ public class SwerveModule extends SubsystemBase {
         //kIz = 500; // Error process value must be within before I is used.
         driving_kFF = 0; 
         driving_m_setpoint = 0;
-        driving_kMaxOutput = 0.4; 
-        driving_kMinOutput = -0.4;
+        driving_kMaxOutput = 0.2; 
+        driving_kMinOutput = -0.2;
         driving_maxRPM = 4500;
 
         m_driving_pidController = m_driveMotor.getPIDController();

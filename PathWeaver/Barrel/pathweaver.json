@@ -1,0 +1,9 @@
+{
+  "lengthUnit": "Meter",
+  "exportUnit": "Always Meters",
+  "maxVelocity": 0.5,
+  "maxAcceleration": 3.0,
+  "wheelBase": 0.916,
+  "gameName": "Barrel Racing Path",
+  "outputDir": "../../2020MainRobot/src/main/deploy"
+}

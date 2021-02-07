@@ -22,14 +22,13 @@ public class Shooter extends SubsystemBase {
     TalonSRX shooterHood;
 
     private CANPIDController m_pidController;
-    private CANEncoder m_encoder;
+    private CANEncoder m_flywheel_encoder;
     private boolean shooting, hood_auto;
 
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, m_setpoint;
 
     public Shooter()
     {
-
         shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
         shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
         shooterHood = new TalonSRX(Ports.SHOOTER_HOOD_CANID);
@@ -44,8 +43,8 @@ public class Shooter extends SubsystemBase {
         shooterMotorB.setSmartCurrentLimit(45);
         
         m_pidController = shooterMotorA.getPIDController();
-        m_encoder = shooterMotorA.getEncoder();
-
+        m_flywheel_encoder = shooterMotorA.getEncoder();
+        
         shooterHood.configFactoryDefault();
         shooterHood.configPeakCurrentLimit(2);
         shooterHood.configPeakCurrentDuration(200);
@@ -53,7 +52,6 @@ public class Shooter extends SubsystemBase {
         shooterHood.enableCurrentLimit(true);
         shooterHood.setNeutralMode(NeutralMode.Brake);
         shooterHood.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-
         shooterHood.setSensorPhase(true);
 
         hood_auto = false;
@@ -113,7 +111,7 @@ public class Shooter extends SubsystemBase {
             m_pidController.setReference(m_setpoint, ControlType.kVelocity);
             //shooterMotorB.set(shooterMotorA.get());
             //SmartDashboard.putNumber("SetPoint", setPoint);
-            SmartDashboard.putNumber("ProcessVariable", m_encoder.getVelocity());
+            SmartDashboard.putNumber("ProcessVariable", m_flywheel_encoder.getVelocity());
         }
         else
         {
@@ -126,7 +124,7 @@ public class Shooter extends SubsystemBase {
     }
     public double getVelocity()
     {
-        return m_encoder.getVelocity();
+        return m_flywheel_encoder.getVelocity();
     }
     public void extendHood()
     {
@@ -177,9 +175,10 @@ public class Shooter extends SubsystemBase {
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
-            SmartDashboard.putNumber("Shooter Velocity", m_encoder.getVelocity());
-            SmartDashboard.putNumber("Shooter Hood Position", m_encoder.getPosition());
+            SmartDashboard.putNumber("Shooter Hood Position", shooterHood.getSelectedSensorPosition());
             SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.getMotorOutputPercent());
+            SmartDashboard.putNumber("Shooter Hood Current", shooterHood.getSupplyCurrent());
+            SmartDashboard.putNumber("Hood Count", shooterHood.getSelectedSensorPosition());
         }
     }
  }
