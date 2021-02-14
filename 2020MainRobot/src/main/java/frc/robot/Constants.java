@@ -1,11 +1,11 @@
 package frc.robot;
 
 public class Constants {
-    public static boolean DEBUG_DRIVETRAIN = true;
+    public static boolean DEBUG_DRIVETRAIN = false;
     public static boolean DEBUG_CLIMBER = false;
     public static boolean DEBUG_SHOOTER = true;
-    public static boolean DEBUG_INTAKE = true;
-    public static boolean DEBUG_INJECTOR = true;
+    public static boolean DEBUG_INTAKE = false;
+    public static boolean DEBUG_INJECTOR = false;
     public static boolean DEBUG_COLOUR_SENSOR = false;
     public static boolean DEBUG = false;
 

@@ -63,7 +63,7 @@ public class Shooter extends SubsystemBase {
         kD = 0.000004; 
         kIz = 500; // Error process value must be within before I is used.
         kFF = 0; 
-        m_setpoint = 2500;
+        m_setpoint = 4000;
         kMaxOutput = 0.85; 
         kMinOutput = -0.85;
         maxRPM = 4500;
@@ -170,7 +170,6 @@ public class Shooter extends SubsystemBase {
             SmartDashboard.putNumber("Set Point", m_setpoint);
             SmartDashboard.putNumber("Max Output", kMaxOutput);
             SmartDashboard.putNumber("Min Output", kMinOutput);
-            
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
