@@ -39,13 +39,17 @@ public class Bounce extends SequentialCommandGroup {
         Trajectory trajectory3 = new Trajectory();
         Trajectory trajectory4 = new Trajectory();
         try {
-        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-        trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        trajectory2 = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        trajectory3 = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        trajectory4 = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        } catch (IOException ex) {
-        DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            Path trajectory2Path = Filesystem.getDeployDirectory().toPath().resolve(trajectory2JSON);
+            Path trajectory3Path = Filesystem.getDeployDirectory().toPath().resolve(trajectory3JSON);
+            Path trajectory4Path = Filesystem.getDeployDirectory().toPath().resolve(trajectory4JSON);
+            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            trajectory2 = TrajectoryUtil.fromPathweaverJson(trajectory2Path);
+            trajectory3 = TrajectoryUtil.fromPathweaverJson(trajectory3Path);
+            trajectory4 = TrajectoryUtil.fromPathweaverJson(trajectory4Path);
+        } 
+        catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
         }
         addCommands ( new DT_InitDrivePose(m_drivetrain, 0.752, -3.383),
                       new DT_DrivePath(trajectory, m_drivetrain),
@@ -54,5 +58,4 @@ public class Bounce extends SequentialCommandGroup {
                       new DT_DrivePath(trajectory4, m_drivetrain),
                       new DT_Drive_Stop(m_drivetrain));
     }
-      
 }

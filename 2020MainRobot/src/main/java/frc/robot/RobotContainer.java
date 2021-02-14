@@ -10,8 +10,6 @@ package frc.robot;
 import java.util.List;
 import java.util.Arrays;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -30,8 +28,6 @@ import frc.robot.commands.shooter.*;
 import frc.robot.commands.visioncontroller.*;
 import frc.robot.commands.autonomous.*;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -61,6 +57,9 @@ public class RobotContainer {
   TrajectoryConfig m_trajConfig = new TrajectoryConfig(Constants.AUTO_MAX_VELOCITY, Constants.AUTO_MAX_ACCEL);
 
   SendableChooser<List<Pose2d>> m_autoChooser = new SendableChooser<List<Pose2d>>();
+  
+  // Create SmartDashboard chooser for autonomous routines
+  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -85,20 +84,12 @@ public class RobotContainer {
 
 
      // set up autonomous trajectories
-     m_autoChooser.setDefaultOption("None", null);
-     m_autoChooser.addOption("Straight Line",
-         Arrays.asList(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1, 0, new Rotation2d(0))));
-     m_autoChooser.addOption("Curve", Arrays.asList(new Pose2d(0, 0, new Rotation2d()),
-         new Pose2d(2+0.2032, 2-0.1524, new Rotation2d()), new Pose2d(3+0.2032, 2-0.1524, new Rotation2d())));
-     m_autoChooser.addOption("Bumps",
-         Arrays.asList(new Pose2d(0, 0, new Rotation2d()), new Pose2d(1.6, 0.94, Rotation2d.fromDegrees(45)),
-             new Pose2d(3.152, 1.736, new Rotation2d()), 
-             new Pose2d(4.484, 1.736, new Rotation2d()),
-             new Pose2d(5.152, 0.942, Rotation2d.fromDegrees(-90)),
-             new Pose2d(4.382, 0, Rotation2d.fromDegrees(-180)),
-             new Pose2d(3.828, 0.942, Rotation2d.fromDegrees(-225)),
-             new Pose2d(2.521, 1.436, Rotation2d.fromDegrees(-180)),
-             new Pose2d(0.526, 1.436, Rotation2d.fromDegrees(-180)))); 
+     m_chooser.setDefaultOption("None", null);
+     m_chooser.addOption("Barrel", new Barrel2(m_drivetrain)); 
+     m_chooser.addOption("Bounce", new Bounce(m_drivetrain)); 
+     m_chooser.addOption("Slalom", new Slalom(m_drivetrain)); 
+     m_chooser.addOption("PathABlue", new PathABlue(m_drivetrain)); 
+     m_chooser.addOption("PathARed", new PathBRed(m_drivetrain)); 
 
      SmartDashboard.putData(m_autoChooser);
     
