@@ -50,7 +50,7 @@ public class Shooter_ShootAtSpeedFinish extends CommandBase {
     @Override
     public void execute() {
         System.out.println("Shooting at speed finish command");
-        m_subsystem.shootAtSpeed(m_speed);
+        m_subsystem.startFlywheel();
         m_subsystem.updateDashboard();
     }
     

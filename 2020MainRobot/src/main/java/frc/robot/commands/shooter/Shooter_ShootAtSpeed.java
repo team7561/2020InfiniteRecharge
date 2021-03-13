@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Shooter_ShootAtSpeed extends CommandBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final Shooter m_subsystem;
-    private final double m_speed;
     private final boolean m_closeTarget;
     private final boolean m_changeHood;
     
@@ -18,9 +17,8 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     *
     * @param subsystem The subsystem used by this command.
     */
-    public Shooter_ShootAtSpeed(Shooter subsystem, double speed){
+    public Shooter_ShootAtSpeed(Shooter subsystem){
         m_subsystem = subsystem;
-        m_speed = speed;
         m_closeTarget = true;
         m_changeHood = false;
         // Use addRequirements() here to declare subsystem dependencies.
@@ -29,7 +27,7 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     }
     public Shooter_ShootAtSpeed(Shooter subsystem, double speed, boolean changeHood, boolean closeTarget){
         m_subsystem = subsystem;
-        m_speed = speed;
+        //m_speed = speed;
         m_closeTarget = closeTarget;
         m_changeHood = changeHood;
         addRequirements(subsystem);
@@ -53,7 +51,7 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.shootAtSpeed(m_speed);
+        m_subsystem.startFlywheel();
         m_subsystem.updateDashboard();
     }
     

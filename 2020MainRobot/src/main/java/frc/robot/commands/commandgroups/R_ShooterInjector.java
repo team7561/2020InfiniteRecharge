@@ -8,19 +8,14 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.commands.injector.*;
 
 public class R_ShooterInjector extends ParallelCommandGroup {
-  /**
-   * Creates a new ComplexAuto.
-   *
-   * @param drive The drive subsystem this command will run on
-   * @param hatch The hatch subsystem this command will run on
-   */
+
   public R_ShooterInjector(Shooter shooter, Injector injector) {
         addCommands(
         // Injector Transfer ball
         new Injector_Transfer_Ball(injector),
 
         // Shoot At Speed
-        new Shooter_ShootAtSpeed(shooter, -3000)
+        new Shooter_ShootAtSpeed(shooter)
         );
   }
 

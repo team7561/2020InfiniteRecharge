@@ -31,8 +31,8 @@ public class CPM_Stop extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.stop();
-      m_subsystem.detectColour();
-      m_subsystem.updateDashboard();
+      //m_subsystem.detectColour();
+      //m_subsystem.updateDashboard();
   }
 
   // Called once the command ends or is interrupted.

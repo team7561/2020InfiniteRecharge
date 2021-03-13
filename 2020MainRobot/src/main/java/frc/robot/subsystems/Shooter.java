@@ -79,7 +79,7 @@ public class Shooter extends SubsystemBase {
         shooterMotorB.follow(ExternalFollower.kFollowerSparkMax, Ports.SHOOTER_A_CANID, true);
     }
 
-    public void shootAtSpeed(double setPoint)
+    public void startFlywheel()
     {
         shooting = true;
     }

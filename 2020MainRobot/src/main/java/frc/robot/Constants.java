@@ -1,7 +1,7 @@
 package frc.robot;
 
 public class Constants {
-    public static boolean DEBUG_DRIVETRAIN = false;
+    public static boolean DEBUG_DRIVETRAIN = true;
     public static boolean DEBUG_CLIMBER = false;
     public static boolean DEBUG_SHOOTER = true;
     public static boolean DEBUG_INTAKE = false;
@@ -34,8 +34,8 @@ public class Constants {
     public static double kvVoltSecondsPerMeter = 1.16;
     public static double kaVoltSecondsSquaredPerMeter = 0.0495;
     public static double kPDriveVel = 0.000692;
-    public static double kMaxSpeedMetersPerSecond = 1;
-    public static double kMaxAccelerationMetersPerSecondSquared = 0.5;
+    public static double kMaxSpeedMetersPerSecond = 0.5;
+    public static double kMaxAccelerationMetersPerSecondSquared = 0.25;
 
     // 5.95:1
     // 42 pulses per rev

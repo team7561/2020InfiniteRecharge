@@ -21,10 +21,14 @@ public class DT_DrivePath extends RamseteCommand {
      * @see DrivePath
      */
     public DT_DrivePath(Trajectory trajectory, Drivetrain drivetrain) {
-        super(trajectory, drivetrain::getPose, new RamseteController(), drivetrain.getKinematics(),
+        /*super(trajectory, drivetrain::getPose, new RamseteController(), drivetrain.getKinematics(),
                 (leftSpeed, rightSpeed) -> {
                     drivetrain.driveClosedLoop(new DifferentialDriveWheelSpeeds(leftSpeed, rightSpeed));
-                }, drivetrain);
+                }, drivetrain);*/
+        super(trajectory, drivetrain::getPose, new RamseteController(), drivetrain.getKinematics(),
+        (leftSpeed, rightSpeed) -> {
+            drivetrain.driveClosedLoop(new DifferentialDriveWheelSpeeds(leftSpeed, rightSpeed));
+        }, drivetrain);
     }
       
 }

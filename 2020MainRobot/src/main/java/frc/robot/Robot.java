@@ -84,8 +84,8 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-    }
-    m_robotContainer.shooter_stop.schedule();                                                                                                                                   
+    }     
+    m_robotContainer.m_shooter.stop();                                                                                                                              
   }                                                                         
   @Override                                     
   public void teleopPeriodic() {                                                                                                                                   

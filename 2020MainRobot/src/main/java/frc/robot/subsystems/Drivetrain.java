@@ -22,15 +22,14 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 public class Drivetrain extends SubsystemBase {
 
     double lastError;
-    int current = 40;
+    int current = 99;
     public ADXRS450_Gyro gyro;
 
     private final DifferentialDrive m_drive;
     private final SpeedControllerGroup m_leftMotors;
     private final SpeedControllerGroup m_rightMotors;
         
-    private SimpleMotorFeedforward m_leftFF;
-    private SimpleMotorFeedforward m_rightFF;
+    private SimpleMotorFeedforward m_FF;
 
     // Odometry class for tracking robot pose
     private final DifferentialDriveOdometry m_odometry;
@@ -52,12 +51,12 @@ public class Drivetrain extends SubsystemBase {
         rightB = new CANSparkMax(Ports.DRIVE_RIGHT_B_CANID, MotorType.kBrushless);
         rightC = new CANSparkMax(Ports.DRIVE_RIGHT_C_CANID, MotorType.kBrushless);
 
-        leftA.restoreFactoryDefaults();
+        /*leftA.restoreFactoryDefaults();
         leftB.restoreFactoryDefaults();
         leftC.restoreFactoryDefaults();
         rightA.restoreFactoryDefaults();
         rightB.restoreFactoryDefaults();
-        rightC.restoreFactoryDefaults();
+        rightC.restoreFactoryDefaults();*/
 
         m_leftMotors = new SpeedControllerGroup(leftA, leftB, leftC);
         m_rightMotors = new SpeedControllerGroup(rightA, rightB, rightC);
@@ -70,6 +69,7 @@ public class Drivetrain extends SubsystemBase {
         rightA.setInverted(true);
         m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
         m_drive.setSafetyEnabled(false);
+        m_drive.setDeadband(0.05);
 
         m_leftEncoder.setVelocityConversionFactor(conversionFactor/60);
         m_leftEncoder.setPositionConversionFactor(conversionFactor);
@@ -80,12 +80,9 @@ public class Drivetrain extends SubsystemBase {
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(0));
         m_kinematics = new DifferentialDriveKinematics(Constants.DRIVE_TRACK_WIDTH);
 
-        m_leftController = new PIDController(0.4, 0, 0);
-        m_rightController = new PIDController(0.4, 0, 0);
-        
-        m_leftFF = new SimpleMotorFeedforward(0.1765, 3.3, 0.341);
-        m_rightFF = new SimpleMotorFeedforward(0.1765, 3.3, 0.341);
-        //m_rightFF = new SimpleMotorFeedforward(0.1835, 3.24, 0.3645);
+        m_leftController = new PIDController(0.295, 0, 0);
+        m_rightController = new PIDController(0.295, 0, 0);
+        m_FF = new SimpleMotorFeedforward(0.3, 1.96, 0.06);
   
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
@@ -114,7 +111,7 @@ public class Drivetrain extends SubsystemBase {
 
     //sets the speeds of all driving motors
     public void drive(double leftSpeed, double rightSpeed) {
-        m_drive.tankDrive(leftSpeed, rightSpeed);
+        m_drive.tankDrive(leftSpeed, rightSpeed, false);
         m_drive.feed();
     }
     public void resetEncoders()
@@ -155,14 +152,14 @@ public class Drivetrain extends SubsystemBase {
         double left = speeds.leftMetersPerSecond;
         double right = speeds.rightMetersPerSecond;
 
-        double leftVoltage = m_leftFF.calculate(left) + m_leftController.calculate(m_leftEncoder.getVelocity(), left);
-        double rightVoltage = m_rightFF.calculate(right) + m_rightController.calculate(m_rightEncoder.getVelocity(), right);
+        double leftVoltage = m_FF.calculate(left) + m_leftController.calculate(m_leftEncoder.getVelocity(), left);
+        double rightVoltage = m_FF.calculate(right) + m_rightController.calculate(m_rightEncoder.getVelocity(), right);
 
         leftA.setVoltage(leftVoltage);
         rightA.setVoltage(rightVoltage);
     }
     public Rotation2d getGyroRotation() {
-        return Rotation2d.fromDegrees(-gyro.getAngle());
+        return gyro.getRotation2d();
       }
     public void periodic() {
         // update the drivetrain's position estimate
@@ -180,21 +177,13 @@ public class Drivetrain extends SubsystemBase {
     }
     //teleop driving
     public void arcadeDrive(double x, double y, double speed, boolean inverted) {
-        //x = x * Math.abs(x) * speed;
-        //y = y * Math.abs(y) * speed;
-        SmartDashboard.putNumber("Drivespeed", speed);
-        SmartDashboard.putNumber("X", x);
-        SmartDashboard.putNumber("Y", y);
-
-        double right = (-y - x)*speed;
         double left = (- (y - x))*speed;
-        if (left > 1) {
-            left = 1;
-        }
-        if (right > 1) {
-            right = 1;
-        }
-        if (inverted == true) {
+        double right = (-y - x)*speed;
+      
+        left = Math.min(left, 1);
+        right = Math.min(right, 1);
+
+        if (inverted) {
             drive(-left, right);
         }
         else
@@ -202,7 +191,7 @@ public class Drivetrain extends SubsystemBase {
             drive(left, -right);
         }
     }
-    public void tankDriveVolts(double leftVolts, double rightVolts) {
+    public void setOutputVolts(double leftVolts, double rightVolts) {
         m_leftMotors.setVoltage(leftVolts);
         m_rightMotors.setVoltage(-rightVolts);
         m_drive.feed();
@@ -210,23 +199,29 @@ public class Drivetrain extends SubsystemBase {
       /**
        * Resets the drivetrain's stored pose and encoder values.
        */
-      public void resetPose() {
-          m_leftEncoder.setPosition(0);
-          m_rightEncoder.setPosition(0);
-          gyro.reset();
-  
-          m_odometry.resetPosition(new Pose2d(), getGyroRotation());
-      }
-      /**
-       * Resets the drivetrain's stored pose and encoder values.
-       */
-      public void setPose(double x, double y) {
-          m_leftEncoder.setPosition(x);
-          m_rightEncoder.setPosition(y);
-          gyro.reset();
-  
-          m_odometry.resetPosition(new Pose2d(), getGyroRotation());
-      }
+    public void resetPose() {
+        m_leftEncoder.setPosition(0);
+        m_rightEncoder.setPosition(0);
+        gyro.reset();
+
+        m_odometry.resetPosition(new Pose2d(), getGyroRotation());
+    }
+    /**
+     * Resets the drivetrain's stored pose and encoder values.
+     */
+    public void setPose(double x, double y) {
+        m_leftEncoder.setPosition(x);
+        m_rightEncoder.setPosition(y);
+        gyro.reset();
+        m_odometry.resetPosition(new Pose2d(x, y, getGyroRotation()), getGyroRotation());
+    }      /**
+    * Resets the drivetrain's stored pose and encoder values.
+    */
+    public void setPose(Pose2d pose2d) {
+        m_leftEncoder.setPosition(pose2d.getX());
+        m_rightEncoder.setPosition(pose2d.getY());
+        m_odometry.resetPosition(pose2d, getGyroRotation());
+    }
     public Pose2d getPose() {
         return m_odometry.getPoseMeters();
     }
@@ -237,7 +232,7 @@ public class Drivetrain extends SubsystemBase {
      */
     public void resetOdometry(Pose2d pose) {
         resetEncoders();
-        m_odometry.resetPosition(pose, gyro.getRotation2d());
+        m_odometry.resetPosition(pose, pose.getRotation());
     }
     //put dashboard stuff here
     public void updateDashboard()
@@ -292,6 +287,18 @@ public class Drivetrain extends SubsystemBase {
    * @return The current wheel speeds.
    */
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getLeftEncoderRate(), getRightEncoder());
+    return new DifferentialDriveWheelSpeeds(getLeftEncoderRate(), getRightEncoderRate());
   }
+
+	public SimpleMotorFeedforward getFeedforward() {
+		return m_FF;
+	}
+
+	public PIDController getLeftPIDController() {
+		return m_leftController;
+	}
+
+	public PIDController getRightPIDController() {
+		return m_rightController;
+	}
 }

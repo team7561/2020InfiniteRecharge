@@ -6,9 +6,11 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.ControlPanelManipulator;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.controlpanelmanipulator.*;
 import java.nio.file.Path;
 
     /**
@@ -27,10 +29,12 @@ public class Barrel2 extends SequentialCommandGroup {
      * @see DrivePath
      */
     Drivetrain m_drivetrain;
-    public Barrel2(Drivetrain drivetrain) {
+    ControlPanelManipulator m_controlPanelManipulator;
+    public Barrel2(Drivetrain drivetrain, ControlPanelManipulator controlPanelManipulator) {
         m_drivetrain = drivetrain;
+        m_controlPanelManipulator = controlPanelManipulator;
         // Load in path
-        String trajectoryJSON = "output/Barrel.wpilib.json";
+        String trajectoryJSON = "output/Forward.wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
         Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
@@ -38,9 +42,13 @@ public class Barrel2 extends SequentialCommandGroup {
         } catch (IOException ex) {
         DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
         }
-        addCommands ( new DT_InitDrivePose(m_drivetrain, 0.752, -3.383),
+        
+        addCommands ( new DT_SetPose(m_drivetrain, trajectory.getInitialPose()),
+                      new CPM_Extend(m_controlPanelManipulator),
                       new DT_DrivePath(trajectory, m_drivetrain),
-                      new DT_Drive_Stop(m_drivetrain));
+                      new CPM_Retract(m_controlPanelManipulator));
+                      //new DT_Drive_Stop(m_drivetrain));
+                    //new CPM_SpinLeft(m_controlPanelManipulator), true);
+                    //new CPM_SpinRight(m_controlPanelManipulator), true);
     }
-      
 }

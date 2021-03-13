@@ -37,7 +37,7 @@ public class DT_ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/2, false);
-    m_subsystem.updateDashboard();
+    //m_subsystem.updateDashboard();
     
   }
 

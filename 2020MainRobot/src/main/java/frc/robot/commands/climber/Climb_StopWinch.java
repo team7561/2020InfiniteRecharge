@@ -31,7 +31,6 @@ public class Climb_StopWinch extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.stop();
-      m_subsystem.updateDashboard();
 
   }
 

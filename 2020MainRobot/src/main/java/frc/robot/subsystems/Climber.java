@@ -5,8 +5,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,8 +15,6 @@ public class Climber extends SubsystemBase {
     TalonFX climberMotorA;
     TalonFX climberMotorB;
     VictorSPX climberDeployMotor;
-    DigitalInput climberHookExtended;
-    DigitalInput limitSwitch;
 
     public Climber()
     {
@@ -35,14 +31,11 @@ public class Climber extends SubsystemBase {
 
         climberDeployMotor = new VictorSPX(Ports.CLIMB_DEPLOY_B_CANID); //22
 
-        climberDeployMotor.configOpenloopRamp(0.5);
+        climberDeployMotor.configOpenloopRamp(1);
 
         climberDeployMotor.configFactoryDefault();
-        climberHookExtended = new DigitalInput(Ports.CLIMBER_HOOK_DEPLOY_LIMIT_SWITCH_CHANNEL);
 
         climberDeployMotor.setNeutralMode(NeutralMode.Brake);
-
-        limitSwitch = new DigitalInput(Ports.WINCH_LIMIT_SWITCH);
 
     }
     private void setWinchSpeed(double speed)
@@ -51,12 +44,7 @@ public class Climber extends SubsystemBase {
     }
     public void climb()
     {
-        if (!limitSwitch.get()) {
-            setWinchSpeed(Speeds.CLIMBER_STOP_SPEED);
-        } else {
-            setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
-        }
-        
+        setWinchSpeed(Speeds.CLIMBER_LIFT_SPEED);
     }
     public void climbReverse()
     {
@@ -94,7 +82,5 @@ public class Climber extends SubsystemBase {
             SmartDashboard.putNumber("Climber Deploy Motor Speed", climberDeployMotor.getMotorOutputPercent());
             //SmartDashboard.putNumber("Climber Deploy Motor B Speed", climberDeployMotorB.getMotorOutputPercent());
         }
-
     }
-
 }
