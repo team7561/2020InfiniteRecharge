@@ -35,7 +35,7 @@ public class Climber extends SubsystemBase {
 
         climberDeployMotor.configFactoryDefault();
 
-        climberDeployMotor.setNeutralMode(NeutralMode.Brake);
+        climberDeployMotor.setNeutralMode(NeutralMode.Coast);
 
     }
     private void setWinchSpeed(double speed)

@@ -68,7 +68,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand( new Climb_StopWinch(m_climber));
     m_intakeHopper.setDefaultCommand( new Intake_Grabbing_Stop(m_intakeHopper));
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
-    m_visionController.setDefaultCommand( new VC_TurnOffLED(m_visionController));
+    m_visionController.setDefaultCommand( new VC_TurnOnLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
 
     // Configure the button bindings

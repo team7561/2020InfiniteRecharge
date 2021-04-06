@@ -14,7 +14,7 @@ public class Speeds {
     public static double CLIMBER_SLOW_LIFT_SPEED = -0.05;
     
     public static double CLIMBER_HOOK_RAISE_SPEED = -1.0;
-    public static double CLIMBER_HOOK_LOWER_SPEED = 0.0001;
+    public static double CLIMBER_HOOK_LOWER_SPEED = 0.13;
     public static double CLIMBER_STOP_SPEED = 0;
     //Injector
     public static double INJECTOR_TRANSFER_SPEED = -1.0;

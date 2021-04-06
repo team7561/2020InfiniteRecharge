@@ -63,7 +63,7 @@ public class DT_TurnToVisionAngle extends CommandBase {
         SmartDashboard.putNumber("errorSpeed", errorSpeed);
         
         if (Math.abs(m_targetAngle) > Constants.ANGLE_TOLERANCE) {
-            m_subsystem.drive(m_speed*errorSpeed, -m_speed*errorSpeed);
+            m_subsystem.drive(m_speed*errorSpeed, m_speed*errorSpeed);
         }
         else {
             System.out.println("At vision target)");

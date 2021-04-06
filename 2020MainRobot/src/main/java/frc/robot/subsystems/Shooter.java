@@ -3,6 +3,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
+import com.revrobotics.EncoderType;
 import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -10,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
@@ -19,10 +21,11 @@ import frc.robot.Ports;
 public class Shooter extends SubsystemBase {
     CANSparkMax shooterMotorA;
     CANSparkMax shooterMotorB;
-    TalonSRX shooterHood;
+    CANSparkMax shooterHood;
 
     private CANPIDController m_pidController;
     private CANEncoder m_flywheel_encoder;
+    private CANEncoder m_hood_encoder;
     private boolean shooting, hood_auto;
 
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, m_setpoint;
@@ -31,7 +34,7 @@ public class Shooter extends SubsystemBase {
     {
         shooterMotorA = new CANSparkMax(Ports.SHOOTER_A_CANID, MotorType.kBrushless);
         shooterMotorB = new CANSparkMax(Ports.SHOOTER_B_CANID, MotorType.kBrushless);
-        shooterHood = new TalonSRX(Ports.SHOOTER_HOOD_CANID);
+        shooterHood = new CANSparkMax(Ports.SHOOTER_HOOD_CANID, MotorType.kBrushed);
         
         shooterMotorA.restoreFactoryDefaults();
         shooterMotorB.restoreFactoryDefaults();
@@ -45,14 +48,10 @@ public class Shooter extends SubsystemBase {
         m_pidController = shooterMotorA.getPIDController();
         m_flywheel_encoder = shooterMotorA.getEncoder();
         
-        shooterHood.configFactoryDefault();
-        shooterHood.configPeakCurrentLimit(2);
-        shooterHood.configPeakCurrentDuration(200);
-        shooterHood.configContinuousCurrentLimit(3);
-        shooterHood.enableCurrentLimit(true);
-        shooterHood.setNeutralMode(NeutralMode.Brake);
-        shooterHood.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-        shooterHood.setSensorPhase(true);
+        shooterHood.restoreFactoryDefaults();
+        shooterHood.setSmartCurrentLimit(2);
+        shooterHood.setIdleMode(IdleMode.kBrake);
+        m_hood_encoder = new CANEncoder(shooterHood, EncoderType.kQuadrature, 100);
 
         hood_auto = false;
         shooting = false; 
@@ -127,15 +126,15 @@ public class Shooter extends SubsystemBase {
     }
     public void extendHood()
     {
-        shooterHood.set(ControlMode.PercentOutput, 0.25);
+        shooterHood.set(0.25);
     }
     public void retractHood()
     {
-        shooterHood.set(ControlMode.PercentOutput, -0.25);
+        shooterHood.set(-0.25);
     }
     public void stopHood()
     {
-        shooterHood.set(ControlMode.PercentOutput, 0);
+        shooterHood.set(0);
     }
     public void setSetpoint(double setPoint)
     {
@@ -173,10 +172,9 @@ public class Shooter extends SubsystemBase {
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
-            SmartDashboard.putNumber("Shooter Hood Position", shooterHood.getSelectedSensorPosition());
-            SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.getMotorOutputPercent());
-            SmartDashboard.putNumber("Shooter Hood Current", shooterHood.getSupplyCurrent());
-            SmartDashboard.putNumber("Hood Count", shooterHood.getSelectedSensorPosition());
+            SmartDashboard.putNumber("Shooter Hood Position", m_hood_encoder.getPosition());
+            SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.get());
+            SmartDashboard.putNumber("Shooter Hood Current", shooterHood.getOutputCurrent());
         }
     }
  }

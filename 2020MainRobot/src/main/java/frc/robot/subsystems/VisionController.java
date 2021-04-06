@@ -16,8 +16,6 @@ public class VisionController extends SubsystemBase {
 	{
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
 		//NetworkTableInstance.getDefault().getTable("limelight").getEntry("camMode").setNumber(1);
-
-
 	}
 	public void periodic()
 	{

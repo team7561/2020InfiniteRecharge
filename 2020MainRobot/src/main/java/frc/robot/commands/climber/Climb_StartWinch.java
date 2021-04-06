@@ -30,6 +30,7 @@ public class Climb_StartWinch extends CommandBase {
   @Override
   public void execute() {
       m_subsystem.climb();
+      m_subsystem.lowerHook();
       m_subsystem.updateDashboard();
   }
 
