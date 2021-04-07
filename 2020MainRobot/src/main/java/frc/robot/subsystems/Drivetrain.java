@@ -281,6 +281,27 @@ public class Drivetrain extends SubsystemBase {
 	public void stop() {
         drive(0, 0);
     }
+
+    public void setCoast()
+    {
+        leftA.setIdleMode(IdleMode.kCoast);
+        leftB.setIdleMode(IdleMode.kCoast);
+        leftC.setIdleMode(IdleMode.kCoast);
+        rightA.setIdleMode(IdleMode.kCoast);
+        rightB.setIdleMode(IdleMode.kCoast);
+        rightC.setIdleMode(IdleMode.kCoast);
+    }
+   
+    public void setBrake()
+    {
+        leftA.setIdleMode(IdleMode.kBrake);
+        leftB.setIdleMode(IdleMode.kBrake);
+        leftC.setIdleMode(IdleMode.kBrake);
+        rightA.setIdleMode(IdleMode.kBrake);
+        rightB.setIdleMode(IdleMode.kBrake);
+        rightC.setIdleMode(IdleMode.kBrake);
+    }
+
     /**
    * Returns the current wheel speeds of the robot.
    *

@@ -30,7 +30,7 @@ public class DT_TurnToVisionAngle extends CommandBase {
   public DT_TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
     m_subsystem = subsystem;
     m_vision_subsystem = vision_subsystem;
-    m_speedSupplier = speedSupplier;
+    // m_speedSupplier = speedSupplier;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     timer = new Timer();
@@ -45,18 +45,20 @@ public class DT_TurnToVisionAngle extends CommandBase {
         m_vision_subsystem.turnOnLED();
         timer.start();
         SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", false);
+        m_subsystem.setBrake();
         
     }
     
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_speed = (m_speedSupplier.getAsDouble()/4);
+        m_speed = (2.76/12);
         SmartDashboard.putNumber("m_speed", m_speed);
         m_vision_subsystem.turnOnLED();
         //System.out.println("Turning to vision angle");
         m_targetAngle = m_vision_subsystem.get_tx();
         System.out.println("tx = " + m_targetAngle);
+        System.out.println("SliderValue = " + m_speed);
         double errorSpeed = motorSpeedForError(m_targetAngle)/20+0.5*(m_targetAngle/Math.abs(m_targetAngle));
         SmartDashboard.putNumber("m_speed", m_speed);
         SmartDashboard.putNumber("m_targetAngle", m_targetAngle);
@@ -98,6 +100,7 @@ public class DT_TurnToVisionAngle extends CommandBase {
         System.out.println("Turning to vision target finished");  
         m_vision_subsystem.turnOffLED();
         m_subsystem.drive(0, 0);
+        m_subsystem.setCoast();
     }
     
     // Returns true when the command should end.
@@ -124,4 +127,5 @@ public class DT_TurnToVisionAngle extends CommandBase {
         }
         return false;
     }
+
 }
