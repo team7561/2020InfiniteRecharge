@@ -69,25 +69,12 @@ public class Shooter_ShootAtAngle extends CommandBase {
 
   // Returns true when the command should end.
   @Override
-  boolean isAtAngle = Math.abs(m_targetAngle) <= Constants.ANGLE_TOLERANCE;
-  if (isAtAngle)
+  public boolean isFinished(){ 
+  boolean isAtAngle = Math.abs(m_hood_encoder) == m_targetAngle;
+  if (isAtAngle=true)
   {
-      timerFinished.start();
-  }
-  else {
-      timerFinished.reset();
-      timerFinished.stop();
-  }
-  if (timer.get()<10.3)
-  {
-      return false;
-  }
-  if (timerFinished.get()>12)
-  {
-      SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", true);
-      //return false;
       return true;
   }
-  return false;
+  return isAtAngle;
 }
 }
