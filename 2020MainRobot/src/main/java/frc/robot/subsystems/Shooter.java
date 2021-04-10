@@ -106,7 +106,7 @@ public class Shooter extends SubsystemBase {
         }
         if (shooter_vision_auto)
         {
-            m_setpoint = limelight_hood_setpoint();
+            m_setpoint = limelight_speed_setpoint();
             SmartDashboard.putNumber("Set Point", m_setpoint);
         }
         if (hood_auto)
@@ -223,9 +223,9 @@ public class Shooter extends SubsystemBase {
         System.out.println("Reseting hood positiion");
         m_hood_encoder.setPosition(0);
     }
-    public double limelight_hood_setpoint()
+    public double limelight_speed_setpoint()
     {
-        return (SmartDashboard.getNumber("ty", 0)+20)/20;
+        return 250*(SmartDashboard.getNumber("ty", 0)/20)+2050;
     }
     public void updateDashboard()
     {

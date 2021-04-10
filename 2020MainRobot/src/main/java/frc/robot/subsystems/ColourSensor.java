@@ -30,7 +30,7 @@ public class ColourSensor{
    * with given confidence range.
    */
   private final ColorMatch m_colorMatcher = new ColorMatch();
-  public LEDController ledController = new LEDController();
+  //public LEDController ledController = new LEDController();
 
   /**
    * Note: Any example colors should be calibrated as the user needs, these
@@ -77,16 +77,12 @@ public class ColourSensor{
 
     if (match.color == kBlueTarget) {
       colorString = "Blue";
-      ledController.Blue();
     } else if (match.color == kRedTarget) {
       colorString = "Red";
-      ledController.Red();
     } else if (match.color == kGreenTarget) {
       colorString = "Green";
-      ledController.Green();
     } else if (match.color == kYellowTarget) {
       colorString = "Yellow";
-      ledController.Yellow();
     } else {
       colorString = "Unknown";
     }

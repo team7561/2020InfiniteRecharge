@@ -19,8 +19,8 @@ public class Ports {
     public static int INJECTOR_CANID = 41;
 
     // PWM control channels
-    public static int LED_CONTROLLER_CHANNEL = 7;
     public static int INTAKE_CHANNEL = 0;
+    public static int LED_CONTROLLER_CHANNEL = 1;
     public static int COLOUR_WHEEL_ROTATE_CHANNEL = 2;
 
     // DIO ports

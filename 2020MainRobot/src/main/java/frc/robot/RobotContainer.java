@@ -47,6 +47,7 @@ public class RobotContainer {
   public final Shooter m_shooter = new Shooter();
   private final Injector m_injector = new Injector();
   private final VisionController m_visionController = new VisionController();
+  private final LEDController m_ledcontroller = new LEDController();
   private final ControlPanelManipulator m_ControlPanelManipulator = new ControlPanelManipulator();
 
   //HID
@@ -70,7 +71,7 @@ public class RobotContainer {
     m_injector.setDefaultCommand( new Injector_Stop(m_injector));
     m_visionController.setDefaultCommand( new VC_TurnOnLED(m_visionController));
     m_ControlPanelManipulator.setDefaultCommand( new CPM_Stop(m_ControlPanelManipulator));
-
+    
     // Configure the button bindings
     configureButtonBindings();
 
