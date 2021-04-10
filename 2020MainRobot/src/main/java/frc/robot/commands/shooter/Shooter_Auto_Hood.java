@@ -19,7 +19,6 @@ public class Shooter_Auto_Hood extends CommandBase {
   private final boolean m_auto_mode;
   private Timer timerFinished;
 
-
   /**
    * Creates a new Shooter_Retract.
    *  @param subsystem
@@ -28,7 +27,6 @@ public class Shooter_Auto_Hood extends CommandBase {
     m_subsystem = subsystem;
     m_auto_mode = auto_mode;
     timerFinished = new Timer();
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 

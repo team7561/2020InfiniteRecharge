@@ -18,9 +18,9 @@ public class DT_TurnToVisionAngle extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   private final VisionController m_vision_subsystem;
-  private DoubleSupplier m_speedSupplier;
   private double m_targetAngle, m_speed;
   private Timer timer, timerFinished;
+  private double intialLEDs;
   
   /**
    * Creates a new ExampleCommand.
@@ -30,14 +30,11 @@ public class DT_TurnToVisionAngle extends CommandBase {
   public DT_TurnToVisionAngle(Drivetrain subsystem, VisionController vision_subsystem, DoubleSupplier speedSupplier){
     m_subsystem = subsystem;
     m_vision_subsystem = vision_subsystem;
-    // m_speedSupplier = speedSupplier;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     timer = new Timer();
     timerFinished = new Timer();
   }
 
-  // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         System.out.println("Starting turn to vision angle");
@@ -46,14 +43,13 @@ public class DT_TurnToVisionAngle extends CommandBase {
         timer.start();
         SmartDashboard.putBoolean("Turn to Vision Angle is finished: ", false);
         m_subsystem.setBrake();
-        
+        intialLEDs = SmartDashboard.getNumber("LED Value", 0.83);
+        SmartDashboard.putNumber("LED Value", Constants.BLINKIN_RAINBOWGLITTER);
     }
     
-    // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_speed = (2.76/12);
-        SmartDashboard.putNumber("m_speed", m_speed);
+        m_speed = (0.125);
         m_vision_subsystem.turnOnLED();
         //System.out.println("Turning to vision angle");
         m_targetAngle = m_vision_subsystem.get_tx();
@@ -98,6 +94,7 @@ public class DT_TurnToVisionAngle extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         System.out.println("Turning to vision target finished");  
+        SmartDashboard.putNumber("LED Value", intialLEDs);
         m_vision_subsystem.turnOffLED();
         m_subsystem.drive(0, 0);
         m_subsystem.setCoast();
