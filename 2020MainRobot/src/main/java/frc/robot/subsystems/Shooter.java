@@ -7,11 +7,6 @@ import com.revrobotics.EncoderType;
 import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
@@ -26,9 +21,10 @@ public class Shooter extends SubsystemBase {
     private CANPIDController m_pidController;
     private CANEncoder m_flywheel_encoder;
     private CANEncoder m_hood_encoder;
-    private boolean shooting, hood_auto;
+    private boolean shooting, hood_auto, shooter_vision_auto;
 
     public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM, m_setpoint;
+    public double m_hood_position, m_hood_setpoint;
 
     public Shooter()
     {
@@ -52,9 +48,12 @@ public class Shooter extends SubsystemBase {
         shooterHood.setSmartCurrentLimit(2);
         shooterHood.setIdleMode(IdleMode.kBrake);
         m_hood_encoder = new CANEncoder(shooterHood, EncoderType.kQuadrature, 100);
+        m_hood_encoder.setPosition(0);
 
         hood_auto = false;
+        shooter_vision_auto = false;
         shooting = false; 
+        m_hood_position = 0;
 
         // PID coefficients
         kP = 0.003; 
@@ -63,6 +62,7 @@ public class Shooter extends SubsystemBase {
         kIz = 500; // Error process value must be within before I is used.
         kFF = 0; 
         m_setpoint = 4000;
+        m_hood_setpoint = 0.2;
         kMaxOutput = 0.85; 
         kMinOutput = -0.85;
         maxRPM = 4500;
@@ -84,40 +84,34 @@ public class Shooter extends SubsystemBase {
     }
     public void periodic()
     {
+        m_hood_setpoint = SmartDashboard.getNumber("Hood Set Point", m_hood_setpoint);
+        m_hood_position = m_hood_encoder.getPosition();
         if (shooting)
         {
             System.out.println("Shooting at speed: " + m_setpoint);
-            // read PID coefficients from SmartDashboard
-            double p = SmartDashboard.getNumber("P Gain", kP);
-            double i = SmartDashboard.getNumber("I Gain", kI);
-            double d = SmartDashboard.getNumber("D Gain", kD);
-            double iz = SmartDashboard.getNumber("I Zone", kIz);
-            double ff = SmartDashboard.getNumber("Feed Forward", kFF);
             double max = SmartDashboard.getNumber("Max Output", kMaxOutput);
             double min = SmartDashboard.getNumber("Min Output", kMinOutput);
             m_setpoint = SmartDashboard.getNumber("Set Point", m_setpoint);
 
-            // if PID coefficients on SmartDashboard have changed, write new values to controller
-            if((p != kP)) { m_pidController.setP(p); kP = p; }
-            if((i != kI)) { m_pidController.setI(i); kI = i; }
-            if((d != kD)) { m_pidController.setD(d); kD = d; }
-            if((iz != kIz)) { m_pidController.setIZone(iz); kIz = iz; }
-            if((ff != kFF)) { m_pidController.setFF(ff); kFF = ff; }
             if((max != kMaxOutput) || (min != kMinOutput)) { 
             m_pidController.setOutputRange(min, max); 
             kMinOutput = min; kMaxOutput = max; 
             }
             m_pidController.setReference(m_setpoint, ControlType.kVelocity);
             
-            SmartDashboard.putNumber("ProcessVariable", m_flywheel_encoder.getVelocity());
         }
         else
         {
             shooterMotorA.set(0);
         }
+        if (shooter_vision_auto)
+        {
+            m_setpoint = limelight_hood_setpoint();
+            SmartDashboard.putNumber("Set Point", m_setpoint);
+        }
         if (hood_auto)
         {
-
+            autoHood();
         }
     }
     public double getVelocity()
@@ -126,14 +120,68 @@ public class Shooter extends SubsystemBase {
     }
     public void extendHood()
     {
-        shooterHood.set(0.25);
+        shooterHood.set(-0.25);
     }
     public void retractHood()
     {
-        shooterHood.set(-0.25);
+        shooterHood.set(0.25);
+    }
+    public void extendHoodSlow()
+    {
+        shooterHood.set(-0.1);
+    }
+    public void retractHoodSlow()
+    {
+        shooterHood.set(0.1);
+    }
+    public void autoHood()
+    {
+        boolean slow = false;
+        if (hood_at_setpoint())
+        {
+            stopHood();
+            return;
+        }
+        if (Math.abs(m_hood_setpoint - m_hood_position) < Constants.HOOD_SLOW_TOLERANCE)
+        {
+            slow = true;
+        }
+        if (m_hood_setpoint < m_hood_position)
+        {
+            if (slow)
+            {
+                retractHoodSlow();
+            }
+            else
+            {
+                retractHood();
+            }
+        }
+        if (m_hood_setpoint > m_hood_position)
+        {
+            if (slow)
+            {
+                extendHoodSlow();
+            }
+            else
+            {
+                extendHood();
+            }
+        }
+    }
+    public boolean hood_at_setpoint()
+    {
+        System.out.println("Hood Setpoint: " + m_hood_setpoint);
+        System.out.println("Hood Position: " + m_hood_position);
+        if (Math.abs(m_hood_setpoint - m_hood_position) < Constants.HOOD_TOLERANCE)
+        {
+            return true;
+        }
+        return false;
     }
     public void stopHood()
     {
+        System.out.println("Stopping hood");
         shooterHood.set(0);
     }
     public void setSetpoint(double setPoint)
@@ -141,38 +189,56 @@ public class Shooter extends SubsystemBase {
         m_setpoint = setPoint;
     }
 
-    //Ejects the Ball slow
-   /* public void ejectBallSlow()
+    // Change hood to auto
+    public void start_auto_hood()
     {
-        intakeSpeed(-0.4);
-    }
-   */
+        hood_auto = true;
+    }    
+    // Change hood to manual
+    public void stop_auto_hood()
+    {
+        hood_auto = false;
+    }    
+    // Change hood to auto
+    public void start_auto_vision_speed()
+    {
+        shooter_vision_auto = true;
+    }    
+    // Change hood to manual
+    public void stop_auto_vision_speed()
+    {
+        shooter_vision_auto = false;
+    }    
+    
     //Stops shooter
     public void stop()
     {
         shooting = false;
-        stopHood();
+        //hood_auto = false;
+        //hood_vision_auto = false;
     }
-
+    //Stops shooter
+    public void reset_Hood()
+    {
+        System.out.println("Reseting hood positiion");
+        m_hood_encoder.setPosition(0);
+    }
+    public double limelight_hood_setpoint()
+    {
+        return (SmartDashboard.getNumber("ty", 0)+20)/20;
+    }
     public void updateDashboard()
     {
         if (Constants.DEBUG_SHOOTER)
         {
-                
-            // display PID coefficients on SmartDashboard
-            SmartDashboard.putNumber("P Gain", kP);
-            SmartDashboard.putNumber("I Gain", kI);
-            SmartDashboard.putNumber("D Gain", kD);
-            SmartDashboard.putNumber("I Zone", kIz);
-            SmartDashboard.putNumber("Feed Forward", kFF);
             SmartDashboard.putNumber("Set Point", m_setpoint);
-            SmartDashboard.putNumber("Max Output", kMaxOutput);
-            SmartDashboard.putNumber("Min Output", kMinOutput);
+            
+            
             SmartDashboard.putNumber("Shooter A Power", shooterMotorA.getAppliedOutput());
             SmartDashboard.putNumber("Shooter B Power", shooterMotorB.getAppliedOutput());
             SmartDashboard.putNumber("Shooter A Current", shooterMotorA.getOutputCurrent());
             SmartDashboard.putNumber("Shooter B Current", shooterMotorB.getOutputCurrent());
-            SmartDashboard.putNumber("Shooter Hood Position", m_hood_encoder.getPosition());
+            SmartDashboard.putNumber("Shooter Hood Position", m_hood_position);
             SmartDashboard.putNumber("Shooter Hood Voltage", shooterHood.get());
             SmartDashboard.putNumber("Shooter Hood Current", shooterHood.getOutputCurrent());
         }

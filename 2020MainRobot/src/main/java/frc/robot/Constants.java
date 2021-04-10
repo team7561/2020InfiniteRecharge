@@ -19,6 +19,8 @@ public class Constants {
     public static double AUTO_DRIVE_SLOW_SPEED = 0.15;
     public static double TURNING_THRESHOLD = 60;
     public static double ANGLE_TOLERANCE = 0.12;
+    public static double HOOD_TOLERANCE = 0.075;
+    public static double HOOD_SLOW_TOLERANCE = 0.3;
 
     // Auto Constants
     public static double kRamseteB = 2;

@@ -7,34 +7,72 @@
 
 package frc.robot.commands.shooter;
 
+import javax.lang.model.util.ElementScanner6;
+
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class Shooter_Stop extends CommandBase {
+public class Shooter_Auto_Hood extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
+  private final boolean m_auto_mode;
+  private Timer timerFinished;
+
+
   /**
-   * 
-   * Creates a new Shooter_Extend.
-   * @param subsystem
+   * Creates a new Shooter_Retract.
+   *  @param subsystem
    */
-  public Shooter_Stop(Shooter subsystem) {
+  public Shooter_Auto_Hood(Shooter subsystem, boolean auto_mode) {
     m_subsystem = subsystem;
+    m_auto_mode = auto_mode;
+    timerFinished = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    if (m_auto_mode)
+    {
+      m_subsystem.start_auto_hood();
+    }
+    else {
+      m_subsystem.stop_auto_hood();
+    }    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.stop();
-    System.out.println("Stopping Deflector.");
+    System.out.println("Retracting Deflector");
     m_subsystem.updateDashboard();
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    //m_subsystem.stop_auto_hood();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    boolean isAtAngle = m_subsystem.hood_at_setpoint();
+    if (isAtAngle)
+    {
+        timerFinished.start();
+    }
+    else {
+        timerFinished.reset();
+        timerFinished.stop();
+    }
+    if (timerFinished.get()>1)
+    {
+        return true;
+    }
+    return false;
   }
 }

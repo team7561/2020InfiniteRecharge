@@ -7,32 +7,33 @@
 
 package frc.robot.commands.shooter;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class Shooter_Stop extends CommandBase {
+public class Shooter_Set_Hood_Setpoint extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_subsystem;
+  private final double m_setpoint;
+
   /**
-   * 
-   * Creates a new Shooter_Extend.
-   * @param subsystem
+   * Creates a new Shooter_Retract.
+   *  @param subsystem
    */
-  public Shooter_Stop(Shooter subsystem) {
+  public Shooter_Set_Hood_Setpoint(Shooter subsystem, double setpoint) {
     m_subsystem = subsystem;
-    // Use addRequirements() here to declare subsystem dependencies.
+    m_setpoint = setpoint;
     addRequirements(subsystem);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called when the command is initially scheduled.
   @Override
-  public void execute() {
-    m_subsystem.stop();
-    System.out.println("Stopping Deflector.");
-    m_subsystem.updateDashboard();
+  public void initialize() {
+    SmartDashboard.putNumber("Hood Set Point", m_setpoint);
   }
 
-  // Returns true when the command should end.
+
   @Override
   public boolean isFinished() {
     return true;

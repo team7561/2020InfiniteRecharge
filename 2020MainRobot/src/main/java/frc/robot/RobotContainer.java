@@ -97,8 +97,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
     System.out.println("Configure button bindings");
     //creating the buttons for the Joystick Controller
+
+    SmartDashboard.putData("Reset Hood Position", new Shooter_Reset_Hood(m_shooter));
+    SmartDashboard.putData("Hood Auto", new Shooter_Auto_Hood(m_shooter, true));
+    SmartDashboard.putData("Hood Manual", new Shooter_Auto_Hood(m_shooter, false));
+    SmartDashboard.putData("Hood Close", new Shooter_Set_Hood_Setpoint(m_shooter, 0));
+    SmartDashboard.putData("Hood Far", new Shooter_Set_Hood_Setpoint(m_shooter, 2));
+    SmartDashboard.putData("Hood Vision True", new Shooter_Auto_Vision_Speed(m_shooter, true));
+    SmartDashboard.putData("Hood Vision False", new Shooter_Auto_Vision_Speed(m_shooter, false));
+
     final JoystickButton trigger =   new JoystickButton(joystick, 1);
-    final JoystickButton thumb =     new JoystickButton(joystick, 2);
+    final JoystickButton thumb   =   new JoystickButton(joystick, 2);
     final JoystickButton button_3 =  new JoystickButton(joystick, 3);
     final JoystickButton button_4 =  new JoystickButton(joystick, 4);
     final JoystickButton button_5 =  new JoystickButton(joystick, 5);
@@ -121,16 +130,16 @@ public class RobotContainer {
     button_5.whenPressed(new Shooter_ShootAtSpeed(m_shooter), true);  // Shoot at speed
     button_6.whenPressed(new Shooter_Shooting_Stop(m_shooter), true); // Stop shooting
     
-    button_7.whenPressed(new Intake_ExtendHopper(m_intakeHopper), true); // Extend Hopper
-    button_8.whenPressed(new Intake_RetractHopper(m_intakeHopper), true); // Reatract Hopper
+    button_7.whenPressed(new Intake_RetractHopper(m_intakeHopper), true); // Extend Hopper
+    button_8.whenPressed(new Intake_ExtendHopper(m_intakeHopper), true); // Reatract Hopper
 
     button_9.whenPressed(new Climb_StartWinch(m_climber), true); // Stop grabbing
     button_9.whenReleased(new Climb_StopWinch(m_climber), true); // Stop the Winch
     button_10.whenPressed(new Climb_RaiseHook(m_climber), true); // Raise the Hook
     button_10.whenReleased(new Climb_StopWinch(m_climber), true); // Stop the Winch
-    button_11.whenPressed(new Shooter_Extend(m_shooter), true);  // Extend the Shooter Hood
+    button_11.whenPressed(new Shooter_Retract(m_shooter), true);  // Extend the Shooter Hood
     button_11.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
-    button_12.whenPressed(new Shooter_Retract(m_shooter), true); // Retract the Shooter Hood
+    button_12.whenPressed(new Shooter_Extend(m_shooter), true); // Retract the Shooter Hood
     button_12.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
     
     //creating the buttons for the Xbox Controller
@@ -159,9 +168,9 @@ public class RobotContainer {
     button_A.whenReleased(new Injector_Stop(m_injector), true);
     button_B.whenPressed(new Injector_Reverse(m_injector), true);
     button_B.whenReleased(new Injector_Stop(m_injector), true);
-    button_X.whenPressed(new Shooter_Extend(m_shooter), false);
+    button_X.whenPressed(new Shooter_Retract(m_shooter), true);
     button_X.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
-    button_Y.whenPressed(new Shooter_Retract(m_shooter), true);
+    button_Y.whenPressed(new Shooter_Extend(m_shooter), true);
     button_Y.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
     //button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
     button_RB.whenPressed(new Intake_ToggleHopper(m_intakeHopper), true);
