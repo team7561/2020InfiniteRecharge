@@ -1,6 +1,8 @@
 package frc.robot.commands.climber;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -9,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Climb_RaiseHook extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Climber m_subsystem;
+  private double initialLEDs;
 
   /**
    * Creates a new ExampleCommand.
@@ -24,6 +27,8 @@ public class Climb_RaiseHook extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    initialLEDs = SmartDashboard.getNumber("LED Value", 0.83);
+    SmartDashboard.putNumber("LED Value", Constants.BLINKIN_LIGHTCHASE);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,6 +41,7 @@ public class Climb_RaiseHook extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    SmartDashboard.putNumber("LED Value", initialLEDs);
   }
 
   // Returns true when the command should end.

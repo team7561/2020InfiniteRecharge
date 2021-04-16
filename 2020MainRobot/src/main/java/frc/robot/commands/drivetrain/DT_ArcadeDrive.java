@@ -24,21 +24,16 @@ public class DT_ArcadeDrive extends CommandBase {
     m_x = x;
     m_y = y;
     m_speed = speed;
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/2, false);
-    //m_subsystem.updateDashboard();
-    
+    m_subsystem.arcadeDrive(m_x.getAsDouble(), m_y.getAsDouble(), (m_speed.getAsDouble()+1)/2, false);    
   }
 
   // Called once the command ends or is interrupted.

@@ -16,39 +16,5 @@ public class LEDController extends SubsystemBase{
         blinkin.set(SmartDashboard.getNumber("LED Value", 0.83));
         SmartDashboard.putNumber("LED Value", blinkin.get());
     }
-
-    public void Rainbow(){
-        blinkin.set(-0.91);
-    }
-    public void RainbowWithGlitter(){
-        blinkin.set(-0.89);
-    }
-    public void ShotBlue(){
-        blinkin.set(-0.83);
-    }
-    
-    public void Red(){
-        blinkin.set(0.61);
-    }
-
-    public void Green(){
-        blinkin.set(0.77);
-    }
-
-    public void Yellow(){
-        blinkin.set(0.69);
-    }
-
-    public void Blue(){
-        blinkin.set(0.83);
-    }
-
-    public void White(){
-        blinkin.set(0.93);
-    }
-
-    public void Lightchase(){
-        blinkin.set(-0.29);
-    }
     
 }

@@ -178,7 +178,6 @@ public class RobotContainer {
 
     RT.whenPressed(new Climb_ReverseWinch(m_climber), true);
     RT.whenReleased(new Climb_StopWinch(m_climber), true);
-    //LT.whenPressed(new Shooting_Stop(m_shooter), true);
 
     dpad_Up.whenPressed(new CPM_Extend(m_ControlPanelManipulator), true);
     dpad_Down.whenPressed(new CPM_Retract(m_ControlPanelManipulator), true);

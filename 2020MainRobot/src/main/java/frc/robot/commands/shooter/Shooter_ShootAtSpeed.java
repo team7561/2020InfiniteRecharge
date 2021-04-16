@@ -1,6 +1,8 @@
 package frc.robot.commands.shooter;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -35,7 +37,8 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
+    public void initialize() {    
+        SmartDashboard.putNumber("LED Value", Constants.BLINKIN_BLUE);
         if (m_changeHood) {
             if (m_closeTarget)
             {

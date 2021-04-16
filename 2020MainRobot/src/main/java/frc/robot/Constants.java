@@ -42,5 +42,13 @@ public class Constants {
     // 5.95:1
     // 42 pulses per rev
     public static final double DRIVE_GEAR_RATIO = 1/5.95;
-
+    
+    public static double BLINKIN_RAINBOW                = -0.91;
+    public static double BLINKIN_RAINBOWGLITTER         = -0.89; 
+    public static double BLINKIN_RED                    = 0.61;
+    public static double BLINKIN_GREEN                  = 0.77;
+    public static double BLINKIN_YELLOW                 = 0.69; 
+    public static double BLINKIN_BLUE                   = 0.83; 
+    public static double BLINKIN_LIGHTCHASE             = -0.29;
+    public static double BLINKIN_COLOUR_WAVE_RAINBOW    = -0.45;
 }
