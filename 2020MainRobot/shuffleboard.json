@@ -358,6 +358,380 @@
               "_source0": "network_table:///SmartDashboard/Shooter A Current",
               "_title": "Shooter A Current"
             }
+          },
+          "2,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_SP",
+              "_title": "BR_SP"
+            }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_SP",
+              "_title": "FR_SP"
+            }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/D Gain",
+              "_title": "D Gain"
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/I Zone",
+              "_title": "I Zone"
+            }
+          },
+          "8,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/P Gain",
+              "_title": "P Gain"
+            }
+          },
+          "9,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Max Output",
+              "_title": "Max Output"
+            }
+          },
+          "10,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_PV",
+              "_title": "BR_PV"
+            }
+          },
+          "11,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_PV",
+              "_title": "FR_PV"
+            }
+          },
+          "12,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_RawDrivespeed",
+              "_title": "BL_RawDrivespeed"
+            }
+          },
+          "0,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_RawDrivespeed",
+              "_title": "FL_RawDrivespeed"
+            }
+          },
+          "1,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/I Gain",
+              "_title": "I Gain"
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_RawDrivespeed",
+              "_title": "BR_RawDrivespeed"
+            }
+          },
+          "3,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_RawDrivespeed",
+              "_title": "FR_RawDrivespeed"
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_SP",
+              "_title": "BL_SP"
+            }
+          },
+          "5,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_SP",
+              "_title": "FL_SP"
+            }
+          },
+          "6,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Speed",
+              "_title": "BL_Speed"
+            }
+          },
+          "7,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_Speed",
+              "_title": "FL_Speed"
+            }
+          },
+          "8,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_Speed",
+              "_title": "BR_Speed"
+            }
+          },
+          "9,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_Speed",
+              "_title": "FR_Speed"
+            }
+          },
+          "10,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_RawSteerSpeed",
+              "_title": "BL_RawSteerSpeed"
+            }
+          },
+          "11,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_RawSteerSpeed",
+              "_title": "FL_RawSteerSpeed"
+            }
+          },
+          "12,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_RawSteerSpeed",
+              "_title": "BR_RawSteerSpeed"
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_PV",
+              "_title": "BL_PV"
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Angle",
+              "_title": "BL_Angle"
+            }
+          },
+          "2,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Min Output",
+              "_title": "Min Output"
+            }
+          },
+          "3,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_PV",
+              "_title": "FL_PV"
+            }
+          },
+          "4,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_Angle",
+              "_title": "FL_Angle"
+            }
+          },
+          "5,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_Angle",
+              "_title": "BR_Angle"
+            }
+          },
+          "6,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_RawSteerSpeed",
+              "_title": "FR_RawSteerSpeed"
+            }
+          },
+          "7,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_Angle",
+              "_title": "FR_Angle"
+            }
+          },
+          "8,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Feed Forward",
+              "_title": "Feed Forward"
+            }
+          },
+          "9,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_x",
+              "_title": "m_x"
+            }
+          },
+          "10,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_y",
+              "_title": "m_y"
+            }
+          },
+          "11,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_twist",
+              "_title": "m_twist"
+            }
           }
         }
       }
@@ -504,6 +878,85 @@
               "_title": "ControlPanelManipulator",
               "Layout/Label position": "BOTTOM",
               "_children": []
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Tab 3",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 96.0,
+        "showGrid": true,
+        "hgap": 12.0,
+        "vgap": 12.0,
+        "tiles": {
+          "3,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Angle",
+              "_title": "SmartDashboard/BL_Angle"
+            }
+          },
+          "3,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_PV",
+              "_title": "SmartDashboard/BL_PV"
+            }
+          },
+          "3,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_RawDrivespeed",
+              "_title": "SmartDashboard/BL_RawDrivespeed"
+            }
+          },
+          "3,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_RawSteerSpeed",
+              "_title": "SmartDashboard/BL_RawSteerSpeed"
+            }
+          },
+          "3,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_SP",
+              "_title": "SmartDashboard/BL_SP"
+            }
+          },
+          "3,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Speed",
+              "_title": "BL_Speed"
             }
           }
         }
