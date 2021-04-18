@@ -1,23 +1,21 @@
-package frc.robot.commands.controlpanelmanipulator;
+package frc.robot.commands.LED_Controller;
 
-import frc.robot.Constants;
-import frc.robot.subsystems.ControlPanelManipulator;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.LEDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class CPM_Retract extends CommandBase {
+public class LED_Select_Random_Colour extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ControlPanelManipulator m_subsystem;
+  private final LEDController m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CPM_Retract(ControlPanelManipulator subsystem) {
+  public LED_Select_Random_Colour(LEDController subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -31,14 +29,12 @@ public class CPM_Retract extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.retract();
-      m_subsystem.updateDashboard();
+    m_subsystem.setRandomValue();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putNumber("LED Value", Constants.BLINKIN_BLUE);
   }
 
   // Returns true when the command should end.

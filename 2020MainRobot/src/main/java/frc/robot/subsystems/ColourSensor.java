@@ -38,7 +38,7 @@ public class ColourSensor{
    */
   private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
   private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  private final Color kRedTarget = ColorMatch.makeColor(0.41, 0.4, 0.16);
   private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   public ColourSensor() {
@@ -73,15 +73,25 @@ public class ColourSensor{
      * Run the color match algorithm on our detected color
      */
     String colorString;
+    System.out.println("Red");
+      System.out.println(detectedColor.red);
+      System.out.println("Green");
+    System.out.println(detectedColor.green);
+    System.out.println("Blue");
+    System.out.println(detectedColor.blue);
     ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
 
     if (match.color == kBlueTarget) {
+      SmartDashboard.putNumber("LED Value", Constants.BLINKIN_BLUE);
       colorString = "Blue";
     } else if (match.color == kRedTarget) {
+      SmartDashboard.putNumber("LED Value", Constants.BLINKIN_RED);
       colorString = "Red";
     } else if (match.color == kGreenTarget) {
+      SmartDashboard.putNumber("LED Value", Constants.BLINKIN_GREEN);
       colorString = "Green";
     } else if (match.color == kYellowTarget) {
+      SmartDashboard.putNumber("LED Value", Constants.BLINKIN_YELLOW);
       colorString = "Yellow";
     } else {
       colorString = "Unknown";

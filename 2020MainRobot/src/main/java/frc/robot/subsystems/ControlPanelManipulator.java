@@ -28,6 +28,13 @@ public class ControlPanelManipulator extends SubsystemBase {
     {
         return colourSensor.periodic();
     }
+    public void periodic()
+    {
+        if (colourWheelRotateMotor.get() != 0)
+        {
+            String test = detectColour();
+        }
+    }
     public void rotateLeft()
     {
         setSpeed(Speeds.ROTATION_CONTROL_SPEED);

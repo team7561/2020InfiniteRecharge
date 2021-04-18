@@ -1,5 +1,9 @@
 package frc.robot.subsystems;
+
 import frc.robot.Ports;
+
+import java.util.Random;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,6 +19,14 @@ public class LEDController extends SubsystemBase{
     public void periodic(){
         blinkin.set(SmartDashboard.getNumber("LED Value", 0.83));
         SmartDashboard.putNumber("LED Value", blinkin.get());
+    }    
+    public void setValue(double value){
+        SmartDashboard.putNumber("LED Value", value);
+    }    
+    public void setRandomValue(){
+        Random rand = new Random();
+        double pattern = rand.nextInt(100)/100-0.99;
+        SmartDashboard.putNumber("LED_Pattern", pattern);
     }
     
 }
