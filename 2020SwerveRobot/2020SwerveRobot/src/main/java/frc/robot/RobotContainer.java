@@ -57,7 +57,7 @@ public class RobotContainer {
     final JoystickButton button_12 = new JoystickButton(joystick, 12);
     
     //trigger.whenPressed(new DT_ArcadeDrive(drivetrain, 0.4, 0.4, 0.5),true);
-    trigger.whenPressed(new DT_ArcadeDrive3(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2),true);
+    trigger.whenPressed(new DT_ArcadeDrive2(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2),true);
     //trigger.whenReleased(new DT_Drive_Stop(drivetrain),true);
     button_7.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CRAB),true);
     button_8.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.TANK),true);

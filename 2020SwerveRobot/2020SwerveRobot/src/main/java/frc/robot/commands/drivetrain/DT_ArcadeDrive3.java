@@ -56,7 +56,7 @@ public class DT_ArcadeDrive3 extends CommandBase {
 
     if (m_angle > 1000)
     {
-      m_angle = 0;
+      m_angle = 0.0;
     }
     m_power = Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) * speed;
     System.out.println(m_power);
