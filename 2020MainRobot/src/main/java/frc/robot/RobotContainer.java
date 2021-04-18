@@ -8,24 +8,18 @@
 package frc.robot;
 
 import java.util.List;
-import java.util.Arrays;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.*;
-import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.trajectory.*;
 import edu.wpi.first.wpilibj.trajectory.constraint.*;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.climber.*;
@@ -35,10 +29,10 @@ import frc.robot.commands.injector.*;
 import frc.robot.commands.intakehopper.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.commands.visioncontroller.*;
+import frc.robot.autonomous.Auto1;
+import frc.robot.commands.LED_Controller.LED_Select_Random_Colour;
 import frc.robot.commands.autonomous.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
   private final Climber m_climber = new Climber();
@@ -153,7 +147,7 @@ public class RobotContainer {
     final JoystickButton button_RB = new JoystickButton(xboxController, 6);
 
     //final JoystickButton back = new JoystickButton(xboxController, 7);
-    //final JoystickButton start = new JoystickButton(xboxController, 8);
+    final JoystickButton start = new JoystickButton(xboxController, 8);
     //final JoystickButton left_joooooooooooooystick_button = new JoystickButton(xboxController, 9);
     //final JoystickButton right_joystick_button = new JoystickButton(xboxController, 10);
     //final JoystickAnalogButton LT = new JoystickAnalogButton(xboxController, 2);
@@ -174,6 +168,7 @@ public class RobotContainer {
     button_Y.whenPressed(new Shooter_Extend(m_shooter), true);
     button_Y.whenReleased(new Shooter_Stop_Hood(m_shooter), true); // Stop the Shooter Hood
     //button_LB.whenPressed(new R_ShooterInjector(m_shooter, m_injector), true);
+    start.whenPressed(new LED_Select_Random_Colour(m_ledcontroller), true);
     button_RB.whenPressed(new Intake_ToggleHopper(m_intakeHopper), true);
 
     RT.whenPressed(new Climb_ReverseWinch(m_climber), true);
@@ -203,6 +198,9 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
+    return new Auto1(m_drivetrain, m_intakeHopper, m_shooter, m_injector, m_ledcontroller, m_visionController);
+  }
+  /*
   TrajectoryConfig config = new TrajectoryConfig(0.1, 0.1);
   config.setKinematics(m_drivetrain.getKinematics());
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
@@ -220,9 +218,9 @@ public class RobotContainer {
     m_drivetrain.getRightPIDController(),
     m_drivetrain::setOutputVolts,
     m_drivetrain
-  );
+  );*/
   //return new DT_InitDrivePose(m_drivetrain, 0,0).andThen(command.andThen(() -> m_drivetrain.setOutputVolts(0, 0)));
 
-  return m_chooser.getSelected();
-  }  
+ // return m_chooser.getSelected();
+  //}  
 }

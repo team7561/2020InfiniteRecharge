@@ -14,18 +14,20 @@ public class Injector extends SubsystemBase {
 
     CANSparkMax injectorMotor;
     Boolean hasBall;
+    double setpoint;
 
     public Injector()
     {
         injectorMotor = new CANSparkMax(Ports.INJECTOR_CANID, MotorType.kBrushless);
         injectorMotor.setSmartCurrentLimit(20);
         injectorMotor.setIdleMode(IdleMode.kCoast);
+        setpoint = 0;
     }
 
     //set speed of both intake motors
     private void setSpeed (double speed)
     {
-        injectorMotor.set(speed);
+        setpoint = speed;
     }
 
     public void transferBall()
@@ -46,6 +48,7 @@ public class Injector extends SubsystemBase {
 
     public void periodic()
     {
+        injectorMotor.set(setpoint);
         updateDashboard();
     }
     public void updateDashboard()

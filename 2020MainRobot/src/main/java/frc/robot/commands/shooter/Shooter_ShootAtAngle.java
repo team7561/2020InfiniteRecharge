@@ -19,7 +19,7 @@ public class Shooter_ShootAtAngle extends CommandBase {
     private final Shooter m_subsystem;
     private final VisionController m_vision_subsystem;
     private double m_targetAngle, m_hood_encoder;
-    private Timer timer, timerFinished;
+    private Timer timer;
 
     /**
      * 
@@ -33,7 +33,6 @@ public class Shooter_ShootAtAngle extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     timer = new Timer();
-    timerFinished = new Timer();
   }
 
   @Override
