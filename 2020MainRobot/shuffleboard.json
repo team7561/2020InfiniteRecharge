@@ -2,7 +2,7 @@
   "tabPane": [
     {
       "title": "SmartDashboard",
-      "autoPopulate": true,
+      "autoPopulate": false,
       "autoPopulatePrefix": "SmartDashboard/",
       "widgetPane": {
         "gridSize": 128.0,
@@ -10,185 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "2,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Auto",
-              "_title": "Hood Auto"
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Vision False",
-              "_title": "Hood Vision False"
-            }
-          },
-          "4,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Close",
-              "_title": "Hood Close"
-            }
-          },
-          "8,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Reset Hood Position",
-              "_title": "Reset Hood Position"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Vision True",
-              "_title": "Hood Vision True"
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/odometry_theta",
-              "_title": "odometry_theta"
-            }
-          },
-          "6,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Far",
-              "_title": "Hood Far"
-            }
-          },
           "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Hood Position",
-              "_title": "Shooter Hood Position"
-            }
-          },
-          "9,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/odometry_x",
-              "_title": "odometry_x"
-            }
-          },
-          "10,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/odometry_y",
-              "_title": "odometry_y"
-            }
-          },
-          "11,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Interface",
-              "_title": "limelight_Interface"
-            }
-          },
-          "12,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/button_close/running",
-              "_title": "button_close/running",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "ComboBox Chooser",
-              "_source0": "network_table:///SmartDashboard/SendableChooser[2]",
-              "_title": "SendableChooser[2]"
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Hood Manual",
-              "_title": "Hood Manual"
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter A Power",
-              "_title": "Shooter A Power"
-            }
-          },
-          "3,1": {
             "size": [
               1,
               1
@@ -199,7 +21,21 @@
               "_title": "ta"
             }
           },
-          "4,1": {
+          "2,5": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Simple Dial",
+              "_source0": "network_table:///SmartDashboard/tx",
+              "_title": "tx",
+              "Range/Min": -30.0,
+              "Range/Max": 30.0,
+              "Visuals/Show value": true
+            }
+          },
+          "8,0": {
             "size": [
               1,
               1
@@ -210,40 +46,33 @@
               "_title": "ty"
             }
           },
-          "5,1": {
+          "0,0": {
+            "size": [
+              5,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/Set Point",
+              "_title": "Set Point",
+              "Slider Settings/Min": 0.0,
+              "Slider Settings/Max": 6000.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "10,2": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/tx",
-              "_title": "tx"
+              "_source0": "network_table:///SmartDashboard/Shooter A Current",
+              "_title": "Shooter A Current"
             }
           },
-          "7,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Hood Set Point",
-              "_title": "Hood Set Point"
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/right_enc",
-              "_title": "right_enc"
-            }
-          },
-          "10,1": {
+          "11,2": {
             "size": [
               1,
               1
@@ -254,6 +83,83 @@
               "_title": "Shooter B Current"
             }
           },
+          "0,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Shooter Hood Position",
+              "_title": "Shooter Hood Position"
+            }
+          },
+          "4,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hood Count",
+              "_title": "Hood Count"
+            }
+          },
+          "11,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left B Current",
+              "_title": "Left B Current"
+            }
+          },
+          "10,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right B Power",
+              "_title": "Right B Power"
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left B Power",
+              "_title": "Left B Power"
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/m_speed",
+              "_title": "m_speed"
+            }
+          },
+          "10,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right B Encoder",
+              "_title": "Right B Encoder"
+            }
+          },
           "11,1": {
             "size": [
               1,
@@ -261,70 +167,11 @@
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter B Power",
-              "_title": "Shooter B Power"
+              "_source0": "network_table:///SmartDashboard/Right C Current",
+              "_title": "Right C Current"
             }
           },
-          "12,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Hood Current",
-              "_title": "Shooter Hood Current"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter Hood Voltage",
-              "_title": "Shooter Hood Voltage"
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream"
-            }
-          },
-          "0,3": {
-            "size": [
-              13,
-              1
-            ],
-            "content": {
-              "_type": "Number Slider",
-              "_source0": "network_table:///SmartDashboard/LED Value",
-              "_title": "LED Value",
-              "Slider Settings/Min": -1.0,
-              "Slider Settings/Max": 1.0,
-              "Slider Settings/Block increment": 0.0625,
-              "Visuals/Display value": true
-            }
-          },
-          "3,2": {
-            "size": [
-              3,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Set Point",
-              "_title": "Set Point"
-            }
-          },
-          "2,2": {
+          "0,6": {
             "size": [
               1,
               1
@@ -337,7 +184,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,2": {
+          "0,5": {
             "size": [
               1,
               1
@@ -348,608 +195,37 @@
               "_title": "m_targetAngle"
             }
           },
-          "8,2": {
+          "0,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Reset Hood Position",
+              "_title": "Reset Hood Position"
+            }
+          },
+          "2,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Close",
+              "_title": "Hood Close"
+            }
+          },
+          "9,6": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Gyro Angle",
-              "_title": "Gyro Angle"
-            }
-          },
-          "9,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left A Power",
-              "_title": "Left A Power"
-            }
-          },
-          "10,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left B Power",
-              "_title": "Left B Power"
-            }
-          },
-          "11,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left C Power",
-              "_title": "Left C Power"
-            }
-          },
-          "12,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right A Power",
-              "_title": "Right A Power"
-            }
-          },
-          "0,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right B Power",
-              "_title": "Right B Power"
-            }
-          },
-          "1,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right C Power",
-              "_title": "Right C Power"
-            }
-          },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left A Encoder",
-              "_title": "Left A Encoder"
-            }
-          },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left B Encoder",
-              "_title": "Left B Encoder"
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left C Encoder",
-              "_title": "Left C Encoder"
-            }
-          },
-          "5,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right A Encoder",
-              "_title": "Right A Encoder"
-            }
-          },
-          "6,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right B Encoder",
-              "_title": "Right B Encoder"
-            }
-          },
-          "7,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right C Encoder",
-              "_title": "Right C Encoder"
-            }
-          },
-          "8,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left A Current",
-              "_title": "Left A Current"
-            }
-          },
-          "9,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left B Current",
-              "_title": "Left B Current"
-            }
-          },
-          "10,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Left C Current",
-              "_title": "Left C Current"
-            }
-          },
-          "11,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right A Current",
-              "_title": "Right A Current"
-            }
-          },
-          "12,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right B Current",
-              "_title": "Right B Current"
-            }
-          },
-          "0,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Right C Current",
-              "_title": "Right C Current"
-            }
-          },
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Colour Wheel Motor Speed",
-              "_title": "Colour Wheel Motor Speed"
-            }
-          },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Set Point",
-              "_title": "/SmartDashboard/Set Point"
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/left_enc",
-              "_title": "left_enc"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Shooter A Current",
-              "_title": "Shooter A Current"
-            }
-          },
-<<<<<<< Updated upstream
-          "2,2": {
-=======
-          "6,0": {
->>>>>>> Stashed changes
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/BR_SP",
-              "_title": "BR_SP"
-            }
-          },
-          "5,2": {
-=======
-              "_source0": "network_table:///SmartDashboard/m_speed",
-              "_title": "m_speed"
-            }
-          },
-          "8,1": {
->>>>>>> Stashed changes
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/FR_SP",
-              "_title": "FR_SP"
-            }
-          },
-          "6,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/D Gain",
-              "_title": "D Gain"
-=======
-              "_source0": "network_table:///SmartDashboard/errorSpeed",
-              "_title": "errorSpeed"
->>>>>>> Stashed changes
-            }
-          },
-          "7,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/I Zone",
-              "_title": "I Zone"
-            }
-          },
-          "8,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/P Gain",
-              "_title": "P Gain"
-            }
-          },
-          "9,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Max Output",
-              "_title": "Max Output"
-            }
-          },
-          "10,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_PV",
-              "_title": "BR_PV"
-            }
-          },
-          "11,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_PV",
-              "_title": "FR_PV"
-            }
-          },
-          "12,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_RawDrivespeed",
-              "_title": "BL_RawDrivespeed"
-            }
-          },
-          "0,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_RawDrivespeed",
-              "_title": "FL_RawDrivespeed"
-            }
-          },
-          "1,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/I Gain",
-              "_title": "I Gain"
-            }
-          },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_RawDrivespeed",
-              "_title": "BR_RawDrivespeed"
-            }
-          },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_RawDrivespeed",
-              "_title": "FR_RawDrivespeed"
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_SP",
-              "_title": "BL_SP"
-            }
-          },
-          "5,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_SP",
-              "_title": "FL_SP"
-            }
-          },
-          "6,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_Speed",
-              "_title": "BL_Speed"
-            }
-          },
-          "7,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_Speed",
-              "_title": "FL_Speed"
-            }
-          },
-          "8,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_Speed",
-              "_title": "BR_Speed"
-            }
-          },
-          "9,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_Speed",
-              "_title": "FR_Speed"
-            }
-          },
-          "10,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_RawSteerSpeed",
-              "_title": "BL_RawSteerSpeed"
-            }
-          },
-          "11,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_RawSteerSpeed",
-              "_title": "FL_RawSteerSpeed"
-            }
-          },
-          "12,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_RawSteerSpeed",
-              "_title": "BR_RawSteerSpeed"
-            }
-          },
-          "0,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_PV",
-              "_title": "BL_PV"
-=======
-              "_source0": "network_table:///SmartDashboard/BR_SP",
-              "_title": "BR_SP"
->>>>>>> Stashed changes
-            }
-          },
-          "1,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/BL_Angle",
-              "_title": "BL_Angle"
-            }
-          },
-          "2,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Min Output",
-              "_title": "Min Output"
-            }
-          },
-          "3,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_PV",
-              "_title": "FL_PV"
-            }
-          },
-          "4,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_Angle",
-              "_title": "FL_Angle"
-=======
-              "_source0": "network_table:///SmartDashboard/FR_SP",
-              "_title": "FR_SP"
->>>>>>> Stashed changes
-            }
-          },
-          "5,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/BR_Angle",
-              "_title": "BR_Angle"
-            }
-          },
-          "6,5": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_RawSteerSpeed",
-              "_title": "FR_RawSteerSpeed"
-=======
-              "_source0": "network_table:///SmartDashboard/D Gain",
-              "_title": "D Gain"
->>>>>>> Stashed changes
+              "_source0": "network_table:///SmartDashboard/LED Value",
+              "_title": "LED Value"
             }
           },
           "7,5": {
@@ -958,10 +234,9 @@
               1
             ],
             "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/FR_Angle",
-              "_title": "FR_Angle"
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Auto",
+              "_title": "Hood Auto"
             }
           },
           "8,5": {
@@ -970,13 +245,20 @@
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Feed Forward",
-              "_title": "Feed Forward"
-=======
-              "_source0": "network_table:///SmartDashboard/I Zone",
-              "_title": "I Zone"
->>>>>>> Stashed changes
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Manual",
+              "_title": "Hood Manual"
+            }
+          },
+          "3,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Far",
+              "_title": "Hood Far"
             }
           },
           "9,5": {
@@ -985,14 +267,9 @@
               1
             ],
             "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/m_x",
-              "_title": "m_x"
-=======
-              "_source0": "network_table:///SmartDashboard/P Gain",
-              "_title": "P Gain"
->>>>>>> Stashed changes
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Vision True",
+              "_title": "Hood Vision True"
             }
           },
           "10,5": {
@@ -1001,30 +278,47 @@
               1
             ],
             "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/m_y",
-              "_title": "m_y"
-=======
-              "_source0": "network_table:///SmartDashboard/Max Output",
-              "_title": "Max Output"
->>>>>>> Stashed changes
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/Hood Vision False",
+              "_title": "Hood Vision False"
             }
           },
-          "11,5": {
+          "2,2": {
             "size": [
-              1,
-              1
+              4,
+              3
             ],
             "content": {
-              "_type": "Text View",
-<<<<<<< Updated upstream
-              "_source0": "network_table:///SmartDashboard/m_twist",
-              "_title": "m_twist"
-=======
-              "_source0": "network_table:///SmartDashboard/BR_PV",
-              "_title": "BR_PV"
->>>>>>> Stashed changes
+              "_type": "Camera Stream",
+              "_source0": "camera_server://USB Camera 0",
+              "_title": "USB Camera 0",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "6,2": {
+            "size": [
+              4,
+              3
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight",
+              "_title": "limelight",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
             }
           }
         }
@@ -1105,8 +399,8 @@
                 },
                 {
                   "_type": "Speed Controller",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[1]",
-                  "_title": "Spark[1]",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[7]",
+                  "_title": "Spark[7]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
@@ -1118,24 +412,17 @@
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Ungrouped/DoubleSolenoid[0,0]/Value",
                   "_title": "DoubleSolenoid[0,0]/Value"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[1]",
+                  "_title": "Spark[1]",
+                  "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
             }
           },
           "4,0": {
-            "size": [
-              2,
-              4
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Injector",
-              "_title": "Injector",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
-          "6,0": {
             "size": [
               2,
               4
@@ -1148,6 +435,19 @@
               "_children": []
             }
           },
+          "6,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_source0": "network_table:///LiveWindow/Injector",
+              "_title": "Injector",
+              "Layout/Label position": "BOTTOM",
+              "_children": []
+            }
+          },
           "8,0": {
             "size": [
               2,
@@ -1155,8 +455,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/LEDController",
-              "_title": "LEDController",
+              "_source0": "network_table:///LiveWindow/Drivetrain",
+              "_title": "Drivetrain",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -1176,397 +476,12 @@
           }
         }
       }
-    },
-    {
-<<<<<<< Updated upstream
-      "title": "Tab 3",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 96.0,
-        "showGrid": true,
-        "hgap": 12.0,
-        "vgap": 12.0,
-        "tiles": {
-          "3,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_Angle",
-              "_title": "/SmartDashboard/BL_Angle"
-            }
-          },
-          "3,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_PV",
-              "_title": "/SmartDashboard/BL_PV"
-            }
-          },
-          "3,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_RawDrivespeed",
-              "_title": "/SmartDashboard/BL_RawDrivespeed"
-            }
-          },
-          "3,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_RawSteerSpeed",
-              "_title": "/SmartDashboard/BL_RawSteerSpeed"
-            }
-          },
-          "3,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_SP",
-              "_title": "/SmartDashboard/BL_SP"
-            }
-          },
-          "3,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BL_Speed",
-              "_title": "/SmartDashboard/BL_Speed"
-            }
-          },
-          "5,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_Angle",
-              "_title": "/SmartDashboard/BR_Angle"
-            }
-          },
-          "5,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_PV",
-              "_title": "/SmartDashboard/BR_PV"
-            }
-          },
-          "5,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_RawDrivespeed",
-              "_title": "/SmartDashboard/BR_RawDrivespeed"
-            }
-          },
-          "5,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_RawSteerSpeed",
-              "_title": "/SmartDashboard/BR_RawSteerSpeed"
-            }
-          },
-          "5,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_SP",
-              "_title": "/SmartDashboard/BR_SP"
-            }
-          },
-          "5,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/BR_Speed",
-              "_title": "/SmartDashboard/BR_Speed"
-            }
-          },
-          "7,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_Angle",
-              "_title": "/SmartDashboard/FL_Angle"
-            }
-          },
-          "7,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_PV",
-              "_title": "/SmartDashboard/FL_PV"
-            }
-          },
-          "7,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_RawDrivespeed",
-              "_title": "/SmartDashboard/FL_RawDrivespeed"
-            }
-          },
-          "7,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_RawSteerSpeed",
-              "_title": "/SmartDashboard/FL_RawSteerSpeed"
-            }
-          },
-          "7,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_SP",
-              "_title": "/SmartDashboard/FL_SP"
-            }
-          },
-          "7,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FL_Speed",
-              "_title": "/SmartDashboard/FL_Speed"
-            }
-          },
-          "9,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_Angle",
-              "_title": "/SmartDashboard/FR_Angle"
-            }
-          },
-          "9,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_PV",
-              "_title": "/SmartDashboard/FR_PV"
-            }
-          },
-          "9,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_RawDrivespeed",
-              "_title": "/SmartDashboard/FR_RawDrivespeed"
-            }
-          },
-          "9,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_RawSteerSpeed",
-              "_title": "/SmartDashboard/FR_RawSteerSpeed"
-            }
-          },
-          "9,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_SP",
-              "_title": "/SmartDashboard/FR_SP"
-            }
-          },
-          "9,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/FR_Speed",
-              "_title": "/SmartDashboard/FR_Speed"
-            }
-          },
-          "13,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/m_twist",
-              "_title": "/SmartDashboard/m_twist"
-            }
-          },
-          "13,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/m_x",
-              "_title": "/SmartDashboard/m_x"
-            }
-          },
-          "13,5": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/m_y",
-              "_title": "/SmartDashboard/m_y"
-=======
-      "title": "Cameras",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {
-          "0,0": {
-            "size": [
-              5,
-              4
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://USB Camera 0",
-              "_title": "USB Camera 0",
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": 0,
-              "imageHeight": 0
-            }
-          },
-          "6,0": {
-            "size": [
-              5,
-              4
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://limelight",
-              "_title": "limelight",
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
->>>>>>> Stashed changes
-            }
-          }
-        }
-      }
-<<<<<<< Updated upstream
-=======
-    },
-    {
-      "title": "Main Robot",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
-      }
-    },
-    {
-      "title": "Swerve Robot",
-      "autoPopulate": false,
-      "autoPopulatePrefix": "",
-      "widgetPane": {
-        "gridSize": 128.0,
-        "showGrid": true,
-        "hgap": 16.0,
-        "vgap": 16.0,
-        "tiles": {}
-      }
->>>>>>> Stashed changes
     }
   ],
   "windowGeometry": {
-    "x": 22.85714340209961,
-    "y": 36.57143020629883,
-    "width": 1697.7142333984375,
-    "height": 997.1428833007812
+    "x": -6.857142925262451,
+    "y": -6.857142925262451,
+    "width": 1728.0,
+    "height": 1126.857177734375
   }
 }
