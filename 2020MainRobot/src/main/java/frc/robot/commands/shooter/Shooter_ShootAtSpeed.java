@@ -13,6 +13,7 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     private final Shooter m_subsystem;
     private final boolean m_closeTarget;
     private final boolean m_changeHood;
+    private final double m_speed;
     
     /**
     * Creates a new ExampleCommand.
@@ -23,13 +24,14 @@ public class Shooter_ShootAtSpeed extends CommandBase {
         m_subsystem = subsystem;
         m_closeTarget = true;
         m_changeHood = false;
+        m_speed = 4000;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
         
     }
     public Shooter_ShootAtSpeed(Shooter subsystem, double speed, boolean changeHood, boolean closeTarget){
         m_subsystem = subsystem;
-        //m_speed = speed;
+        m_speed = speed;
         m_closeTarget = closeTarget;
         m_changeHood = changeHood;
         addRequirements(subsystem);
@@ -49,6 +51,7 @@ public class Shooter_ShootAtSpeed extends CommandBase {
                 m_subsystem.extendHood();
             }
         }
+        SmartDashboard.putNumber("Set Point", m_speed);
     }
     
     // Called every time the scheduler runs while the command is scheduled.
@@ -61,12 +64,13 @@ public class Shooter_ShootAtSpeed extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        System.out.println("Shooting at speed finished");
     }
     
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {        
-        return false;
-        //return (m_subsystem.getVelocity() > m_speed);
+        //return false;
+        return (m_subsystem.getVelocity() > m_speed);
     }
 }

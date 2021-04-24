@@ -61,7 +61,7 @@ public class Shooter extends SubsystemBase {
         kD = 0.000004; 
         kIz = 500; // Error process value must be within before I is used.
         kFF = 0; 
-        m_setpoint = 4000;
+        m_setpoint = 2200;
         m_hood_setpoint = 0.2;
         kMaxOutput = 0.85; 
         kMinOutput = -0.85;
@@ -88,7 +88,7 @@ public class Shooter extends SubsystemBase {
         m_hood_position = m_hood_encoder.getPosition();
         if (shooting)
         {
-            System.out.println("Shooting at speed: " + m_setpoint);
+            //System.out.println("Shooting at speed: " + m_setpoint);
             double max = SmartDashboard.getNumber("Max Output", kMaxOutput);
             double min = SmartDashboard.getNumber("Min Output", kMinOutput);
             m_setpoint = SmartDashboard.getNumber("Set Point", m_setpoint);

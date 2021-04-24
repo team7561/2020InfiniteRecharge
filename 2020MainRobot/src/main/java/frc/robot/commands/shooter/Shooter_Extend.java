@@ -24,7 +24,9 @@ public class Shooter_Extend extends CommandBase {
     addRequirements(subsystem);
   }
 
-
+  public void initialize() {
+    System.out.println("Starting Shooter Extend");
+  }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
@@ -36,6 +38,6 @@ public class Shooter_Extend extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

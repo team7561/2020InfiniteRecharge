@@ -48,19 +48,19 @@ public class DT_DriveDistance extends CommandBase {
         if (m_inverted)
         {
             if (m_difference > m_distance/5){
-                m_subsystem.drive(m_speed, m_speed); 
+                m_subsystem.drive(m_speed, -m_speed); 
             }
             else{
-                m_subsystem.drive(m_speed/2, m_speed/2);
+                m_subsystem.drive(m_speed/2, -m_speed/2);
             }
             m_subsystem.updateDashboard();
         }
         else {
             if (m_difference < -m_distance/5){
-                m_subsystem.drive(-m_speed, -m_speed); 
+                m_subsystem.drive(-m_speed, m_speed); 
             }
             else{
-                m_subsystem.drive(-m_speed/2, -m_speed/2);
+                m_subsystem.drive(-m_speed/2, m_speed/2);
             }
             
         }
@@ -72,10 +72,10 @@ public class DT_DriveDistance extends CommandBase {
     public void end(boolean interrupted) {
         if (m_inverted)
         {
-            m_subsystem.drive(0.01, 0.01);
+            m_subsystem.drive(0.01, -0.01);
         }
         else {
-            m_subsystem.drive(-0.01, -0.01);
+            m_subsystem.drive(-0.01, 0.01);
         }
     }
     

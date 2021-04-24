@@ -25,8 +25,9 @@ public class LEDController extends SubsystemBase{
     }    
     public void setRandomValue(){
         Random rand = new Random();
-        double pattern = rand.nextInt(100)/100-0.99;
-        SmartDashboard.putNumber("LED_Pattern", pattern);
+        double pattern = rand.nextInt(100)*1.0/100-0.99;
+        System.out.println(pattern);
+        SmartDashboard.putNumber("LED Value", pattern);
     }
     
 }

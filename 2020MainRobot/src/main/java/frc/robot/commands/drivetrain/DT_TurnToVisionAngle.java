@@ -52,9 +52,9 @@ public class DT_TurnToVisionAngle extends CommandBase {
         m_speed = (0.125);
         m_vision_subsystem.turnOnLED();
         //System.out.println("Turning to vision angle");
-        m_targetAngle = m_vision_subsystem.get_tx();
-        System.out.println("tx = " + m_targetAngle);
-        System.out.println("SliderValue = " + m_speed);
+        m_targetAngle = m_vision_subsystem.get_tx()-4;
+        //System.out.println("tx = " + m_targetAngle);
+        //System.out.println("SliderValue = " + m_speed);
         double errorSpeed = motorSpeedForError(m_targetAngle)/20+0.5*(m_targetAngle/Math.abs(m_targetAngle));
         SmartDashboard.putNumber("m_speed", m_speed);
         SmartDashboard.putNumber("m_targetAngle", m_targetAngle);
@@ -64,7 +64,7 @@ public class DT_TurnToVisionAngle extends CommandBase {
             m_subsystem.drive(m_speed*errorSpeed, m_speed*errorSpeed);
         }
         else {
-            System.out.println("At vision target)");
+            //System.out.println("At vision target");
             m_subsystem.drive(0, 0);
         }
         m_subsystem.updateDashboard();
