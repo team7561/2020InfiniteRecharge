@@ -6,27 +6,25 @@ import frc.robot.subsystems.Drivetrain;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * An example command that uses an example subsystem.
  */
-public class DT_ArcadeDrive2 extends CommandBase {
+public class DT_DriveTime extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
-  private DoubleSupplier m_x, m_y, m_twist, m_speed;
+  Timer timer;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param drivetrain The subsystem used by this command.
    */
-  public DT_ArcadeDrive2(Drivetrain drivetrain, DoubleSupplier x, DoubleSupplier y, DoubleSupplier twist, DoubleSupplier speed) {
+  public DT_DriveTime(Drivetrain drivetrain) {
     m_subsystem = drivetrain;
-    m_x = x;
-    m_y = y;
-    m_speed = speed;
-    m_twist = twist;
+    timer = new Timer();
     
     addRequirements(drivetrain);
   }
@@ -34,16 +32,16 @@ public class DT_ArcadeDrive2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Starting auto");
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setAngle(m_twist.getAsDouble()*40);
-    arcadeDrive(m_y.getAsDouble(), m_x.getAsDouble(), m_speed.getAsDouble(), false);
-    SmartDashboard.putNumber("m_x", m_x.getAsDouble());
-    SmartDashboard.putNumber("m_y", m_y.getAsDouble());
-    SmartDashboard.putNumber("m_twist", m_twist.getAsDouble());
+    m_subsystem.setAngle(0);
+    drive(1000, 1000);
+    System.out.println("Auto Drive");
     m_subsystem.updateDashboard();
   }
 
@@ -53,37 +51,16 @@ public class DT_ArcadeDrive2 extends CommandBase {
     m_subsystem.moduleFL.setVelocity(leftSpeed);
     m_subsystem.moduleFR.setVelocity(-rightSpeed);
   }
-  public void arcadeDrive(double x, double y, double speed, boolean inverted) {
-    if (m_subsystem.getMode() == SwerveMode.TANK || m_subsystem.getMode() == SwerveMode.TANK_X)
-    {
-      x = 0;
-    }
-
-    double right = (-y - x)*speed;
-    double left = (- (y - x))*speed;
-    if (left > 1) {
-        left = 1;
-    }
-    if (right > 1) {
-        right = 1;
-    }
-    if (inverted == true) {
-        drive(-left*10, -right*10);
-    }
-    else
-    {
-        drive(left*10, right*10);
-    }
-}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    drive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get()>1;
   }
 }

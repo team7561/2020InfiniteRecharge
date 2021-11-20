@@ -8,6 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalSource;
+import edu.wpi.first.wpilibj.DutyCycle;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.SwerveMode;
 
@@ -18,6 +22,8 @@ public class Drivetrain extends SubsystemBase {
     public SwerveModule moduleFL, moduleFR, moduleBL, moduleBR;
     double angleFL, angleFR, angleBL, angleBR;
     SwerveMode m_mode;
+    DigitalSource absolute_encoder_source;
+    DutyCycle absolute_encoder;
 
     
 
@@ -27,6 +33,8 @@ public class Drivetrain extends SubsystemBase {
         moduleFR = new SwerveModule(Constants.SWERVE_FR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_FR, Constants.CAN_ID_STEERING_FR, "FR");
         moduleBL = new SwerveModule(Constants.SWERVE_BL_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BL, Constants.CAN_ID_STEERING_BL, "BL");
         moduleBR = new SwerveModule(Constants.SWERVE_BR_OFFSET_ANGLE, Constants.CAN_ID_DRIVING_BR, Constants.CAN_ID_STEERING_BR, "BR");
+        absolute_encoder_source = new DigitalInput(0);
+        absolute_encoder = new DutyCycle(absolute_encoder_source);
         resetEncoders();
     }
 
@@ -147,12 +155,23 @@ public class Drivetrain extends SubsystemBase {
     {
         m_mode = mode;
     }
+    public double getPulses()
+    {
+        return absolute_encoder.getOutput();
+    }
+    public double getAngle()
+    {
+        return absolute_encoder.getOutput()*360-180;
+    }
     public void updateDashboard()
     {
         moduleFL.updateDashboard();
         moduleFR.updateDashboard();
         moduleBL.updateDashboard();
         moduleBR.updateDashboard();
+        SmartDashboard.putNumber("Encoder Pulses Output", absolute_encoder.getOutput());
+        SmartDashboard.putNumber("Encoder Pulses Output Raw", absolute_encoder.getOutputRaw());
+        SmartDashboard.putNumber("Encoder Pulses Frequency", absolute_encoder.getFrequency());
     }
 
 }

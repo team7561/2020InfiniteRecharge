@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
@@ -16,8 +15,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class SwerveModule extends SubsystemBase {
     /**
@@ -166,7 +163,7 @@ public class SwerveModule extends SubsystemBase {
         }
         if (m_driving)
         {
-            m_driveMotor.set(driving_m_setpoint/10);
+            m_driveMotor.set(driving_m_setpoint/3);
             /*m_driving_pidController.setOutputRange(driving_kMinOutput, driving_kMaxOutput); 
             m_driving_pidController.setReference(driving_m_setpoint, ControlType.kVelocity);*/
         }
@@ -249,6 +246,7 @@ public class SwerveModule extends SubsystemBase {
     }
     public void updateDashboard()
     {
+        SmartDashboard.putNumber(m_pos+"_DrivingSP", driving_m_setpoint);
         SmartDashboard.putNumber(m_pos+"_Speed", getSpeed());
         SmartDashboard.putNumber(m_pos+"_RawDrivespeed", getRawSpeed());
         SmartDashboard.putNumber(m_pos+"_RawSteerSpeed", getSteerSpeed());

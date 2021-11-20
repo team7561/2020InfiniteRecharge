@@ -45,5 +45,14 @@ public class Constants {
 
     public static int CAN_ID_DRIVING_BR = 7;
     public static int CAN_ID_STEERING_BR = 8;
+
+    public static int CAN_ID_CLIMBER_WINCH = 10;
+    public static int CAN_ID_CLIMBER_DEPLOY = 11;
+
+    public static int CAN_ID_SHOOTER_A = 20;
+    public static int CAN_ID_SHOOTER_B = 21;
+
+    
+    public static int CAN_ID_INTAKE = 30;
     
 }

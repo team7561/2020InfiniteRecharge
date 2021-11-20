@@ -30,7 +30,6 @@ public class DT_ArcadeDrive3 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.updateDashboard();
     double x = m_x.getAsDouble();
     double y = m_y.getAsDouble();
     double speed = m_speed.getAsDouble();
@@ -69,8 +68,8 @@ public class DT_ArcadeDrive3 extends CommandBase {
 
     SmartDashboard.putNumber("m_x", m_x.getAsDouble());
     SmartDashboard.putNumber("m_y", m_y.getAsDouble());
+    SmartDashboard.putNumber("m_power", m_power);
     SmartDashboard.putNumber("m_twist", m_twist.getAsDouble());
-    m_subsystem.updateDashboard();
   }
 
   public void drive(double leftSpeed, double rightSpeed) {
