@@ -1,0 +1,374 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2021-07-31 17:10:00
+count workspace : c:\Users\Joshua\Documents\GitHub\2020InfiniteRecharge\2020MainRobot
+total files : 348
+total code lines : 5519
+total comment lines : 1181
+total blank lines : 756
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |          .json|           1780|              0|             22|     32|
+   |            .md|             22|              0|              2|   0.40|
+   |          .java|           3434|           1097|            674|     62|
+   |           .txt|              3|              0|              0|  0.054|
+   |        .gradle|             69|             24|             13|    1.3|
+   |           .bat|             42|              0|              9|   0.76|
+   |               |            159|             59|             35|    2.9|
+   |    .properties|              7|              1|              0|   0.13|
+   |            .MF|              2|              0|              1|  0.036|
+   |           .bin|              1|              0|              0|  0.018|
+   -------------------------------------------------------------------------
+.gitignore, code is 82, comment is 58, blank is 24.
+.gradle\6.0.1\executionHistory\executionHistory.bin, it is a binary file.
+.gradle\6.0.1\executionHistory\executionHistory.lock, it is a binary file.
+.gradle\6.0.1\fileChanges\last-build.bin, code is 1, comment is 0, blank is 0.
+.gradle\6.0.1\fileContent\fileContent.lock, it is a binary file.
+.gradle\6.0.1\fileHashes\fileHashes.bin, it is a binary file.
+.gradle\6.0.1\fileHashes\fileHashes.lock, it is a binary file.
+.gradle\6.0.1\fileHashes\resourceHashesCache.bin, it is a binary file.
+.gradle\6.0.1\gc.properties, code is 0, comment is 0, blank is 0.
+.gradle\6.0.1\javaCompile\classAnalysis.bin, it is a binary file.
+.gradle\6.0.1\javaCompile\jarAnalysis.bin, it is a binary file.
+.gradle\6.0.1\javaCompile\javaCompile.lock, it is a binary file.
+.gradle\6.0.1\javaCompile\taskHistory.bin, it is a binary file.
+.gradle\buildOutputCleanup\buildOutputCleanup.lock, it is a binary file.
+.gradle\buildOutputCleanup\cache.properties, code is 2, comment is 0, blank is 0.
+.gradle\buildOutputCleanup\outputFiles.bin, it is a binary file.
+.gradle\vcs-1\gc.properties, code is 0, comment is 0, blank is 0.
+.wpilib\wpilib_preferences.json, code is 6, comment is 0, blank is 0.
+build.gradle, code is 43, comment is 24, blank is 12.
+build\classes\java\main\frc\robot\autonomous\Auto1.class, it is a binary file.
+build\classes\java\main\frc\robot\autonomous\Coordinate.class, it is a binary file.
+build\classes\java\main\frc\robot\autonomous\ViveMeasurements.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\AutoBarrel.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\Barrel2.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\Bounce.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\DriveToPoint.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\FollowTestPath.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\PathABlue.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\PathBRed.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\Slalom.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\TestPath.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\autonomous\UnnamedPath.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\climber\Climb_LowerHook.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\climber\Climb_RaiseHook.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\climber\Climb_ReverseWinch.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\climber\Climb_StartWinch.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\climber\Climb_StopWinch.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\commandgroups\AutoStrategy1.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\commandgroups\R_ShooterInjector.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\commandgroups\Slow_DrawerSlides.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_Extend.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_Retract.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_SpinLeft.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_SpinPositionControl.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_SpinRight.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_SpinToColour.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\controlpanelmanipulator\CPM_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_ArcadeDrive.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_Drive_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_DriveDistance.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_DrivePath.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_InitDrivePose.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_ResetDrivePose.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_SetPose.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_TurnToAngle.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\drivetrain\DT_TurnToVisionAngle.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\injector\Injector_Reverse.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\injector\Injector_Reverse_copy.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\injector\Injector_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\injector\Injector_Transfer_Ball.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_EjectBall.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_ExtendHopper.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_GrabBall.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_Grabbing_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_RetractHopper.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\intakehopper\Intake_ToggleHopper.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\LED_Controller\LED_Select_Random_Colour.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Auto_Hood.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Auto_Vision_Speed.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Extend.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Reset_Hood.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Retract.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Set_Hood_Setpoint.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_ShootAtAngle.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_ShootAtSpeed.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_ShootAtSpeedFinish.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Shooting_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Stop.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\shooter\Shooter_Stop_Hood.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\TimerCommand.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\visioncontroller\VC_Blink_LED.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\visioncontroller\VC_TurnOffLED.class, it is a binary file.
+build\classes\java\main\frc\robot\commands\visioncontroller\VC_TurnOnLED.class, it is a binary file.
+build\classes\java\main\frc\robot\Constants.class, it is a binary file.
+build\classes\java\main\frc\robot\DPadButton$Direction.class, it is a binary file.
+build\classes\java\main\frc\robot\DPadButton.class, it is a binary file.
+build\classes\java\main\frc\robot\JoystickAnalogButton.class, it is a binary file.
+build\classes\java\main\frc\robot\Main.class, it is a binary file.
+build\classes\java\main\frc\robot\Ports.class, it is a binary file.
+build\classes\java\main\frc\robot\Robot.class, it is a binary file.
+build\classes\java\main\frc\robot\RobotContainer.class, it is a binary file.
+build\classes\java\main\frc\robot\Speeds.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\Climber.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\ColourSensor.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\ControlPanelManipulator.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\Drivetrain.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\ExampleSubsystem.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\Injector.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\IntakeHopper.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\LEDController.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\Shooter.class, it is a binary file.
+build\classes\java\main\frc\robot\subsystems\VisionController.class, it is a binary file.
+build\classes\java\main\frc\robot\utility\EulerAngles.class, it is a binary file.
+build\classes\java\main\frc\robot\utility\Math.class, it is a binary file.
+build\classes\java\main\frc\robot\utility\Quaternion.class, it is a binary file.
+build\debug\debuginfo.json, code is 16, comment is 0, blank is 0.
+build\debug\desktopinfo.json, code is 12, comment is 0, blank is 1.
+build\debug\partial\2020MainRobot_java.json, code is 12, comment is 0, blank is 1.
+build\debug\riopartial\2020MainRobot-Imported.json, code is 9, comment is 0, blank is 0.
+build\debug\riopartial\2020MainRobot.json, code is 9, comment is 0, blank is 0.
+build\libs\2020MainRobot-Imported.jar, it is a binary file.
+build\libs\2020MainRobot.jar, it is a binary file.
+build\tmp\expandedArchives\canutils-5.18.3-windowsx86-64.zip_5cb6f1fab6f6fde4effea5ee92437a3b\windows\x86-64\shared\CTRE_PhoenixCanutils.dll, it is a binary file.
+build\tmp\expandedArchives\cci-5.18.3-linuxathena.zip_cf4719e6fc6681b529428dcc66ec01c0\linux\athena\shared\libCTRE_PhoenixCCI.so, it is a binary file.
+build\tmp\expandedArchives\cci-5.18.3-windowsx86-64.zip_926f3fefee95ac038f5121e3c7aca06a\windows\x86-64\shared\CTRE_PhoenixCCI.dll, it is a binary file.
+build\tmp\expandedArchives\core-5.18.3-linuxathena.zip_31f372c37c2df45ec6682fc74add8e28\linux\athena\shared\libCTRE_PhoenixCore.so, it is a binary file.
+build\tmp\expandedArchives\core-5.18.3-windowsx86-64.zip_b0e6648e7ead28c204a33926f6d26310\windows\x86-64\shared\CTRE_PhoenixCore.dll, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.1.2-linuxathena.zip_750c226b9188d46094c5a0344567e9cb\linux\athena\shared\libcscore.so, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.1.2-linuxathena.zip_750c226b9188d46094c5a0344567e9cb\linux\athena\shared\libcscorejni.so, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.1.2-windowsx86-64.zip_64caa035eb03ec40edcba51d50923333\windows\x86-64\shared\cscore.dll, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.1.2-windowsx86-64.zip_64caa035eb03ec40edcba51d50923333\windows\x86-64\shared\cscorejni.dll, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.2.2-linuxathena.zip_469003f6178040b869686dc9e5e622d6\linux\athena\shared\libcscore.so, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.2.2-linuxathena.zip_469003f6178040b869686dc9e5e622d6\linux\athena\shared\libcscorejni.so, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.2.2-windowsx86-64.zip_bd2a4bb97c432fc7e8a8ce21b9d9dd62\windows\x86-64\shared\cscore.dll, it is a binary file.
+build\tmp\expandedArchives\cscore-cpp-2021.2.2-windowsx86-64.zip_bd2a4bb97c432fc7e8a8ce21b9d9dd62\windows\x86-64\shared\cscorejni.dll, it is a binary file.
+build\tmp\expandedArchives\diagnostics-5.18.3-linuxathena.zip_315e744ec15cc5dbcc9c128f87333aed\linux\athena\shared\libCTRE_PhoenixDiagnostics.so, it is a binary file.
+build\tmp\expandedArchives\diagnostics-5.18.3-windowsx86-64.zip_67161419c4ddc5c3401f4e2305fca775\windows\x86-64\shared\CTRE_PhoenixDiagnostics.dll, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.1.2-linuxathena.zip_1c3ef5a5512cf2b357a82ca5be1e2ae2\linux\athena\shared\libwpiHal.so, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.1.2-linuxathena.zip_1c3ef5a5512cf2b357a82ca5be1e2ae2\linux\athena\shared\libwpiHaljni.so, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.1.2-windowsx86-64.zip_bbd24cf9292df49a77ed6c722c2c5ee2\windows\x86-64\shared\wpiHal.dll, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.1.2-windowsx86-64.zip_bbd24cf9292df49a77ed6c722c2c5ee2\windows\x86-64\shared\wpiHaljni.dll, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.2.2-linuxathena.zip_e067dba4455d661bb9cbea462d88db4b\linux\athena\shared\libwpiHal.so, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.2.2-linuxathena.zip_e067dba4455d661bb9cbea462d88db4b\linux\athena\shared\libwpiHaljni.so, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.2.2-windowsx86-64.zip_f93aebf7ed1ef7ece27952f9396e1ae7\windows\x86-64\shared\wpiHal.dll, it is a binary file.
+build\tmp\expandedArchives\hal-cpp-2021.2.2-windowsx86-64.zip_f93aebf7ed1ef7ece27952f9396e1ae7\windows\x86-64\shared\wpiHaljni.dll, it is a binary file.
+build\tmp\expandedArchives\halsim_ds_socket-2021.2.2-windowsx86-64.zip_32ee0d595231a6c6d5a0455f7d794cf5\windows\x86-64\shared\halsim_ds_socket.dll, it is a binary file.
+build\tmp\expandedArchives\halsim_gui-2021.2.2-windowsx86-64.zip_d9b742accb7d26f71bdac05b796e7cc3\windows\x86-64\shared\halsim_gui.dll, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.1.2-linuxathena.zip_25ca7e4e1efdb8fa3d4d888148525cb4\linux\athena\shared\libntcore.so, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.1.2-linuxathena.zip_25ca7e4e1efdb8fa3d4d888148525cb4\linux\athena\shared\libntcorejni.so, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.1.2-windowsx86-64.zip_6ae0f26f36e1dcc0b0d8b7d7d5db12bb\windows\x86-64\shared\ntcore.dll, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.1.2-windowsx86-64.zip_6ae0f26f36e1dcc0b0d8b7d7d5db12bb\windows\x86-64\shared\ntcorejni.dll, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.2.2-linuxathena.zip_dd37f80b945a6b9ea211e6b391f63d59\linux\athena\shared\libntcore.so, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.2.2-linuxathena.zip_dd37f80b945a6b9ea211e6b391f63d59\linux\athena\shared\libntcorejni.so, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.2.2-windowsx86-64.zip_1e764e1439cc4ecfe944831262e3b42e\windows\x86-64\shared\ntcore.dll, it is a binary file.
+build\tmp\expandedArchives\ntcore-cpp-2021.2.2-windowsx86-64.zip_1e764e1439cc4ecfe944831262e3b42e\windows\x86-64\shared\ntcorejni.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_calib3d.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_core.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_features2d.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_flann.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_highgui.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_imgcodecs.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_imgproc.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_java347.so, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_ml.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_objdetect.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_photo.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_shape.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_stitching.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_superres.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_video.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_videoio.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-linuxathena.zip_a13e35f7ea5f447a741134dc3e7cd6a6\linux\athena\shared\libopencv_videostab.so.3.4, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_calib3d347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_core347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_features2d347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_flann347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_highgui347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_imgcodecs347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_imgproc347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_java347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_ml347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_objdetect347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_photo347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_shape347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_stitching347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_superres347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_video347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_videoio347.dll, it is a binary file.
+build\tmp\expandedArchives\opencv-cpp-3.4.7-5-windowsx86-64.zip_fffab528a2a8fe3f8b05d8b9ec5a431d\windows\x86-64\shared\opencv_videostab347.dll, it is a binary file.
+build\tmp\expandedArchives\platform-stub-5.18.3-windowsx86-64.zip_120f80e3ae2e93fdc7e8affca780cd67\windows\x86-64\shared\CTRE_PhoenixPlatform.dll, it is a binary file.
+build\tmp\expandedArchives\SparkMax-driver-1.5.2-linuxathena.zip_bfb1335f5d4e82cc2615b8d1a4c06d92\linux\athena\shared\libSparkMaxDriver.so, it is a binary file.
+build\tmp\expandedArchives\SparkMax-driver-1.5.2-windowsx86-64.zip_19442b87944a928d745f75e00e0f9a5a\windows\x86-64\shared\SparkMaxDriver.dll, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.1.2-linuxathena.zip_07f1b87d249e578d38cf6e5a7e355f4a\linux\athena\shared\libwpimath.so, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.1.2-linuxathena.zip_07f1b87d249e578d38cf6e5a7e355f4a\linux\athena\shared\libwpimathjni.so, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.1.2-windowsx86-64.zip_445c70fc28a937b2a029eb89efdaa526\windows\x86-64\shared\wpimath.dll, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.1.2-windowsx86-64.zip_445c70fc28a937b2a029eb89efdaa526\windows\x86-64\shared\wpimathjni.dll, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.2.2-linuxathena.zip_6c120e12eda677ad4bd02b44f97df717\linux\athena\shared\libwpimath.so, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.2.2-linuxathena.zip_6c120e12eda677ad4bd02b44f97df717\linux\athena\shared\libwpimathjni.so, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.2.2-windowsx86-64.zip_834f1921f10fb3de182c9d24d64129ea\windows\x86-64\shared\wpimath.dll, it is a binary file.
+build\tmp\expandedArchives\wpimath-cpp-2021.2.2-windowsx86-64.zip_834f1921f10fb3de182c9d24d64129ea\windows\x86-64\shared\wpimathjni.dll, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.1.2-linuxathena.zip_3828fa20bd0c980160d71250c9907971\linux\athena\shared\libwpiutil.so, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.1.2-linuxathena.zip_3828fa20bd0c980160d71250c9907971\linux\athena\shared\libwpiutiljni.so, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.1.2-windowsx86-64.zip_e7dbdf87c2c292239daf013d7c9f8dbe\windows\x86-64\shared\wpiutil.dll, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.1.2-windowsx86-64.zip_e7dbdf87c2c292239daf013d7c9f8dbe\windows\x86-64\shared\wpiutiljni.dll, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.2.2-linuxathena.zip_49c59468df0780d2dec66945c0c3511f\linux\athena\shared\libwpiutil.so, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.2.2-linuxathena.zip_49c59468df0780d2dec66945c0c3511f\linux\athena\shared\libwpiutiljni.so, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.2.2-windowsx86-64.zip_8fcf93096fd5825eb1d2d43470c72713\windows\x86-64\shared\wpiutil.dll, it is a binary file.
+build\tmp\expandedArchives\wpiutil-cpp-2021.2.2-windowsx86-64.zip_8fcf93096fd5825eb1d2d43470c72713\windows\x86-64\shared\wpiutiljni.dll, it is a binary file.
+build\tmp\jar\MANIFEST.MF, code is 2, comment is 0, blank is 1.
+build\tmp\jniExtractDir\cscore.dll, it is a binary file.
+build\tmp\jniExtractDir\cscorejni.dll, it is a binary file.
+build\tmp\jniExtractDir\CTRE_PhoenixCanutils.dll, it is a binary file.
+build\tmp\jniExtractDir\CTRE_PhoenixCCI.dll, it is a binary file.
+build\tmp\jniExtractDir\CTRE_PhoenixCore.dll, it is a binary file.
+build\tmp\jniExtractDir\CTRE_PhoenixDiagnostics.dll, it is a binary file.
+build\tmp\jniExtractDir\CTRE_PhoenixPlatform.dll, it is a binary file.
+build\tmp\jniExtractDir\ntcore.dll, it is a binary file.
+build\tmp\jniExtractDir\ntcorejni.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_calib3d347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_core347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_features2d347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_flann347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_highgui347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_imgcodecs347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_imgproc347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_java347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_ml347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_objdetect347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_photo347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_shape347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_stitching347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_superres347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_video347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_videoio347.dll, it is a binary file.
+build\tmp\jniExtractDir\opencv_videostab347.dll, it is a binary file.
+build\tmp\jniExtractDir\SparkMaxDriver.dll, it is a binary file.
+build\tmp\jniExtractDir\wpiHal.dll, it is a binary file.
+build\tmp\jniExtractDir\wpiHaljni.dll, it is a binary file.
+build\tmp\jniExtractDir\wpimath.dll, it is a binary file.
+build\tmp\jniExtractDir\wpimathjni.dll, it is a binary file.
+build\tmp\jniExtractDir\wpiutil.dll, it is a binary file.
+build\tmp\jniExtractDir\wpiutiljni.dll, it is a binary file.
+gradle\wrapper\gradle-wrapper.jar, it is a binary file.
+gradle\wrapper\gradle-wrapper.properties, code is 5, comment is 1, blank is 0.
+gradlew, code is 77, comment is 1, blank is 11.
+gradlew.bat, code is 42, comment is 0, blank is 9.
+settings.gradle, code is 26, comment is 0, blank is 1.
+shuffleboard.json, code is 487, comment is 0, blank is 0.
+shuffleboard_1080p.json, code is 454, comment is 0, blank is 0.
+shuffleboard_768p.json, code is 454, comment is 0, blank is 0.
+src\main\deploy\example.txt, code is 3, comment is 0, blank is 0.
+src\main\deploy\output\Barrel.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\BarrelRacing.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Bounce.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Bounce2.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Bounce3.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Bounce4.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Forward.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\PathA_Blue.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\PathA_Red.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Slalom.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Test path.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\output\Unnamed.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\paths\output\TestPath2.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\paths\output\TestPath3.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\paths\TestPath1.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\paths\TestPath2.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\deploy\paths\TestPath3.wpilib.json, code is 1, comment is 0, blank is 0.
+src\main\java\frc\robot\autonomous\Auto1.java, code is 72, comment is 3, blank is 8.
+src\main\java\frc\robot\autonomous\Coordinate.java, code is 38, comment is 0, blank is 3.
+src\main\java\frc\robot\autonomous\ViveMeasurements.java, code is 105, comment is 0, blank is 4.
+src\main\java\frc\robot\commands\autonomous\AutoBarrel.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\autonomous\Barrel2.java, code is 32, comment is 18, blank is 4.
+src\main\java\frc\robot\commands\autonomous\Bounce.java, code is 43, comment is 15, blank is 3.
+src\main\java\frc\robot\commands\autonomous\DriveToPoint.java, code is 100, comment is 8, blank is 21.
+src\main\java\frc\robot\commands\autonomous\FollowTestPath.java, code is 25, comment is 15, blank is 10.
+src\main\java\frc\robot\commands\autonomous\PathABlue.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\autonomous\PathBRed.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\autonomous\Slalom.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\autonomous\TestPath.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\autonomous\UnnamedPath.java, code is 27, comment is 15, blank is 4.
+src\main\java\frc\robot\commands\climber\Climb_LowerHook.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\climber\Climb_RaiseHook.java, code is 32, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\climber\Climb_ReverseWinch.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\climber\Climb_StartWinch.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\climber\Climb_StopWinch.java, code is 25, comment is 13, blank is 9.
+src\main\java\frc\robot\commands\commandgroups\AutoStrategy1.java, code is 41, comment is 8, blank is 6.
+src\main\java\frc\robot\commands\commandgroups\R_ShooterInjector.java, code is 14, comment is 2, blank is 6.
+src\main\java\frc\robot\commands\commandgroups\Slow_DrawerSlides.java, code is 12, comment is 8, blank is 6.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_Extend.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_Retract.java, code is 29, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_SpinLeft.java, code is 27, comment is 13, blank is 9.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_SpinPositionControl.java, code is 30, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_SpinRight.java, code is 27, comment is 13, blank is 9.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_SpinToColour.java, code is 31, comment is 13, blank is 9.
+src\main\java\frc\robot\commands\controlpanelmanipulator\CPM_Stop.java, code is 25, comment is 15, blank is 7.
+src\main\java\frc\robot\commands\drivetrain\DT_ArcadeDrive.java, code is 30, comment is 10, blank is 9.
+src\main\java\frc\robot\commands\drivetrain\DT_Drive_Stop.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\drivetrain\DT_DriveDistance.java, code is 63, comment is 13, blank is 12.
+src\main\java\frc\robot\commands\drivetrain\DT_DrivePath.java, code is 14, comment is 18, blank is 2.
+src\main\java\frc\robot\commands\drivetrain\DT_InitDrivePose.java, code is 17, comment is 15, blank is 6.
+src\main\java\frc\robot\commands\drivetrain\DT_ResetDrivePose.java, code is 14, comment is 15, blank is 6.
+src\main\java\frc\robot\commands\drivetrain\DT_SetPose.java, code is 17, comment is 0, blank is 7.
+src\main\java\frc\robot\commands\drivetrain\DT_TurnToAngle.java, code is 52, comment is 14, blank is 9.
+src\main\java\frc\robot\commands\drivetrain\DT_TurnToVisionAngle.java, code is 101, comment is 15, blank is 12.
+src\main\java\frc\robot\commands\injector\Injector_Reverse.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\injector\Injector_Reverse_copy.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\injector\Injector_Stop.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\injector\Injector_Transfer_Ball.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_EjectBall.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_ExtendHopper.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_GrabBall.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_Grabbing_Stop.java, code is 26, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_RetractHopper.java, code is 27, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\intakehopper\Intake_ToggleHopper.java, code is 33, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\LED_Controller\LED_Select_Random_Colour.java, code is 25, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\shooter\Shooter_Auto_Hood.java, code is 51, comment is 15, blank is 8.
+src\main\java\frc\robot\commands\shooter\Shooter_Auto_Vision_Speed.java, code is 33, comment is 15, blank is 10.
+src\main\java\frc\robot\commands\shooter\Shooter_Extend.java, code is 24, comment is 14, blank is 5.
+src\main\java\frc\robot\commands\shooter\Shooter_Reset_Hood.java, code is 19, comment is 14, blank is 5.
+src\main\java\frc\robot\commands\shooter\Shooter_Retract.java, code is 21, comment is 13, blank is 5.
+src\main\java\frc\robot\commands\shooter\Shooter_Set_Hood_Setpoint.java, code is 22, comment is 11, blank is 7.
+src\main\java\frc\robot\commands\shooter\Shooter_ShootAtAngle.java, code is 53, comment is 15, blank is 11.
+src\main\java\frc\robot\commands\shooter\Shooter_ShootAtSpeed.java, code is 54, comment is 14, blank is 8.
+src\main\java\frc\robot\commands\shooter\Shooter_ShootAtSpeedFinish.java, code is 49, comment is 15, blank is 8.
+src\main\java\frc\robot\commands\shooter\Shooter_Shooting_Stop.java, code is 29, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\shooter\Shooter_Stop.java, code is 21, comment is 14, blank is 5.
+src\main\java\frc\robot\commands\shooter\Shooter_Stop_Hood.java, code is 21, comment is 14, blank is 5.
+src\main\java\frc\robot\commands\TimerCommand.java, code is 27, comment is 12, blank is 9.
+src\main\java\frc\robot\commands\visioncontroller\VC_Blink_LED.java, code is 25, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\visioncontroller\VC_TurnOffLED.java, code is 25, comment is 13, blank is 7.
+src\main\java\frc\robot\commands\visioncontroller\VC_TurnOnLED.java, code is 25, comment is 13, blank is 7.
+src\main\java\frc\robot\Constants.java, code is 42, comment is 4, blank is 8.
+src\main\java\frc\robot\DPadButton.java, code is 23, comment is 0, blank is 9.
+src\main\java\frc\robot\JoystickAnalogButton.java, code is 30, comment is 49, blank is 10.
+src\main\java\frc\robot\Main.java, code is 9, comment is 16, blank is 4.
+src\main\java\frc\robot\Ports.java, code is 39, comment is 7, blank is 10.
+src\main\java\frc\robot\Robot.java, code is 69, comment is 22, blank is 13.
+src\main\java\frc\robot\RobotContainer.java, code is 143, comment is 68, blank is 37.
+src\main\java\frc\robot\Speeds.java, code is 19, comment is 5, blank is 4.
+src\main\java\frc\robot\subsystems\Climber.java, code is 69, comment is 9, blank is 9.
+src\main\java\frc\robot\subsystems\ColourSensor.java, code is 71, comment is 37, blank is 12.
+src\main\java\frc\robot\subsystems\ControlPanelManipulator.java, code is 58, comment is 0, blank is 4.
+src\main\java\frc\robot\subsystems\Drivetrain.java, code is 242, comment is 44, blank is 39.
+src\main\java\frc\robot\subsystems\ExampleSubsystem.java, code is 9, comment is 10, blank is 5.
+src\main\java\frc\robot\subsystems\Injector.java, code is 49, comment is 3, blank is 10.
+src\main\java\frc\robot\subsystems\IntakeHopper.java, code is 60, comment is 11, blank is 13.
+src\main\java\frc\robot\subsystems\LEDController.java, code is 26, comment is 0, blank is 7.
+src\main\java\frc\robot\subsystems\Shooter.java, code is 214, comment is 12, blank is 21.
+src\main\java\frc\robot\subsystems\VisionController.java, code is 47, comment is 1, blank is 5.
+src\main\java\frc\robot\utility\EulerAngles.java, code is 32, comment is 0, blank is 3.
+src\main\java\frc\robot\utility\Math.java, code is 15, comment is 0, blank is 1.
+src\main\java\frc\robot\utility\Quaternion.java, code is 63, comment is 0, blank is 2.
+vendordeps\Phoenix.json, code is 167, comment is 0, blank is 13.
+vendordeps\REVColorSensorV3.json, code is 35, comment is 0, blank is 2.
+vendordeps\REVRobotics.json, code is 66, comment is 0, blank is 4.
+vendordeps\WPILibNewCommands.json, code is 36, comment is 0, blank is 1.
+WPILib-License.md, code is 22, comment is 0, blank is 2.
+===============================================================================

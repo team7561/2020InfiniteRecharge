@@ -1,0 +1,57 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import frc.robot.RobotMap;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+//import frc.robot.TeleoperationCommand;
+
+
+public class DriveSubsystem extends SubsystemBase {
+  /** Creates a new DriveSubsystem. */
+  public DriveSubsystem() {
+
+ // instantiate new motor controller objects 
+ public VictorSPX leftFrontMotor = new VictorSPX(RobotMap.leftFrontMotor);
+ public VictorSPX leftRearMotor = new VictorSPX(RobotMap.leftRearMotor);
+ public VictorSPX rightFrontMotor = new VictorSPX(RobotMap.rightFrontMotor);
+ public VictorSPX rightRearMotor = new VictorSPX(RobotMap.rightRearMotor);
+ 
+ //EG SpeedControllerGroup m_right = new SpeedControllerGroup(m_frontRight, m_rearRight);
+ 
+ SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftFrontMotor,leftRearMotor);
+ SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+ 
+ // instantiate a new DifferentialDrive object and assign motor controllers to differential drive
+ 
+ public DifferentialDrive drive = new DifferentialDrive(leftMotors,rightMotors);
+ 
+ // create constructor function
+ public void DriveSubsytem (){
+   leftRearMotor.follow(leftFrontMotor);
+   rightRearMotor.follow(rightFrontMotor);
+ }
+ // add manualDrive() method (which I'll keep as teleopdrive)
+ public void teleopDrive(double move, double turn){
+   drive.arcadeDrive(move, turn);
+ }
+ 
+ 
+   @Override
+   public void initDefaultCommand() {
+     // Set the default command for a subsystem here.
+   setDefaultCommand(new TeleoperationCommand());
+   }
+
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}

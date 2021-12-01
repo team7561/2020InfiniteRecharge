@@ -29,10 +29,16 @@ public class Constants {
     public static double ANGLE_TOLERANCE = 5;
 
 
-    public static double SWERVE_FL_OFFSET_ANGLE = 0;
-    public static double SWERVE_FR_OFFSET_ANGLE = 0;
-    public static double SWERVE_BL_OFFSET_ANGLE = 0;
-    public static double SWERVE_BR_OFFSET_ANGLE = 0;
+    public static double SWERVE_FL_OFFSET_ANGLE = 0.7623;
+    public static double SWERVE_FR_OFFSET_ANGLE = 0.7; // Was 0.6407
+    public static double SWERVE_BL_OFFSET_ANGLE = 0.9438;
+    public static double SWERVE_BR_OFFSET_ANGLE = 0.47797;
+
+    public static int SWERVE_FL_ENCODER_PORT = 0;
+    public static int SWERVE_FR_ENCODER_PORT = 1;
+    public static int SWERVE_BL_ENCODER_PORT = 2;
+    public static int SWERVE_BR_ENCODER_PORT = 3;
+
 
     public static int CAN_ID_DRIVING_FL = 1;
     public static int CAN_ID_STEERING_FL = 2;
