@@ -759,7 +759,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "5,1": {
+          "8,0": {
             "size": [
               2,
               1
@@ -770,7 +770,7 @@
               "_title": "SmartDashboard/BL_EncoderOutput"
             }
           },
-          "5,2": {
+          "5,0": {
             "size": [
               2,
               1
@@ -802,14 +802,119 @@
               "_source0": "network_table:///SmartDashboard/FR_CurrentAngle",
               "_title": "SmartDashboard/FR_CurrentAngle"
             }
+          },
+          "9,2": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/BL_Offset_Angle",
+              "_title": "SmartDashboard/BL_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/BR_Offset_Angle",
+              "_title": "/SmartDashboard/BR_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "8,3": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/BR_Offset_Angle",
+              "_title": "SmartDashboard/BR_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "8,4": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/FL_Offset_Angle",
+              "_title": "SmartDashboard/FL_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "8,5": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/FR_Offset_Angle",
+              "_title": "SmartDashboard/FR_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "3,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Graph",
+              "_source0": "network_table:///SmartDashboard/target_angle",
+              "_title": "SmartDashboard/target_angle",
+              "Graph/Visible time": 30.0,
+              "Graph/X-axis auto scrolling": true,
+              "Y-axis/Automatic bounds": true,
+              "Y-axis/Upper bound": 1.0,
+              "Y-axis/Lower bound": -1.0,
+              "Y-axis/Unit": "ul",
+              "Visible data/SmartDashboard/target_angle": true
+            }
           }
         }
+      }
+    },
+    {
+      "title": "Tab 5",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {}
       }
     }
   ],
   "windowGeometry": {
-    "x": 140.0,
-    "y": 167.3333282470703,
+    "x": 30.0,
+    "y": 45.33333206176758,
     "width": 1846.0,
     "height": 1119.3333740234375
   }

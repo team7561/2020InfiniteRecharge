@@ -2,8 +2,10 @@ package frc.robot.commands.drivetrain;
 
 import frc.robot.SwerveMode;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.Constants;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -40,6 +42,24 @@ public class DT_ArcadeDrive2 extends CommandBase {
   public void execute() {
     abs_x = Math.abs(m_x.getAsDouble());
     abs_y = Math.abs(m_y.getAsDouble());
+
+    if (m_subsystem.moduleBL.getAngleOffset() != SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE))
+    {
+        m_subsystem.moduleBL.setAngleOffset(SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE));
+    }
+    if (m_subsystem.moduleBR.getAngleOffset() != SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE))
+    {
+        m_subsystem.moduleBR.setAngleOffset(SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE));
+    }
+    if (m_subsystem.moduleFL.getAngleOffset() != SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE))
+    {
+      m_subsystem.moduleFL.setAngleOffset(SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE));
+    }
+    if (m_subsystem.moduleFR.getAngleOffset() != SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE))
+    {
+      m_subsystem.moduleFR.setAngleOffset(SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE));
+    }
+    
 /*
     if( abs_x != 0 && abs_y != 0 ){
       if (m_y.getAsDouble() > 0 ){
@@ -55,23 +75,18 @@ public class DT_ArcadeDrive2 extends CommandBase {
 */
   m_power = Math.sqrt(Math.pow(abs_x , 2) + Math.pow(abs_y , 2)) * m_speed.getAsDouble();
   
-  target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
-  target_angle /= 2 * Math.PI;
-  //target_angle = 0.8;
-    System.out.println("Target Angle: "+target_angle);
+//  target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
+target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
+
+  target_angle = target_angle * 360 / (2 * Math.PI);
+  System.out.println(target_angle);
+
     SmartDashboard.putNumber("current_angle", current_angle);
     SmartDashboard.putNumber("measured_angle", m_subsystem.moduleBL.getAngle());
     SmartDashboard.putNumber("target_angle", target_angle);
 
     m_subsystem.setAngle(target_angle);
-
-    //arcadeDrive(m_y.getAsDouble(), m_x.getAsDouble(), m_speed.getAsDouble(), false);
-    SmartDashboard.putNumber("m_x", m_x.getAsDouble());
-    SmartDashboard.putNumber("m_y", m_y.getAsDouble());
-    SmartDashboard.putNumber("m_twist", m_twist.getAsDouble());
     m_subsystem.updateDashboard();
-    
-
     drive(m_power, m_power);
   }
 

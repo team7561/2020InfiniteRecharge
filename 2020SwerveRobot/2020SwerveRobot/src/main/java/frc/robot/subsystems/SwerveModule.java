@@ -58,6 +58,7 @@ public class SwerveModule extends SubsystemBase {
 
     public SwerveModule(double angleOffset, int encoderPort, int driveChannel, int steerChannel, String pos) {
         setAngleOffset(angleOffset);
+        SmartDashboard.putNumber(m_pos+"_Offset_Angle",getAngleOffset());
         m_angle = 0;
         m_driveMotor = new CANSparkMax(driveChannel, MotorType.kBrushless);
         m_steeringMotor = new CANSparkMax(steerChannel, MotorType.kBrushless);
@@ -114,35 +115,23 @@ public class SwerveModule extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
 
-        //m_steering_target = 170/360;
-        currentAngle = SmartDashboard.getNumber(m_pos+"_Angle", 0)-m_offset;
+        currentAngle = SmartDashboard.getNumber(m_pos+"_Angle", 0)-m_offset*360;
         if (currentAngle < 0)
         {
-            currentAngle += 1;
+            currentAngle += 360;
         }
-        double error = m_steering_target-currentAngle;
-        System.out.println(m_pos+"_currentAngle: " + currentAngle);
-        System.out.println(m_pos+"_Target Angle: " + m_steering_target);
-        System.out.println(m_pos+"_Error: " + error);
+        double error = (m_steering_target-currentAngle)%360;
+        if (error > 180)
+        {
+            error = error-180;
+        }
+        if (error < -180)
+        {
+            error = error+180;
+        }
         if (m_steering)
         {
-            m_steeringMotor.set(2*error);
-            /*
-            if (currentAngle > m_steering_target)
-            {
-                System.out.println("Need to go forwards");
-                System.out.println(currentAngle);
-                m_steeringMotor.set(0.1);
-            }
-            else
-            {
-                System.out.println("Need to go backwards");
-                System.out.println(currentAngle);
-                m_steeringMotor.set(-0.1);
-            }
-            */
-            //m_steering_sp = SmartDashboard.getNumber("Set Point", 0);
-            
+            m_steeringMotor.set(error/180);
         }
         else
         {
@@ -150,9 +139,7 @@ public class SwerveModule extends SubsystemBase {
         }
         if (m_driving)
         {
-            m_driveMotor.set(driving_m_setpoint*0.99);
-            /*m_driving_pidController.setOutputRange(driving_kMinOutput, driving_kMaxOutput); 
-            m_driving_pidController.setReference(driving_m_setpoint, ControlType.kVelocity);*/
+            m_driveMotor.set(driving_m_setpoint);
         }
         else
         {
@@ -165,7 +152,7 @@ public class SwerveModule extends SubsystemBase {
     }
     public double getAngle()
     {
-        return absolute_encoder.getOutput();
+        return absolute_encoder.getOutput()*360;
     }
 
     public void resetEncoders()
@@ -233,6 +220,10 @@ public class SwerveModule extends SubsystemBase {
         //
         m_offset = angleOffset;
     }
+
+    public double getAngleOffset(){
+        return m_offset;
+    }
     public void updateDashboard()
     {
         SmartDashboard.putNumber(m_pos+"_DrivingSP", driving_m_setpoint);
@@ -245,6 +236,7 @@ public class SwerveModule extends SubsystemBase {
         SmartDashboard.putNumber(m_pos+"_SP", steering_m_setpoint);
         SmartDashboard.putNumber(m_pos+"_EncoderOutput", absolute_encoder.getOutput());
         SmartDashboard.putNumber(m_pos+"_m_steering_target", m_steering_target);
+        
 
     }
     

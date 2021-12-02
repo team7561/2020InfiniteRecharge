@@ -20,9 +20,6 @@ public class Drivetrain extends SubsystemBase {
     double angleFL, angleFR, angleBL, angleBR;
     SwerveMode m_mode;
 
-
-    
-
     public Drivetrain() {
         m_mode = SwerveMode.CRAB; //
         moduleFL = new SwerveModule(Constants.SWERVE_FL_OFFSET_ANGLE, Constants.SWERVE_FL_ENCODER_PORT, Constants.CAN_ID_DRIVING_FL, Constants.CAN_ID_STEERING_FL, "FL");
