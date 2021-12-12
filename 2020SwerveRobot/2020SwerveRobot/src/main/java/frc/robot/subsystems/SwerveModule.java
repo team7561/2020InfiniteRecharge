@@ -85,7 +85,6 @@ public class SwerveModule extends SubsystemBase {
         m_driving = true;
 
         currentAngle = 0;
-        
 
         // PID coefficients
         driving_kP = 0.01; 
@@ -113,7 +112,6 @@ public class SwerveModule extends SubsystemBase {
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
 
         currentAngle = SmartDashboard.getNumber(m_pos+"_Angle", 0)-m_offset*360;
         if (currentAngle < 0)
@@ -121,17 +119,28 @@ public class SwerveModule extends SubsystemBase {
             currentAngle += 360;
         }
         double error = (m_steering_target-currentAngle)%360;
-        if (error > 180)
-        {
-            error = error-180;
+        double dir = 1;
+        SmartDashboard.putNumber(m_pos + "_Error", error);
+
+        if (error < 1){
+            dir = -0.1;
         }
-        if (error < -180)
+
+        if (error > 1)
         {
-            error = error+180;
+            dir = 0.1;
+        }        
+
+        if (Math.abs(error) > 180){
+            dir *= -1;
+            dir *= (360 - Math.abs(error))/7;
+        } else {
+            dir *= Math.abs(error)/7;
         }
+
         if (m_steering)
         {
-            m_steeringMotor.set(error/180);
+            m_steeringMotor.set(dir); 
         }
         else
         {
@@ -226,16 +235,16 @@ public class SwerveModule extends SubsystemBase {
     }
     public void updateDashboard()
     {
-        SmartDashboard.putNumber(m_pos+"_DrivingSP", driving_m_setpoint);
+        /*SmartDashboard.putNumber(m_pos+"_DrivingSP", driving_m_setpoint);
         SmartDashboard.putNumber(m_pos+"_Speed", getSpeed());
         SmartDashboard.putNumber(m_pos+"_RawDrivespeed", getRawSpeed());
-        SmartDashboard.putNumber(m_pos+"_RawSteerSpeed", getSteerSpeed());
+        SmartDashboard.putNumber(m_pos+"_RawSteerSpeed", getSteerSpeed());*/
         SmartDashboard.putNumber(m_pos+"_Angle", getAngle());
-        SmartDashboard.putNumber(m_pos+"_CurrentAngle", currentAngle);
+        /*SmartDashboard.putNumber(m_pos+"_CurrentAngle", currentAngle);
         SmartDashboard.putNumber(m_pos+"_PV", m_steeringMotor.getEncoder().getPosition());
         SmartDashboard.putNumber(m_pos+"_SP", steering_m_setpoint);
         SmartDashboard.putNumber(m_pos+"_EncoderOutput", absolute_encoder.getOutput());
-        SmartDashboard.putNumber(m_pos+"_m_steering_target", m_steering_target);
+        SmartDashboard.putNumber(m_pos+"_m_steering_target", m_steering_target);*/
         
 
     }

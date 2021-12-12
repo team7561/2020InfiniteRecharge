@@ -684,8 +684,7 @@
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
               "Y-axis/Lower bound": -1.0,
-              "Y-axis/Unit": "ul",
-              "Visible data/SmartDashboard/FL_RawSteerSpeed": true
+              "Y-axis/Unit": "ul"
             }
           },
           "3,4": {
@@ -702,8 +701,7 @@
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
               "Y-axis/Lower bound": -1.0,
-              "Y-axis/Unit": "ul",
-              "Visible data/SmartDashboard/FL_EncoderOutput": true
+              "Y-axis/Unit": "ul"
             }
           },
           "6,0": {
@@ -720,8 +718,7 @@
               "Y-axis/Automatic bounds": true,
               "Y-axis/Upper bound": 1.0,
               "Y-axis/Lower bound": -1.0,
-              "Y-axis/Unit": "ul",
-              "Visible data/SmartDashboard/FL_m_steering_target": true
+              "Y-axis/Unit": "ul"
             }
           },
           "1,1": {
@@ -803,7 +800,7 @@
               "_title": "SmartDashboard/FR_CurrentAngle"
             }
           },
-          "9,2": {
+          "8,1": {
             "size": [
               4,
               1
@@ -833,7 +830,7 @@
               "Visuals/Display value": true
             }
           },
-          "8,3": {
+          "8,2": {
             "size": [
               4,
               1
@@ -848,7 +845,7 @@
               "Visuals/Display value": true
             }
           },
-          "8,4": {
+          "8,3": {
             "size": [
               4,
               1
@@ -857,21 +854,6 @@
               "_type": "Number Slider",
               "_source0": "network_table:///SmartDashboard/FL_Offset_Angle",
               "_title": "SmartDashboard/FL_Offset_Angle",
-              "Slider Settings/Min": -1.0,
-              "Slider Settings/Max": 1.0,
-              "Slider Settings/Block increment": 0.0625,
-              "Visuals/Display value": true
-            }
-          },
-          "8,5": {
-            "size": [
-              4,
-              1
-            ],
-            "content": {
-              "_type": "Number Slider",
-              "_source0": "network_table:///SmartDashboard/FR_Offset_Angle",
-              "_title": "SmartDashboard/FR_Offset_Angle",
               "Slider Settings/Min": -1.0,
               "Slider Settings/Max": 1.0,
               "Slider Settings/Block increment": 0.0625,
@@ -895,6 +877,76 @@
               "Y-axis/Unit": "ul",
               "Visible data/SmartDashboard/target_angle": true
             }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Offset_Angle",
+              "_title": "SmartDashboard/BL_Offset_Angle"
+            }
+          },
+          "8,4": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Number Slider",
+              "_source0": "network_table:///SmartDashboard/FR_Offset_Angle",
+              "_title": "SmartDashboard/FR_Offset_Angle",
+              "Slider Settings/Min": -1.0,
+              "Slider Settings/Max": 1.0,
+              "Slider Settings/Block increment": 0.0625,
+              "Visuals/Display value": true
+            }
+          },
+          "7,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FL_Offset_Angle",
+              "_title": "/SmartDashboard/FL_Offset_Angle"
+            }
+          },
+          "7,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/FR_Offset_Angle",
+              "_title": "/SmartDashboard/FR_Offset_Angle"
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BR_Offset_Angle",
+              "_title": "/SmartDashboard/BR_Offset_Angle"
+            }
+          },
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/BL_Offset_Angle",
+              "_title": "/SmartDashboard/BL_Offset_Angle"
+            }
           }
         }
       }
@@ -913,9 +965,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 30.0,
-    "y": 45.33333206176758,
-    "width": 1846.0,
+    "x": 71.33333587646484,
+    "y": 230.0,
+    "width": 1779.3333740234375,
     "height": 1119.3333740234375
   }
 }

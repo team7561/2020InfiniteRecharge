@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.drivetrain.*;
+
 /*import frc.robot.commands.climber.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.subsystems.Intake;
@@ -50,6 +51,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    drivetrain.setDefaultCommand(new DT_ArcadeDrive2(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2));
+
   }
 
   /**
@@ -91,7 +94,7 @@ public class RobotContainer {
     trigger.whenPressed(new DT_ArcadeDrive2(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2),true);
     //trigger.whenReleased(new DT_Drive_Stop(drivetrain),true);
     button_7.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CRAB),true);
-    button_8.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.TANK),true);
+    button_8.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.SPIN),true);
     button_9.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.SNAKE),true);
     button_10.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CAR),true);
     button_11.whenPressed(new DT_Drive_ResetEncoders(drivetrain),true);

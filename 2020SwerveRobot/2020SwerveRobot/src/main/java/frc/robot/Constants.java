@@ -29,10 +29,11 @@ public class Constants {
     public static double ANGLE_TOLERANCE = 5;
 
 
-    public static double SWERVE_FL_OFFSET_ANGLE = 0.7623;
-    public static double SWERVE_FR_OFFSET_ANGLE = 0.73;
-    public static double SWERVE_BL_OFFSET_ANGLE = 0.25;
-    public static double SWERVE_BR_OFFSET_ANGLE = 0.48;
+    public static double SWERVE_FL_OFFSET_ANGLE = 0.41;
+    public static double SWERVE_FR_OFFSET_ANGLE = -0.02;
+    public static double SWERVE_BL_OFFSET_ANGLE = -0.1;
+    public static double SWERVE_BR_OFFSET_ANGLE = 0.14;
+
 
     public static int SWERVE_FL_ENCODER_PORT = 0;
     public static int SWERVE_FR_ENCODER_PORT = 1;

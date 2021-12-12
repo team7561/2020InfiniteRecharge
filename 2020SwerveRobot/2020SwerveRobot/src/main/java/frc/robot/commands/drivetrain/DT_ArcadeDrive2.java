@@ -74,6 +74,9 @@ public class DT_ArcadeDrive2 extends CommandBase {
     }
 */
   m_power = Math.sqrt(Math.pow(abs_x , 2) + Math.pow(abs_y , 2)) * m_speed.getAsDouble();
+  if (m_subsystem.getMode() == SwerveMode.SPIN){
+    m_power = -1 * m_twist.getAsDouble() * m_speed.getAsDouble();
+  }
   
 //  target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
 target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;

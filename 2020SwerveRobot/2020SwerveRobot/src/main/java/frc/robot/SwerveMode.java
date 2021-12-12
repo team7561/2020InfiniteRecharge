@@ -5,6 +5,7 @@ public enum SwerveMode {
     CAR,
     TANK,
     CRAB,
+    SPIN,
     SNAKE_X,
     CAR_X,
     TANK_X,

@@ -27,6 +27,12 @@ public class Drivetrain extends SubsystemBase {
         moduleBL = new SwerveModule(Constants.SWERVE_BL_OFFSET_ANGLE, Constants.SWERVE_BL_ENCODER_PORT, Constants.CAN_ID_DRIVING_BL, Constants.CAN_ID_STEERING_BL, "BL");
         moduleBR = new SwerveModule(Constants.SWERVE_BR_OFFSET_ANGLE, Constants.SWERVE_BR_ENCODER_PORT, Constants.CAN_ID_DRIVING_BR, Constants.CAN_ID_STEERING_BR, "BR");
         resetEncoders();
+
+        SmartDashboard.putNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE);
+        SmartDashboard.putNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE);
+        SmartDashboard.putNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE);
+        SmartDashboard.putNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE);
+
     }
 
     @Override
@@ -62,6 +68,12 @@ public class Drivetrain extends SubsystemBase {
             moduleFR.setAngle(0);
             moduleBL.setAngle(angle);
             moduleBR.setAngle(0);
+        }
+        if (m_mode == SwerveMode.SPIN){
+            moduleFL.setAngle(45);
+            moduleFR.setAngle(135);
+            moduleBL.setAngle(315);
+            moduleBR.setAngle(225);
         }
         if (m_mode == SwerveMode.TANK)
         {
