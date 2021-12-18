@@ -63,7 +63,6 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     final JoystickButton trigger = new JoystickButton(joystick, 1);
-    final JoystickButton button_6 = new JoystickButton(joystick, 6);
     final JoystickButton button_7 = new JoystickButton(joystick, 7);
     final JoystickButton button_8 = new JoystickButton(joystick, 8);
     final JoystickButton button_9 = new JoystickButton(joystick, 9);
@@ -94,11 +93,10 @@ public class RobotContainer {
     //trigger.whenPressed(new DT_ArcadeDrive(drivetrain, 0.4, 0.4, 0.5),true);
     trigger.whenPressed(new DT_ArcadeDrive2(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2),true);
     //trigger.whenReleased(new DT_Drive_Stop(drivetrain),true);
-    button_6.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.TANK), true);
     button_7.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CRAB),true);
     button_8.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.SPIN),true);
     button_9.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.SNAKE),true);
-    button_10.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CAR),true);
+    button_10.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.TANK),true);
     button_11.whenPressed(new DT_Drive_ResetEncoders(drivetrain),true);
     button_12.whenPressed(new DT_Drive_Invert_Mode(drivetrain),true);
 
