@@ -133,9 +133,9 @@ public class SwerveModule extends SubsystemBase {
 
         if (Math.abs(error) > 180){
             dir *= -1;
-            dir *= (360 - Math.abs(error))/7;
+            dir *= (360 - Math.abs(error))/4.6;
         } else {
-            dir *= Math.abs(error)/7;
+            dir *= Math.abs(error)/4.6;
         }
 
         if (m_steering)

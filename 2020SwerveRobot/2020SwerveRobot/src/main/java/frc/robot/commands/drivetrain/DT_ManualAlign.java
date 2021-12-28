@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * An example command that uses an example subsystem.
  */
-public class DT_ArcadeDrive2 extends CommandBase {
+public class DT_ManualAlign extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   private DoubleSupplier m_x, m_y, m_twist, m_speed;
@@ -22,7 +22,7 @@ public class DT_ArcadeDrive2 extends CommandBase {
    *
    * @param drivetrain The subsystem used by this command.
    */
-  public DT_ArcadeDrive2(Drivetrain drivetrain, DoubleSupplier x, DoubleSupplier y, DoubleSupplier twist, DoubleSupplier speed) {
+  public DT_ManualAlign(Drivetrain drivetrain, DoubleSupplier x, DoubleSupplier y, DoubleSupplier twist, DoubleSupplier speed) {
     m_subsystem = drivetrain;
     m_x = x;
     m_y = y;
@@ -80,10 +80,9 @@ public class DT_ArcadeDrive2 extends CommandBase {
   }
   
 //  target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
-target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
+    target_angle = 90;
 
-  target_angle = target_angle * 360 / (2 * Math.PI);
-  System.out.println(target_angle);
+    System.out.println(target_angle);
 
     SmartDashboard.putNumber("current_angle", current_angle);
     SmartDashboard.putNumber("measured_angle", m_subsystem.moduleBL.getAngle());
@@ -91,7 +90,7 @@ target_angle = Math.atan2(m_y.getAsDouble(), m_x.getAsDouble())+Math.PI;
 
     m_subsystem.setAngle(target_angle);
     m_subsystem.updateDashboard();
-    drive(m_power, m_power);
+    drive(0.1, 0.1);
   }
 
   public void drive(double leftSpeed, double rightSpeed) {

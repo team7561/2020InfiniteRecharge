@@ -49,6 +49,7 @@ public class DT_DriveTime extends CommandBase {
     m_subsystem.moduleBL.setVelocity(leftSpeed);
     m_subsystem.moduleBR.setVelocity(-rightSpeed);
     m_subsystem.moduleFL.setVelocity(leftSpeed);
+    
     m_subsystem.moduleFR.setVelocity(-rightSpeed);
   }
 
