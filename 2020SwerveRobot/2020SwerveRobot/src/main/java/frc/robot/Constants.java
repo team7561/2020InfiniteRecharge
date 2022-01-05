@@ -29,29 +29,29 @@ public class Constants {
     public static double ANGLE_TOLERANCE = 5;
 
 
-    public static double SWERVE_FL_OFFSET_ANGLE = -0.16;
-    public static double SWERVE_FR_OFFSET_ANGLE = 0.36;
-    public static double SWERVE_BL_OFFSET_ANGLE = 0.01;
-    public static double SWERVE_BR_OFFSET_ANGLE = -0.01;
+    public static double SWERVE_A_OFFSET_ANGLE = -0.16;
+    public static double SWERVE_B_OFFSET_ANGLE = 0.36;
+    public static double SWERVE_D_OFFSET_ANGLE = 0.44;
+    public static double SWERVE_C_OFFSET_ANGLE = 0.49;
 
 
-    public static int SWERVE_FL_ENCODER_PORT = 0;
-    public static int SWERVE_FR_ENCODER_PORT = 1;
-    public static int SWERVE_BL_ENCODER_PORT = 2;
-    public static int SWERVE_BR_ENCODER_PORT = 3;
+    public static int SWERVE_A_ENCODER_PORT = 0;
+    public static int SWERVE_B_ENCODER_PORT = 1;
+    public static int SWERVE_D_ENCODER_PORT = 2;
+    public static int SWERVE_C_ENCODER_PORT = 3;
 
 
-    public static int CAN_ID_DRIVING_FL = 1;
-    public static int CAN_ID_STEERING_FL = 2;
+    public static int CAN_ID_DRIVING_A = 1;
+    public static int CAN_ID_STEERING_A = 2;
 
-    public static int CAN_ID_DRIVING_FR = 3;
-    public static int CAN_ID_STEERING_FR = 4;
+    public static int CAN_ID_DRIVING_B = 3;
+    public static int CAN_ID_STEERING_B = 4;
 
-    public static int CAN_ID_DRIVING_BL = 5;
-    public static int CAN_ID_STEERING_BL = 6;
+    public static int CAN_ID_DRIVING_D = 5;
+    public static int CAN_ID_STEERING_D = 6;
 
-    public static int CAN_ID_DRIVING_BR = 7;
-    public static int CAN_ID_STEERING_BR = 8;
+    public static int CAN_ID_DRIVING_C = 7;
+    public static int CAN_ID_STEERING_C = 8;
 
     public static int CAN_ID_CLIMBER_WINCH = 10;
     public static int CAN_ID_CLIMBER_DEPLOY = 11;

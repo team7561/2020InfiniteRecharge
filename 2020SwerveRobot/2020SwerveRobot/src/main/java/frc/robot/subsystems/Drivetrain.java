@@ -9,29 +9,38 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+import edu.wpi.first.wpilibj.SPI;
+
 import frc.robot.Constants;
 import frc.robot.SwerveMode;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 public class Drivetrain extends SubsystemBase {
     /**
      * Creates a new ExampleSubsystem.
      */
-    public SwerveModule moduleFL, moduleFR, moduleBL, moduleBR;
-    double angleFL, angleFR, angleBL, angleBR;
+    public SwerveModule moduleA, moduleB, moduleD, moduleC;
+    double angleA, angleB, angleD, angleC;
     SwerveMode m_mode;
+    public static final ADIS16448_IMU imu = new ADIS16448_IMU();
 
     public Drivetrain() {
         m_mode = SwerveMode.CRAB; //
-        moduleFL = new SwerveModule(Constants.SWERVE_FL_OFFSET_ANGLE, Constants.SWERVE_FL_ENCODER_PORT, Constants.CAN_ID_DRIVING_FL, Constants.CAN_ID_STEERING_FL, "FL");
-        moduleFR = new SwerveModule(Constants.SWERVE_FR_OFFSET_ANGLE, Constants.SWERVE_FR_ENCODER_PORT, Constants.CAN_ID_DRIVING_FR, Constants.CAN_ID_STEERING_FR, "FR");
-        moduleBL = new SwerveModule(Constants.SWERVE_BL_OFFSET_ANGLE, Constants.SWERVE_BL_ENCODER_PORT, Constants.CAN_ID_DRIVING_BL, Constants.CAN_ID_STEERING_BL, "BL");
-        moduleBR = new SwerveModule(Constants.SWERVE_BR_OFFSET_ANGLE, Constants.SWERVE_BR_ENCODER_PORT, Constants.CAN_ID_DRIVING_BR, Constants.CAN_ID_STEERING_BR, "BR");
+        moduleA = new SwerveModule(Constants.SWERVE_A_OFFSET_ANGLE, Constants.SWERVE_A_ENCODER_PORT, Constants.CAN_ID_DRIVING_A, Constants.CAN_ID_STEERING_A, "A");
+        moduleB = new SwerveModule(Constants.SWERVE_B_OFFSET_ANGLE, Constants.SWERVE_B_ENCODER_PORT, Constants.CAN_ID_DRIVING_B, Constants.CAN_ID_STEERING_B, "B");
+        moduleD = new SwerveModule(Constants.SWERVE_D_OFFSET_ANGLE, Constants.SWERVE_D_ENCODER_PORT, Constants.CAN_ID_DRIVING_D, Constants.CAN_ID_STEERING_D, "D");
+        moduleC = new SwerveModule(Constants.SWERVE_C_OFFSET_ANGLE, Constants.SWERVE_C_ENCODER_PORT, Constants.CAN_ID_DRIVING_C, Constants.CAN_ID_STEERING_C, "C");
         resetEncoders();
 
-        SmartDashboard.putNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE);
-        SmartDashboard.putNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE);
-        SmartDashboard.putNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE);
-        SmartDashboard.putNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE);
+        imu.calibrate();
+        imu.reset();
+
+        SmartDashboard.putNumber("D_Offset_Angle", Constants.SWERVE_D_OFFSET_ANGLE);
+        SmartDashboard.putNumber("C_Offset_Angle", Constants.SWERVE_C_OFFSET_ANGLE);
+        SmartDashboard.putNumber("A_Offset_Angle", Constants.SWERVE_A_OFFSET_ANGLE);
+        SmartDashboard.putNumber("B_Offset_Angle", Constants.SWERVE_B_OFFSET_ANGLE);
 
     }
 
@@ -42,82 +51,133 @@ public class Drivetrain extends SubsystemBase {
     }
 
 	public void stop() {
-        moduleFL.stop();
-        moduleFR.stop();
-        moduleBL.stop();
-        moduleBR.stop();
+        moduleA.stop();
+        moduleB.stop();
+        moduleD.stop();
+        moduleC.stop();
 
     }
 	public void resetEncoders() {
-        moduleFL.resetEncoders();
-        moduleFR.resetEncoders();
-        moduleBL.resetEncoders();
-        moduleBR.resetEncoders();
+        moduleA.resetEncoders();
+        moduleB.resetEncoders();
+        moduleD.resetEncoders();
+        moduleC.resetEncoders();
 	}
 	public void setAngle(double angle) {
         if (m_mode == SwerveMode.CAR)
         {
-            moduleFL.setAngle(angle);
-            moduleFR.setAngle(angle);
-            moduleBL.setAngle(0);
-            moduleBR.setAngle(0);
+            moduleA.setAngle(angle);
+            moduleB.setAngle(angle);
+            moduleD.setAngle(0);
+            moduleC.setAngle(0);
         }
         if (m_mode == SwerveMode.CAR_X)
         {
-            moduleFL.setAngle(angle);
-            moduleFR.setAngle(0);
-            moduleBL.setAngle(angle);
-            moduleBR.setAngle(0);
+            moduleA.setAngle(angle);
+            moduleB.setAngle(0);
+            moduleD.setAngle(angle);
+            moduleC.setAngle(0);
         }
         if (m_mode == SwerveMode.SPIN){
-            moduleFL.setAngle(45);
-            moduleFR.setAngle(135);
-            moduleBL.setAngle(315);
-            moduleBR.setAngle(225);
+            moduleA.setAngle(45);
+            moduleB.setAngle(135);
+            moduleD.setAngle(315);
+            moduleC.setAngle(225);
         }
         if (m_mode == SwerveMode.TANK)
         {
-            moduleFL.setAngle(0);
-            moduleFR.setAngle(0);
-            moduleBL.setAngle(0);
-            moduleBR.setAngle(0);
+            moduleA.setAngle(0);
+            moduleB.setAngle(0);
+            moduleD.setAngle(0);
+            moduleC.setAngle(0);
         }
         if (m_mode == SwerveMode.TANK_X)
         {
-            moduleFL.setAngle(90);
-            moduleFR.setAngle(90);
-            moduleBL.setAngle(90);
-            moduleBR.setAngle(90);
+            moduleA.setAngle(90);
+            moduleB.setAngle(90);
+            moduleD.setAngle(90);
+            moduleC.setAngle(90);
         }
         if (m_mode == SwerveMode.CRAB)
         {
-            moduleFL.setAngle(angle);
-            moduleFR.setAngle(angle);
-            moduleBL.setAngle(angle);
-            moduleBR.setAngle(angle);
+            moduleA.setAngle(angle);
+            moduleB.setAngle(angle);
+            moduleD.setAngle(angle);
+            moduleC.setAngle(angle);
         }
         if (m_mode == SwerveMode.CRAB_X)
         {
-            moduleFL.setAngle(90+angle);
-            moduleFR.setAngle(90+angle);
-            moduleBL.setAngle(90+angle);
-            moduleBR.setAngle(90+angle);
+            moduleA.setAngle(90+angle);
+            moduleB.setAngle(90+angle);
+            moduleD.setAngle(90+angle);
+            moduleC.setAngle(90+angle);
         }
         if (m_mode == SwerveMode.SNAKE)
         {
-            moduleFL.setAngle(angle);
-            moduleFR.setAngle(angle);
-            moduleBL.setAngle(-angle);
-            moduleBR.setAngle(-angle);
+            moduleA.setAngle(angle);
+            moduleB.setAngle(angle);
+            moduleD.setAngle(-angle);
+            moduleC.setAngle(-angle);
         }
         if (m_mode == SwerveMode.SNAKE_X)
         {
-            moduleFL.setAngle(angle);
-            moduleFR.setAngle(-angle);
-            moduleBL.setAngle(angle);
-            moduleBR.setAngle(-angle);
+            moduleA.setAngle(angle);
+            moduleB.setAngle(-angle);
+            moduleD.setAngle(angle);
+            moduleC.setAngle(-angle);
         }
-	}
+    }
+    
+    public void setSwerveVector(double twist, double target_angle, double mag){
+        double x = mag * Math.cos((target_angle + imu.getAngle()) * Math.PI/180);
+        double y = mag * Math.sin((target_angle + imu.getAngle()) * Math.PI/180);
+
+
+        double Ax = twist * Math.cos(Math.PI/4) + x; 
+        double Ay = twist * Math.sin(Math.PI/4) + y;
+        double Ao = (Math.atan2(Ay, Ax) * 180/Math.PI + 180) % 360;
+
+        double Bx = twist * Math.cos(3 * Math.PI/4) + x; 
+        double By = twist * Math.sin(3 * Math.PI/4) + y;
+        double Bo = (Math.atan2(By, Bx) * 180/Math.PI + 180) % 360;
+
+        double Cx = twist * Math.cos(5 * Math.PI/4) + x; 
+        double Cy = twist * Math.sin(5 * Math.PI/4) + y;
+        double Co = (Math.atan2(Cy, Cx) * 180/Math.PI + 180) % 360;
+
+        double Dx = twist * Math.cos(7 * Math.PI/4) + x; 
+        double Dy = twist * Math.sin(7 * Math.PI/4) + y;
+        double Do = (Math.atan2(Dy, Dx) * 180/Math.PI + 180) % 360;
+
+        moduleA.setVelocity(
+            Math.sqrt(
+                Math.pow(Ax, 2) + Math.pow(Ay, 2)
+                )
+            );
+    
+        moduleB.setVelocity(
+            -Math.sqrt(
+                Math.pow(Bx, 2) + Math.pow(By, 2)
+                )
+            );
+
+        moduleC.setVelocity(
+            -Math.sqrt(
+                Math.pow(Cx, 2) + Math.pow(Cy, 2)
+                )
+            );
+
+        moduleD.setVelocity(
+            Math.sqrt(
+                Math.pow(Dx, 2) + Math.pow(Dy, 2)
+                )
+            );
+
+        moduleA.setAngle(Ao);
+        moduleB.setAngle(Bo);
+        moduleD.setAngle(Do);
+        moduleC.setAngle(Co);
+    }
 
 	public double getFrontRightEncoder() {
 		return 0;
@@ -159,12 +219,17 @@ public class Drivetrain extends SubsystemBase {
         m_mode = mode;
     }
 
+    public void resetGyro(){
+        imu.reset();
+    }
+
     public void updateDashboard()
     {
-        moduleFL.updateDashboard();
-        moduleFR.updateDashboard();
-        moduleBL.updateDashboard();
-        moduleBR.updateDashboard();
+        moduleA.updateDashboard();
+        moduleB.updateDashboard();
+        moduleD.updateDashboard();
+        moduleC.updateDashboard();
+        SmartDashboard.putNumber("Gyro Angle", imu.getAngle());
     }
 
 }

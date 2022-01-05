@@ -59,10 +59,10 @@ public class DT_ArcadeDrive3 extends CommandBase {
     }
     m_power = Math.sqrt(Math.pow(x , 2) + Math.pow(y , 2)) * speed;
     System.out.println(m_power);
-    m_subsystem.moduleBL.setAngle(m_angle);
-    m_subsystem.moduleFL.setAngle(m_angle);
-    m_subsystem.moduleBR.setAngle(m_angle);
-    m_subsystem.moduleFR.setAngle(m_angle);
+    m_subsystem.moduleD.setAngle(m_angle);
+    m_subsystem.moduleA.setAngle(m_angle);
+    m_subsystem.moduleC.setAngle(m_angle);
+    m_subsystem.moduleB.setAngle(m_angle);
 
     drive(m_power, m_power);
 
@@ -73,10 +73,10 @@ public class DT_ArcadeDrive3 extends CommandBase {
   }
 
   public void drive(double leftSpeed, double rightSpeed) {
-    m_subsystem.moduleBL.setVelocity(leftSpeed);
-    m_subsystem.moduleBR.setVelocity(rightSpeed);
-    m_subsystem.moduleFL.setVelocity(leftSpeed);
-    m_subsystem.moduleFR.setVelocity(rightSpeed);
+    m_subsystem.moduleD.setVelocity(leftSpeed);
+    m_subsystem.moduleC.setVelocity(rightSpeed);
+    m_subsystem.moduleA.setVelocity(leftSpeed);
+    m_subsystem.moduleB.setVelocity(rightSpeed);
   }
 
   // Called once the command ends or is interrupted.

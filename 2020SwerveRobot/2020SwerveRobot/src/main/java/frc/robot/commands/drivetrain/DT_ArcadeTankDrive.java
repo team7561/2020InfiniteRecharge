@@ -46,10 +46,10 @@ public class DT_ArcadeTankDrive extends CommandBase {
 
   }
   public void drive(double leftSpeed, double rightSpeed) {
-    m_subsystem.moduleBL.setSpeed(leftSpeed);
-    m_subsystem.moduleBR.setSpeed(-rightSpeed);
-    m_subsystem.moduleFL.setSpeed(leftSpeed);
-    m_subsystem.moduleFR.setSpeed(-rightSpeed);
+    m_subsystem.moduleD.setSpeed(leftSpeed);
+    m_subsystem.moduleC.setSpeed(-rightSpeed);
+    m_subsystem.moduleA.setSpeed(leftSpeed);
+    m_subsystem.moduleB.setSpeed(-rightSpeed);
   }
   public void arcadeDrive(double x, double y, double speed, boolean inverted) {
     //x = x * Math.abs(x) * speed;

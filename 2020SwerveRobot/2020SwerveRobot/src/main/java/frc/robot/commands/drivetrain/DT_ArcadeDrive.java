@@ -49,16 +49,16 @@ public class DT_ArcadeDrive extends CommandBase {
 
     m_power = Math.sqrt(Math.pow(m_x , 2) + Math.pow(m_y , 2)) * m_speed ;
 
-    m_subsystem.moduleBL.setAngle(m_angle);
-    m_subsystem.moduleFL.setAngle(m_angle);
-    m_subsystem.moduleBR.setAngle(m_angle);
-    m_subsystem.moduleFR.setAngle(m_angle);
+    m_subsystem.moduleD.setAngle(m_angle);
+    m_subsystem.moduleA.setAngle(m_angle);
+    m_subsystem.moduleC.setAngle(m_angle);
+    m_subsystem.moduleB.setAngle(m_angle);
 
     double m_power = 0.25;
-    m_subsystem.moduleBL.setSpeed(m_power);
-    m_subsystem.moduleBR.setSpeed(m_power);
-    m_subsystem.moduleFR.setSpeed(m_power);
-    m_subsystem.moduleFL.setSpeed(m_power);
+    m_subsystem.moduleD.setSpeed(m_power);
+    m_subsystem.moduleC.setSpeed(m_power);
+    m_subsystem.moduleB.setSpeed(m_power);
+    m_subsystem.moduleA.setSpeed(m_power);
   }
 
   // Called once the command ends or is interrupted.

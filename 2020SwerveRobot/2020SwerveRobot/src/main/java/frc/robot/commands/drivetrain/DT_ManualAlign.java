@@ -44,21 +44,21 @@ public class DT_ManualAlign extends CommandBase {
     abs_x = Math.abs(m_x.getAsDouble());
     abs_y = Math.abs(m_y.getAsDouble());
 
-    if (m_subsystem.moduleBL.getAngleOffset() != SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE))
+    if (m_subsystem.moduleD.getAngleOffset() != SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_D_OFFSET_ANGLE))
     {
-        m_subsystem.moduleBL.setAngleOffset(SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_BL_OFFSET_ANGLE));
+        m_subsystem.moduleD.setAngleOffset(SmartDashboard.getNumber("BL_Offset_Angle", Constants.SWERVE_D_OFFSET_ANGLE));
     }
-    if (m_subsystem.moduleBR.getAngleOffset() != SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE))
+    if (m_subsystem.moduleC.getAngleOffset() != SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_C_OFFSET_ANGLE))
     {
-        m_subsystem.moduleBR.setAngleOffset(SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_BR_OFFSET_ANGLE));
+        m_subsystem.moduleC.setAngleOffset(SmartDashboard.getNumber("BR_Offset_Angle", Constants.SWERVE_C_OFFSET_ANGLE));
     }
-    if (m_subsystem.moduleFL.getAngleOffset() != SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE))
+    if (m_subsystem.moduleA.getAngleOffset() != SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_A_OFFSET_ANGLE))
     {
-      m_subsystem.moduleFL.setAngleOffset(SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_FL_OFFSET_ANGLE));
+      m_subsystem.moduleA.setAngleOffset(SmartDashboard.getNumber("FL_Offset_Angle", Constants.SWERVE_A_OFFSET_ANGLE));
     }
-    if (m_subsystem.moduleFR.getAngleOffset() != SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE))
+    if (m_subsystem.moduleB.getAngleOffset() != SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_B_OFFSET_ANGLE))
     {
-      m_subsystem.moduleFR.setAngleOffset(SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_FR_OFFSET_ANGLE));
+      m_subsystem.moduleB.setAngleOffset(SmartDashboard.getNumber("FR_Offset_Angle", Constants.SWERVE_B_OFFSET_ANGLE));
     }
     
 /*
@@ -85,7 +85,7 @@ public class DT_ManualAlign extends CommandBase {
     System.out.println(target_angle);
 
     SmartDashboard.putNumber("current_angle", current_angle);
-    SmartDashboard.putNumber("measured_angle", m_subsystem.moduleBL.getAngle());
+    SmartDashboard.putNumber("measured_angle", m_subsystem.moduleD.getAngle());
     SmartDashboard.putNumber("target_angle", target_angle);
 
     m_subsystem.setAngle(target_angle);
@@ -94,10 +94,10 @@ public class DT_ManualAlign extends CommandBase {
   }
 
   public void drive(double leftSpeed, double rightSpeed) {
-    m_subsystem.moduleBL.setVelocity(leftSpeed);
-    m_subsystem.moduleBR.setVelocity(-rightSpeed);
-    m_subsystem.moduleFL.setVelocity(leftSpeed);
-    m_subsystem.moduleFR.setVelocity(-rightSpeed);
+    m_subsystem.moduleD.setVelocity(leftSpeed);
+    m_subsystem.moduleC.setVelocity(-rightSpeed);
+    m_subsystem.moduleA.setVelocity(leftSpeed);
+    m_subsystem.moduleB.setVelocity(-rightSpeed);
   }
   public void arcadeDrive(double x, double y, double speed, boolean inverted) {
     if (m_subsystem.getMode() == SwerveMode.TANK || m_subsystem.getMode() == SwerveMode.TANK_X)

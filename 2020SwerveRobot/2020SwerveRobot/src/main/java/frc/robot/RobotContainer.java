@@ -95,10 +95,10 @@ public class RobotContainer {
     //trigger.whenReleased(new DT_Drive_Stop(drivetrain),true);
     button_7.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.CRAB),true);
     button_8.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.SPIN),true);
-    button_9.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.TANK),true);
+    button_9.whenPressed(new DT_Drive_Change_Mode(drivetrain, SwerveMode.LUKEYWUKEY),true);
     button_10.whenPressed(new DT_ManualAlign(drivetrain, () -> joystick.getX(), () -> joystick.getY(), () -> joystick.getTwist(), () -> (joystick.getThrottle()+1)/2),true);
     button_11.whenPressed(new DT_Drive_ResetEncoders(drivetrain),true);
-    button_12.whenPressed(new DT_Drive_Invert_Mode(drivetrain),true);
+    button_12.whenPressed(new DT_Drive_Reset_Gyro(drivetrain),true);
 
 /*
     button_A.whenPressed(new Climb_RaiseHook(climberDeploy), true);

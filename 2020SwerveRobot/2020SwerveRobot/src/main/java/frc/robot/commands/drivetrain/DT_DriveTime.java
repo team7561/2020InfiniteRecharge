@@ -16,6 +16,7 @@ public class DT_DriveTime extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_subsystem;
   Timer timer;
+  double startTime;
 
   /**
    * Creates a new ExampleCommand.
@@ -32,25 +33,36 @@ public class DT_DriveTime extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("Starting auto");
+    System.out.println("Starting auto eat my ass");
     timer.start();
+    m_subsystem.resetGyro();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.setAngle(0);
-    drive(1000, 1000);
+    
+    if (timer.get() < 1.5){
+      m_subsystem.setSwerveVector(0.5, 0, 0.15);
+    }
+    else if (timer.get() < 3){
+      m_subsystem.setSwerveVector(0.5, 270, 0.15);
+    }
+    else if (timer.get() < 4.5){
+      m_subsystem.setSwerveVector(0.5, 180, 0.15);
+    }
+    else if (timer.get() < 6){
+      m_subsystem.setSwerveVector(0.5, 90, 0.15);
+    }
     System.out.println("Auto Drive");
     m_subsystem.updateDashboard();
   }
 
   public void drive(double leftSpeed, double rightSpeed) {
-    m_subsystem.moduleBL.setVelocity(leftSpeed);
-    m_subsystem.moduleBR.setVelocity(-rightSpeed);
-    m_subsystem.moduleFL.setVelocity(leftSpeed);
-    
-    m_subsystem.moduleFR.setVelocity(-rightSpeed);
+    m_subsystem.moduleD.setVelocity(leftSpeed);
+    m_subsystem.moduleC.setVelocity(-rightSpeed);
+    m_subsystem.moduleA.setVelocity(leftSpeed);
+    m_subsystem.moduleB.setVelocity(-rightSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -62,6 +74,6 @@ public class DT_DriveTime extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.get()>1;
+    return timer.get()>6;
   }
 }
