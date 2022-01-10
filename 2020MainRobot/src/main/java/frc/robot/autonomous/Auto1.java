@@ -16,7 +16,6 @@ import frc.robot.commands.intakehopper.Intake_RetractHopper;
 import frc.robot.commands.shooter.Shooter_ShootAtSpeed;
 import frc.robot.commands.shooter.Shooter_Stop;
 import frc.robot.commands.shooter.Shooter_Extend;
-import frc.robot.commands.shooter.Shooter_Retract;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Injector;
 import frc.robot.subsystems.IntakeHopper;

@@ -32,7 +32,7 @@ public class ControlPanelManipulator extends SubsystemBase {
     {
         if (colourWheelRotateMotor.get() != 0)
         {
-            String test = detectColour();
+            //String test = detectColour();
         }
     }
     public void rotateLeft()

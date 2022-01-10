@@ -13,7 +13,7 @@ import frc.robot.subsystems.Shooter;
 
 public class Shooter_Set_Hood_Setpoint extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_subsystem;
+  //private final Shooter m_subsystem;
   private final double m_setpoint;
 
   /**
@@ -21,7 +21,7 @@ public class Shooter_Set_Hood_Setpoint extends CommandBase {
    *  @param subsystem
    */
   public Shooter_Set_Hood_Setpoint(Shooter subsystem, double setpoint) {
-    m_subsystem = subsystem;
+    //m_subsystem = subsystem;
     m_setpoint = setpoint;
     addRequirements(subsystem);
   }
